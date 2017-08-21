@@ -1,0 +1,124 @@
+{% extends "base_layout.html" %}
+{% load staticfiles %}
+{% load filters %}
+
+{% block title %}बजेट बक्तब्य{% endblock title %}
+{% block extra_css %}
+
+  <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css' %}"> 
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css"> 
+
+   <style type="text/css">                                              
+  #div2 {
+    white-space: nowrap;
+    width: 20em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}</style>
+{% endblock extra_css %}
+{% block content %}
+
+
+		<!--Main Content Area Starts-->
+		<section id="app-section">
+			<ol class="breadcrumb">
+                <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i>गृह पृष्ठ</a></li>
+                <li><a href="{% url 'office:office-dashboard' office.id %}">वैदेशिक रोजगार विभाग</a></li>
+                <li class="active">बजेट बक्तब्य</li>
+              </ol>
+			<div class="bg-white padding margin-top-lg">
+				<div class="app-page-header">
+					<div class="row">
+						<div class="col-md-10">
+							<h4>बजेट बक्तब्य</h4>
+						</div>
+
+						<div class="col-md-2">
+							<div class="action-holder">
+								<a href="{% url 'sachibBaithak:budgetbaktabya-create' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus-circle"></i>  बजेट बक्तब्य थप्नुहोस</a>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="table-responsive">
+					<table id="datatable" class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>बजेट वक्तव्यको बुदाँ नं.</th>
+								<th>नीति तथा कार्यक्रमको व्यहोरा</th>
+								<th>प्रगति/कार्यान्वयनको अवस्था (भौतिक एवं वित्तिय दुवै)</th>
+								<th>समस्याहरु</th>
+								<th>सुधारका उपायहरु</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for data in object_list %}
+							<tr>
+								<td>{{ data.budhano }}</td>
+								<td>
+								{{ data.karyakrams }}
+								</td>
+								<td>
+								{{ data.pragati }}
+								</td>
+								<td>
+								{{ data.problems }}
+								</td>
+								<td>
+								{{ data.solutions }}
+								</td>
+								
+								<td>
+								<a href="{% url 'sachibBaithak:budgetbaktabya-update' office.id data.id %}
+								
+								" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+
+								</td>
+							</tr>
+						{% endfor %}
+							
+
+						</tbody>
+						
+					</table>
+				</div>
+				
+			</div>
+		</section>
+		<div class="clearfix"></div>
+		<!--Main Content Area Ends-->
+
+
+{% endblock content %}
+{% block extra_scripts %}
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src = "https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+<script src = "https://cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src = "https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script src = "https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script src = "https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+<script src = "https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+<script src="{% static 'plugins/datatables/dataTables.bootstrap.min.js' %}"></script>
+<script>
+  $(function () {
+    $("#datatable").DataTable(
+      {
+        scrollX: true,
+        dom: 'Bfrtip',
+        "ordering": false,
+        lengthMenu: [
+            [ 10, 25, 50, -1 ],
+            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            'pageLength','copy', 'csv', 'excel', 'pdf', 'print',
+        ]
+      });
+    });
+</script>
+{% endblock extra_scripts %}

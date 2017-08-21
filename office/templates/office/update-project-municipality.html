@@ -1,0 +1,63 @@
+
+
+{% load staticfiles %}
+
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- calender -->
+  <link href="{% static 'dist/css/calendar.css' %}" rel="stylesheet">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.css' %}">
+    
+
+
+    <!-- bread crumb  -->
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-body">
+
+
+        <form class = "" action="" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{% for field in form %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <span class="text-danger small">{{ field.errors }}</span>
+                </div>
+                <label class="col-md-3 control-label">{{ field.label_tag }}</label>
+                <div class="col-md-5">{{ field }}</div>
+            </div>
+        {% endfor %}
+
+	<input type="hidden" name="office_id" value="{{ object.project_detail.id }}">
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">पेश गर्नुहोस्</button>
+			<button type="Cancel" onclick="window.open('','_self').close();" class="btn btn-success">रद्द गर्नुहोस्</button>
+		</div>
+	</div>
+	<br>
+	<br>
+
+
+</form>
+
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </section>
+
+ 
+
+
+

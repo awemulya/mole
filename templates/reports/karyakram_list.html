@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load filters %}
+
+{% block title %}Karyakrams{% endblock title %}
+
+{% block content %}
+<h2>कार्यक्रमहरु<a href="{% url 'office:office-dashboard' office %}">कार्यालयको गृहपृष्ट</a> </h2>
+{% for obj in object_list %}
+{{obj}} <a href="">बार्षिक लक्ष्य</a> <a href="">प्रथम प्रगति</a> <a href="">दोस्रो लक्ष्य</a> <a href="">दोस्रो प्रगति</a>
+<a href="">तेस्रो लक्ष्य</a><a href="">तेस्रो प्रगति</a> <br>
+{% endfor %}
+
+{% endblock content %}
+
+
+{% block extra_script %}
+{% endblock %}
