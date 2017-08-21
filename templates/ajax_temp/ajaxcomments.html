@@ -1,0 +1,20 @@
+{% if comments %}
+{% for comment in comments %}
+               <div class="box-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="{% if comment.commented_by.profile.photo %}{{ comment.commented_by.profile.photo.url }}{% else %}{% endif %}" alt="User Image">
+
+                <div class="comment-text">
+                      <span class="username">
+                        {{ comment.commented_by }}
+                        <span class="text-muted pull-right">{{ comment.date_commented }}</span>
+                      </span><!-- /.username -->
+                  {{ comment.comment }}
+                </div>
+                <!-- /.comment-text -->
+              </div>
+              <br>
+{% endfor %}
+{% else %}
+No Comments Yet.
+{% endif %}

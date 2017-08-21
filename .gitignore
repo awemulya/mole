@@ -5,13 +5,27 @@
 *.log
 *.pot
 *.pyc
+<<<<<<< HEAD
 *.sqlite3
 *.idea/
+=======
+>>>>>>> 719bc9122596449e063f0af3f47076ef744b011b
 __pycache__/
 local_settings.py
 media
 
 .Python
+<<<<<<< HEAD
+=======
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+>>>>>>> 719bc9122596449e063f0af3f47076ef744b011b
 pip-selfcheck.json
 
 # End of https://www.gitignore.io/api/django
