@@ -1,0 +1,117 @@
+{% extends base_template %}
+{% block body %}
+<script type="text/javascript">
+  var d = document.getElementById("{% url 'supa:adduser' %}");
+  d.className += "active";
+  var d = document.getElementById("user");
+  d.className += " open";
+</script>
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="{% url 'supa:dashboard' %}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>गृह पृष्ठ</a><a href="#" class="current">प्रयोगकर्ता थप्न</a> </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-pencil"></i> </span>
+            <h5>प्रयोगकर्ता थप्न</h5>
+          </div>
+          <div class="widget-content nopadding">
+
+
+            <form class="form-horizontal" method="post">
+            {% csrf_token %}
+
+
+                <div class="control-group">
+                 {{ form.username.errors }}
+                  <label class="control-label" for="{{ form.username.id_for_label }}">प्रयोगकर्ता नाम</label>
+                  <div class="controls">
+                    {{ form.username }}
+                  </div>
+                </div>
+                <div class="control-group">
+                {{ form.email.errors }}
+                  <label class="control-label" for="{{ form.email.id_for_label }}">इमेल</label>
+
+                  <div class="controls">
+                    {{ form.email }}
+                  </div>
+                </div>
+
+
+
+
+
+
+ 
+
+ <div class="control-group" style="display: none;">
+                 {{ form.password1.errors }}
+                  <label class="control-label" for="{{ form.password1.id_for_label }}">पासवर्ड</label>
+                  <div class="controls">
+                    {{ form.password1 }}
+                  </div>
+
+
+
+
+               
+
+
+                 {{ form.password2.errors }}
+                  <label class="control-label" for="{{ form.password2.id_for_label }}">पासवर्ड</label>
+                  <div class="controls">
+                    {{ form.password2 }}
+                  </div>
+                </div>
+
+                <div class="control-group">
+                 {{ form.staff.errors }}
+                  <label class="control-label" for="{{ form.staff.id_for_label }}">पोस्ट</label>
+                  <div class="controls">
+                    {{ form.staff }}
+                  </div>
+                </div>
+
+                <div class="control-group">
+                 {{ form.OPMtype.errors }}
+                  <label class="control-label" for="{{ form.office.id_for_label }}">कार्यालय</label>
+                  <div class="controls">
+                    {{ form.OPMtype }}
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+              <div class="form-actions">
+
+
+ <input class="btn btn-primary" type="submit" value="पेश गर्नुहोस्" />
+
+
+                <div id="status"></div>
+              </div>
+              <div id="submitted"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

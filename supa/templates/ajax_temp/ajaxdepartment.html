@@ -1,0 +1,21 @@
+<div id="form-wizard-2" class="step">
+                <div class="control-group">
+
+
+                  <label class="control-label" for="id_department">विभाग</label>
+
+                  <div class="controls">
+                    <select name="department" required="" id="id_department">
+  <option value="">---------</option>
+
+{% for dep in department %}
+   <option value="{{ dep.id }}">{{ dep }}</option>
+{% endfor %}
+
+</select>
+                  </div>
+                </div>
+
+
+              </div>
+

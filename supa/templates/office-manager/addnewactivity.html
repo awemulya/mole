@@ -1,0 +1,196 @@
+{% extends base_template %}
+{% block body %}
+<script type="text/javascript">
+  var d = document.getElementById("{% url 'supa:addoffice' %}");
+  d.className += "active";
+  var d = document.getElementById("office");
+  d.className += " open";
+</script>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="{% url 'supa:dashboard' %}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>गृह पृष्ठ</a><a href="#" class="current">कार्यक्रम थप्न</a> </div>
+    
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-pencil"></i> </span>
+            <h5>कार्यालय थप्न</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form id="form-wizard" class="form-horizontal" method="post">
+            {% csrf_token %}
+              <div id="form-wizard-1" class="step">
+
+
+{% for field in activityform %}
+
+
+
+
+
+
+                <div class="control-group">
+                 {{ form.errors }}
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div class="controls">
+                    {{ field }}
+                  </div>
+                </div>
+       {% endfor %}
+
+
+              
+              </div>
+
+              <div id="form-wizard-2" class="step">
+              
+                {% for field in currentactsform %}
+
+
+
+
+
+
+                <div class="control-group">
+                 {{ form.errors }}
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div class="controls">
+                    {{ field }}
+                  </div>
+                </div>
+       {% endfor %}
+
+
+
+              </div>
+
+<div id="form-wizard-3" class="step">
+              
+                {% for field in allactsform %}
+
+
+
+
+
+
+                <div class="control-group">
+                 {{ form.errors }}
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div class="controls">
+                    {{ field }}
+                  </div>
+                </div>
+       {% endfor %}
+
+
+
+              </div>
+
+
+<div id="form-wizard-4" class="step">              
+                {% for field in yearlyform %}
+                <div class="control-group">
+                 {{ form.errors }}
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div class="controls">
+                    {{ field }}
+                  </div>
+                </div>
+       {% endfor %}
+</div>
+<div id="form-wizard-5" class="step">              
+                {% for field in firstform %}
+                <div class="control-group">
+                 {{ form.errors }}
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div class="controls">
+                    {{ field }}
+                  </div>
+                </div>
+       {% endfor %}
+</div>
+<div id="form-wizard-6" class="step">              
+                {% for field in secondform %}
+                <div class="control-group">
+                 {{ form.errors }}
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div class="controls">
+                    {{ field }}
+                  </div>
+                </div>
+       {% endfor %}
+</div>
+<div id="form-wizard-7" class="step">              
+                {% for field in thirdform %}
+                <div class="control-group">
+                 {{ form.errors }}
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div class="controls">
+                    {{ field }}
+                  </div>
+                </div>
+       {% endfor %}
+</div>
+
+
+
+
+
+              
+
+
+              <div class="form-actions">
+               <input id="back" class="btn btn-primary" type="reset" value="Back" />
+               
+                <input id="next" class="btn btn-primary" type="submit" value="पेश गर्नुहोस् " />
+                <div id="status"></div>
+              </div>
+              <div id="submitted"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+    $("#id_first-ministry").change(function () {
+      
+      var id = $(this).val();
+      console.log(id);
+      $.ajax({
+        url: "{% url 'supa:ajaxgetdepartment' %}",
+        data: {'ministry': id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        type: 'POST',
+        success: function (html) {
+           $('#update-dep').html(html);
+        }
+      });
+
+    });
+
+    $("#id_first-category").change(function () {
+      
+      var id = $(this).val();
+      console.log(id);
+      $.ajax({
+        url: "{% url 'supa:ajaxgetcategory' %}",
+        data: {'category': id, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        type: 'POST',
+        success: function (html) {
+          //alert(html);
+          $("#form-wizard-3").html("");
+          $('#form-wizard-3').html(html);
+        }
+      });
+
+    });
+  </script>
+
+
+
+
+{% endblock %}

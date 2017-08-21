@@ -1,0 +1,28 @@
+{% extends base_template %}
+{% block body %}
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Form elements</a> <a href="#" class="current">Form wizard</a> </div>
+    <h1>Form wizard</h1>
+  </div>
+
+        {% if municipal_list %}
+            <ul>
+            {% for muni in municipal_list %}
+            <div class="container">
+                <div class="col-md-3">
+                    <a href=""><h3>Name: {{ muni.OPMtype.name }}</h3></a>
+                    <p>Category: {{ muni.OPMtype.category }}</p>
+                    <p>Address: {{ muni.OPMtype.address }}</p><br/>
+                </div>
+            </div>
+            {% endfor %}
+
+            </ul>
+        {% else %}
+            <p>No Office are available.</p>
+        {% endif %}
+
+  </div>
+</div>
+{% endblock %}

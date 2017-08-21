@@ -1,0 +1,50 @@
+{% extends base_template %}
+{% block body %}
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">फारम तत्व</a> <a href="#" class="current">फारम</a> </div>
+    <h1>फारम</h1>
+  </div>
+  <div class="container-fluid"><hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-pencil"></i> </span>
+            <h5>प्रथम चौमासिक</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form id="form-wizard" class="form-horizontal" method="post">
+            {% csrf_token %}
+              <div id="form-wizard-1" class="step">
+
+                {% for field in form %}
+                    <div class="control-group">
+                     {{ field.errors }}
+                      <label class="control-label">{{ field.label_tag }}</label>
+                      <div class="controls">
+                        {{ field }}
+                      </div>
+                    </div>
+                {% endfor %}
+              </div>
+
+              <div class="form-actions">
+               
+                <input id="next" class="btn btn-primary" type="submit" value="पेश गर्नुहोस्" />
+                <div id="status"></div>
+              </div>
+              <div id="submitted"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

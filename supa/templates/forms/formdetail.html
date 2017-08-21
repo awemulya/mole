@@ -1,0 +1,15 @@
+{% extends base_template %}
+{% block body %}
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Form elements</a> <a href="#" class="current">Form wizard</a> </div>
+    <h1>Form wizard</h1>
+  </div>
+
+		<h1>{{ form.id }}</h1>
+	<h3>{{ form.name }}</h3>
+	<h3>{{ form.form_vstatus.status }}</h3>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends base_template %}
+{% block body %}
+<div id="content">
+  <div id="content-header">
+
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">फारम तत्व</a> <a href="#" class="current">फारम</a> </div>
+    <h1>फारम</h1>
+  </div>
+	  <form method="post">{% csrf_token %}
+	   के तपाईं निश्चित हुनुहुन्छ "{{ object }}" हटाउन ?
+	    <input type="submit" value="पेश गर्नुहोस्" />
+	</form>
+
+  </div>
+</div>
+{% endblock %}
+

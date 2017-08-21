@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{% block title %}
+    {% endblock %}</title>
+  {% load staticfiles %}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/bootstrap-responsive.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/fullcalendar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/matrix-style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/matrix-media.css' %}" />
+
+<link rel="stylesheet" href="{% static 'css/select2.css' %}" />
+
+<link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/jquery.gritter.css' %}" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+</head>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<body>
+
+<!--Header-part-->
+<div id="header">
+
+
+    <img style="margin: 10px;" src="http://naxa.com.np/appadmin/application/logo.png" height="45px" width="200px">
+
+</div>
+<!--close-Header-part-->
+
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Office Manager</span><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+
+        <li id="user-Alex" class="online"><a href=""><img alt="" src="{{ request.user.profile.photo.url }}" width="40px" height="40px">{{ request.user.profile.name }}<span></span></a></li>
+
+      </ul>
+    </li>
+
+
+    <li class=""><a title="" href="{% url 'logout' %}"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+  </ul>
+</div>
+<!--close-top-Header-menu-->
+
+<!--sidebar-menu-->
+<div id="sidebar" style="font-size: 15px; color: #f2f2f2;">
+  <ul>
+    <li id="{% url 'supa:dashboard' %}"><a href="{% url 'supa:dashboard' %}"><i class="icon icon-home"></i><span>गृह पृष्ठ</span></a></li>
+
+
+
+    <li class="submenu" id="गतिविधि"> <a href="#"><i class="icon icon-file"></i> <span>कार्यक्रम</span> </a>
+      <ul>
+        <li id="{% url 'supa:addactivity' %}"><a href="{% url 'supa:addactivity' %}">कार्यक्रम थप्न</a></li>
+        <li id="{% url 'supa:allactivity' %}"><a href="{% url 'supa:allactivity' %}">कार्यक्रम हेर्ने</a></li>
+        <li id="{% url 'supa:allactivityreport' %}"><a href="{% url 'supa:allactivityreport' %}">कार्यक्रम रिपोर्ट</a></li>
+
+
+      </ul>
+    </li>
+    <li class="submenu" id="user"> <a href="#"><i class="icon icon-file"></i> <span>कर्मचारी</span> </a>
+      <ul>
+        <li id="{% url 'supa:adduser' %}"><a href="{% url 'supa:adduser' %}">कर्मचारीहरु थप्न</a></li>
+        <li><a href="#">कर्मचारी हेर्ने</a></li>
+
+
+      </ul>
+    </li>
+
+
+   
+
+  </ul>
+
+</div>
+
+<!--sidebar-menu-->
+
+<!--main-container-part-->
+{% block body %}
+{% endblock %}
+<!--end-main-container-part-->
+
+<!--Footer-part-->
+
+<div class="row-fluid">
+  <div id="footer" class="span12"> Brought to you by <a href="http://naxa.com.np">Naxa</a> </div>
+</div>
+
+<!--end-Footer-part-->
+
+
+
+<script src="{% static 'js/jquery.ui.custom.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- <script src="{% static 'js/jquery.flot.min.js' %}"></script>
+<script src="{% static 'js/jquery.flot.resize.min.js' %}"></script>  -->
+<!-- <script src="{% static 'js/jquery.peity.min.js' %}"></script>  -->
+<script src="{% static 'js/matrix.js' %}"></script>
+<!-- <script src="{% static 'js/matrix.dashboard.js' %}"></script>  -->
+<!-- <script src="{% static 'js/jquery.gritter.min.js' %}"></script>
+ <script src="{% static 'js/matrix.interface.js' %}"></script>
+<script src="{% static 'js/matrix.chat.js' %}"></script>  -->
+<script src="{% static 'js/jquery.validate.js' %}"></script>
+<!-- <script src="{% static 'js/matrix.form_validation.js' %}"></script>  -->
+<script src="{% static 'js/jquery.wizard.js' %}"></script>
+<!-- <script src="{% static 'js/jquery.uniform.js' %}"></script>  -->
+<!-- <script src="{% static 'js/select2.min.js' %}"></script>  -->
+<!-- <script src="{% static 'js/matrix.popover.js' %}"></script>  -->
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+
+<script src="{% static 'js/matrix.tables.js' %}"></script> 
+<script src="{% static 'js/matrix.wizard.js' %}"></script>
+
+<script type="text/javascript">
+
+
+
+
+</script>
+</body>
+</html>

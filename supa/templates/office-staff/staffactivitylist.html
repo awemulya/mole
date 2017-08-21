@@ -1,0 +1,53 @@
+{% extends base_template %}
+{% load staticfiles %}
+{% block body %}
+<script type="text/javascript">
+  var d = document.getElementById("{% url 'supa:listoffice' %}");
+  d.className += "active";
+  var d = document.getElementById("office");
+  d.className += " open";
+</script>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">फारम तत्व</a> <a href="#" class="current">फारम </a> </div>
+    <h1>फारम </h1>
+  </div>
+    <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-file"></i> </span>
+                <h5>हाल पोष्ट</h5>
+                </div>
+                <div class="widget-content nopadding">
+
+        {% if forms %}
+            <ul class="recent-posts">
+            {% for fom in forms %}
+            <li>
+             <div class="user-thumb"> <img alt="User" src="{% static 'img/demo/av1.jpg' %}" width="40" height="40"> </div>
+            <div class="article-post">
+                <div class="fr"><a href="{% url 'supa:editstaffactivity' fom.id %}" class="btn btn-primary btn-mini">सम्पादन</a> </div>
+                    <a href="{% url 'supa:editstaffactivity' fom.id %}"><h3>फारम: {{ fom.title }}</h3></a>
+                    <p>परिमाण: {{ fom.title }}</p>
+                    <p>भार: {{ fom.yearly.bhar_aim }}</p>
+                    <p>बजेट: {{ fom.yearly.budget_aim }}</p><br/>
+                </div>
+            </li>
+
+            {% endfor %}
+            <li>
+                <button class="btn btn-warning btn-mini">सबै हेर्न</button>
+            </li>
+            </div>
+            </ul>
+        {% else %}
+            <p>क्रियाकलाप उपलब्द छैन </p>
+        {% endif %}
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

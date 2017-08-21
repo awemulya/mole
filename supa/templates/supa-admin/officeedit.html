@@ -1,0 +1,70 @@
+{% extends base_template %}
+{% block body %}
+<div id="content">
+  <div id="content-header">
+
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">फारम तत्व</a> <a href="#" class="current">फारम </a> </div>
+    <h1>फारम</h1>
+
+  </div>
+  <div class="container-fluid"><hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-pencil"></i> </span>
+
+            <h5>फारम प्रमाणीकरण</h5>
+
+          </div>
+          <div class="widget-content nopadding">
+            <form id="form-wizard" class="form-horizontal" method="post">
+            {% csrf_token %}
+              <div id="form-wizard-1" class="step">
+                <div class="control-group">
+                 {{ form.name.errors }}
+
+                  <label class="control-label" for="{{ form.name.id_for_label }}"> नाम</label>
+
+                  <div class="controls">
+                    {{ form.name }}
+                  </div>
+                </div>
+
+
+                <div class="control-group">
+                 {{ form.address.errors }}
+                  <label class="control-label" for="{{ form.address.id_for_label }}"> ठेगाना</label>
+
+                  <div class="controls">
+                    {{ form.address }}
+                  </div>
+                </div>
+
+
+                <div class="control-group">
+                 {{ form.category.errors }}
+                  <label class="control-label" for="{{ form.category.id_for_label }}"> वर्ग</label>
+                  <div class="controls">
+                    {{ form.category }}
+                  </div>
+
+                </div>
+              </div>
+              <div class="form-actions">
+                <input id="back" class="btn btn-primary" type="reset" value="Back" />
+                <input id="next" class="btn btn-primary" type="submit" value="पेश गर्नुहोस्" />
+
+                <div id="status"></div>
+              </div>
+              <div id="submitted"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

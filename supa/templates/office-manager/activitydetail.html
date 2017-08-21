@@ -1,0 +1,20 @@
+{% extends base_template %}
+{% block body %}
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Form elements</a> <a href="#" class="current">Form wizard</a> </div>
+    <h1>Form wizard</h1>
+  </div>
+
+	    <h1>{{ activity.id }}</h1>
+                <div class="container">
+            	    <h3><p>Name:{{ activity.name }}</p></h3>
+                    <h3><p>Ekai:{{ activity.ekai }}</p></h3>
+                    <h3><p>Date:{{ activity.date }}</p></h3>
+                   
+                </div>
+
+
+  </div>
+</div>
+{% endblock %}

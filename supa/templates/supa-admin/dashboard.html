@@ -1,0 +1,166 @@
+{% extends base_template %}
+{% block body %}
+
+<script type="text/javascript">
+  var d = document.getElementById("{% url 'supa:dashboard' %}");
+  d.className += "active";
+</script>
+  <style>
+       #map {
+        height: 470px;
+        width: 100%;
+       }
+    </style>
+     <script>
+    var socket = new WebSocket('ws://' + window.location.host + '/supa/');
+
+    socket.onopen = function open() {
+      console.log('WebSockets connection created.');
+    };
+
+
+      socket.onmessage = function message(event) {
+      var data = JSON.parse(event.data);
+      // NOTE: We escape JavaScript to prevent XSS attacks.
+      var username = encodeURI(data['username']);
+      alert(username);
+    };
+
+
+
+    if (socket.readyState == WebSocket.OPEN) {
+      socket.onopen();
+      console.log('ready');
+    }
+  </script>
+
+
+<div id="content">
+<!--breadcrumbs-->
+  <div id="content-header">
+
+    <div id="{% url 'supa:dashboard' %}"> <a href="{% url 'supa:dashboard' %}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+
+  </div>
+<!--End-breadcrumbs-->
+
+<!--Action boxes-->
+  <div class="container-fluid">
+   <div class="widget-box widget-plain">
+   <br>
+      <div class="center">
+        <ul class="stat-boxes2">
+          <li>
+            <div class="left peity_bar_neutral"><span><span style="display: none;"><span style="display: none;"><span style="display: none;"><span style="display: none;">2,4,9,7,12,10,12</span><canvas width="50" height="24"></canvas></span>
+              <canvas width="50" height="24"></canvas>
+              </span><canvas width="50" height="24"></canvas></span><canvas width="50" height="24"></canvas></span>+10%</div>
+            <div class="right"> <strong>15598</strong> Visits </div>
+          </li>
+          <li>
+            <div class="left peity_line_neutral"><span><span style="display: none;"><span style="display: none;"><span style="display: none;"><span style="display: none;">10,15,8,14,13,10,10,15</span><canvas width="50" height="24"></canvas></span>
+              <canvas width="50" height="24"></canvas>
+              </span><canvas width="50" height="24"></canvas></span><canvas width="50" height="24"></canvas></span>10%</div>
+            <div class="right"> <strong>150</strong> New Users </div>
+          </li>
+          <li>
+            <div class="left peity_bar_bad"><span><span style="display: none;"><span style="display: none;"><span style="display: none;"><span style="display: none;">3,5,6,16,8,10,6</span><canvas width="50" height="24"></canvas></span>
+              <canvas width="50" height="24"></canvas>
+              </span><canvas width="50" height="24"></canvas></span><canvas width="50" height="24"></canvas></span>-40%</div>
+            <div class="right"> <strong>4560</strong> Orders</div>
+          </li>
+          <li>
+            <div class="left peity_line_good"><span><span style="display: none;"><span style="display: none;"><span style="display: none;"><span style="display: none;">12,6,9,23,14,10,17</span><canvas width="50" height="24"></canvas></span>
+              <canvas width="50" height="24"></canvas>
+              </span><canvas width="50" height="24"></canvas></span><canvas width="50" height="24"></canvas></span>+60%</div>
+            <div class="right"> <strong>5672</strong> Active Users </div>
+          </li>
+          <li>
+            <div class="left peity_bar_good"><span><span style="display: none;">12,6,9,23,14,10,13</span><canvas width="50" height="24"></canvas></span>+30%</div>
+            <div class="right"> <strong>2560</strong> Register</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+<!-- Status notifications End -->
+
+
+<div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
+            <h5>Turning-series chart</h5>
+          </div>
+          <div class="widget-content">
+            <div id="placeholder" style="padding: 0px; position: relative;"><canvas class="base" width="999" height="300"></canvas><canvas class="overlay" width="999" height="300" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="tickLabels" style="font-size:smaller"><div class="xAxis x1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:center;left:-7px;top:280px;width:99px">1988</div><div class="tickLabel" style="position:absolute;text-align:center;left:98px;top:280px;width:99px">1990</div><div class="tickLabel" style="position:absolute;text-align:center;left:204px;top:280px;width:99px">1992</div><div class="tickLabel" style="position:absolute;text-align:center;left:310px;top:280px;width:99px">1994</div><div class="tickLabel" style="position:absolute;text-align:center;left:416px;top:280px;width:99px">1996</div><div class="tickLabel" style="position:absolute;text-align:center;left:522px;top:280px;width:99px">1998</div><div class="tickLabel" style="position:absolute;text-align:center;left:628px;top:280px;width:99px">2000</div><div class="tickLabel" style="position:absolute;text-align:center;left:734px;top:280px;width:99px">2002</div><div class="tickLabel" style="position:absolute;text-align:center;left:840px;top:280px;width:99px">2004</div><div class="tickLabel" style="position:absolute;text-align:center;left:946px;top:280px;width:99px">2006</div></div><div class="yAxis y1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:right;top:264px;right:963px;width:36px">0</div><div class="tickLabel" style="position:absolute;text-align:right;top:219px;right:963px;width:36px">100000</div><div class="tickLabel" style="position:absolute;text-align:right;top:174px;right:963px;width:36px">200000</div><div class="tickLabel" style="position:absolute;text-align:right;top:129px;right:963px;width:36px">300000</div><div class="tickLabel" style="position:absolute;text-align:right;top:84px;right:963px;width:36px">400000</div><div class="tickLabel" style="position:absolute;text-align:right;top:39px;right:963px;width:36px">500000</div><div class="tickLabel" style="position:absolute;text-align:right;top:-6px;right:963px;width:36px">600000</div></div></div><div class="legend"><div style="position: absolute; width: 65px; height: 154px; top: 9px; right: 9px; background-color: rgb(249, 249, 249); opacity: 0.85;"> </div><table style="position:absolute;top:9px;right:9px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(72,140,19);overflow:hidden"></div></div></td><td class="legendLabel">Activities</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(218,75,15);overflow:hidden"></div></div></td><td class="legendLabel">Budget</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(233,177,4);overflow:hidden"></div></div></td><td class="legendLabel">Progress</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(151,8,14);overflow:hidden"></div></div></td><td class="legendLabel">Aim</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(27,85,192);overflow:hidden"></div></div></td><td class="legendLabel">Total Offices</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(57,112,15);overflow:hidden"></div></div></td><td class="legendLabel">Completed Projects</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(174,60,12);overflow:hidden"></div></div></td><td class="legendLabel">Budget</td></tr></tbody></table></div></div>
+            <p id="choices"><br><input name="usa" checked="checked" id="idusa" type="checkbox"><label for="idusa">Activities</label><br><input name="russia" checked="checked" id="idrussia" type="checkbox"><label for="idrussia">Aim</label><br><input name="uk" checked="checked" id="iduk" type="checkbox"><label for="iduk">Projects</label><br><input name="germany" checked="checked" id="idgermany" type="checkbox"><label for="idgermany">Offices</label><br><input name="denmark" checked="checked" id="iddenmark" type="checkbox"><label for="iddenmark">Spent Budget</label><br><input name="sweden" checked="checked" id="idsweden" type="checkbox"><label for="idsweden">Budget</label><br><input name="norway" checked="checked" id="idnorway" type="checkbox"><label for="idnorway">Sucesss Rate</label></p>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="row-fluid">
+      <div class="span8">
+       <div id="map"></div>
+      </div>
+      <div class="span4">
+        <ins style="width:100%;height:470px;" class="nepalipatro-wg" widget="month"/><script src="//nepalipatro.com.np/widget/js"></script>
+      </div>
+    </div>
+
+
+
+
+
+
+
+ <div class="container-fluid">
+
+   <div class="widget-box widget-plain">
+   <div class="col-md-5">
+
+
+</div>
+
+
+
+   </div>
+   </div>
+
+
+
+    <script>
+      function initMap() {
+        var uluru = {lat: 27.363, lng: 85.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key= AIzaSyBW0dYLRy9A6VacFBYTXhflFyzQa_y9mHU &callback=initMap">
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Start of upcoming event widget -->
+
+
+
+
+  </div>
+</div>
+{% endblock %}

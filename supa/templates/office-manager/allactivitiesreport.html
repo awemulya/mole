@@ -1,0 +1,309 @@
+{% extends base_template %}
+
+{% block body %}
+<script type="text/javascript">
+  var d = document.getElementById("{% url 'supa:listoffice' %}");
+  d.className += "active";
+  var d = document.getElementById("office");
+  d.className += "open";
+</script>
+
+
+ <script type="text/javascript">
+              var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,'
+        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+        , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+        , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function (table, name, filename) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+
+            document.getElementById("dlink").href = uri + base64(format(template, ctx));
+            document.getElementById("dlink").download = filename;
+            document.getElementById("dlink").click();
+
+        }
+    })()
+  </script>
+
+
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">फारम तत्व</a> <a href="#" class="current">फारम </a> </div>
+    </div>
+<div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+<a id="dlink"  style="display:none;"></a>
+<div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5>{{ formtype }}</h5>
+            <input type="button" onclick="tableToExcel('report', 'name', 'Report.xls')" class="pull-right" value="Export to Excel">
+          </div>
+<div class="widget-content nopadding">
+
+{% if formtype == "Project" %}
+
+
+
+            <table id = "report" class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th rowspan="3">सि. न.</th>
+                  <th rowspan="3">क्रियाकलाब</th>
+                  <th rowspan="3">वार्षिक विषय</th>
+                  <th rowspan="3">एकाई</th>
+                  <th colspan="3">हाल क्रियाकलाब</th>
+                  <th colspan="3">सबै क्रियाकलाब</th>
+                  <th colspan="24">बजेट वर्ष </th>
+                  <th rowspan="3">टिप्पणी</th>
+                </tr>
+               <tr>
+                  <th rowspan="2">परिमाण </th>
+                  <th rowspan="2">भार</th>
+                  <th rowspan="2">लागत </th>
+                  <th rowspan="2">परिमाण </th>
+                  <th rowspan="2">भार</th>
+                  <th rowspan="2">लागत </th>
+                  <th colspan="3">बार्षिक लक्ष्य</th>
+                  <th colspan="3">प्रथम लक्ष्य</th>
+                  <th colspan="3">दोस्रो लक्ष्य</th>
+                  <th colspan="3">तेस्रो लक्ष्य</th>
+                  <th colspan="3">बार्षिक प्रगति</th>
+                  <th colspan="3">प्रथम प्रगति</th>
+                  <th colspan="3">दोस्रो प्रगतिs</th>
+                  <th colspan="3">तेस्रो प्रगति</th>
+               </tr>
+                <tr>
+
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                </tr>
+
+
+
+
+              </thead>
+              <tbody>
+
+
+
+            {% for act in activities %}
+                  <tr>
+
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ act.title }}</td>
+                      <td>{{ act.karchasirsak }}</td>
+                      <td>{{ act.ekai }}</td>
+                      <td>{{ act.currentacts.parinam }}</td>
+                      <td>{{ act.currentacts.bhar }}</td>
+                      <td>{{ act.currentacts.laagat }}</td>
+                      <td>{{ act.allacts.parinam }}</td>
+                      <td>{{ act.allacts.bhar }}</td>
+                      <td>{{ act.allacts.laagat }}</td>
+                      <td>{{ act.yearly.parinam_aim }}</td>
+                      <td>{{ act.yearly.bhar_aim }}</td>
+                      <td>{{ act.yearly.budget_aim }}</td>
+                      <td>{{ act.first.parinam_aim }}</td>
+                      <td>{{ act.first.bhar_aim }}</td>
+                      <td>{{ act.first.budget_aim }}</td>
+                      <td>{{ act.second.parinam_aim }}</td>
+                      <td>{{ act.second.bhar_aim }}</td>
+                      <td>{{ act.second.budget_aim }}</td>
+                      <td>{{ act.third.parinam_aim }}</td>
+                      <td>{{ act.third.bhar_aim }}</td>
+                      <td>{{ act.third.budget_aim }}</td>
+                      <td>{{ act.yearly.parinam_progress }}</td>
+                      <td>{{ act.yearly.bhar_progress }}</td>
+                      <td>{{ act.yearly.laagat_progress }}</td>
+                      <td>{{ act.first.parinam_progress }}</td>
+                      <td>{{ act.first.bhar_progress }}</td>
+                      <td>{{ act.first.laagat_progress }}</td>
+                      <td>{{ act.second.parinam_progress }}</td>
+                      <td>{{ act.second.bhar_progress }}</td>
+                      <td>{{ act.second.laagat_progress }}</td>
+                      <td>{{ act.third.parinam_progress }}</td>
+                      <td>{{ act.third.bhar_progress }}</td>
+                      <td>{{ act.third.laagat }}</td>
+                      <td></td>
+
+
+
+                  </tr>
+
+            {% endfor %}
+
+
+
+
+
+              </tbody>
+            </table>
+
+{% else %}
+
+      <table id = "report" class="table table-bordered data-table">
+              <thead>
+                <tr>
+
+
+
+                  <th rowspan="3">सि. न.</th>
+                  <th rowspan="3">क्रियाकलाब</th>
+                  <th rowspan="3">वार्षिक विषय</th>
+                  <th rowspan="3">एकाई</th>
+
+                  <th colspan="24">बजेट वर्ष</th>
+                  <th rowspan="3">टिप्पणी</th>
+                </tr>
+               <tr>
+
+                  <th colspan="3">बार्षिक लक्ष्य</th>
+                  <th colspan="3">प्रथम लक्ष्य</th>
+                  <th colspan="3">दोस्रो लक्ष्य</th>
+                  <th colspan="3">तेस्रो लक्ष्य</th>
+                  <th colspan="3">बार्षिक प्रगति</th>
+                  <th colspan="3">प्रथम प्रगति</th>
+                  <th colspan="3">दोस्रो प्रगति</th>
+                  <th colspan="3">तेस्रो प्रगति</th>
+               </tr>
+                <tr>
+
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                  <th>परिमाण </th>
+                  <th>भार</th>
+                  <th>लागत </th>
+                </tr>
+
+
+
+
+              </thead>
+              <tbody>
+
+
+
+            {% for act in activities %}
+                  <tr>
+
+
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ act.title }}</td>
+                      <td>{{ act.karchasirsak }}</td>
+                      <td>{{ act.ekai }}</td>
+                      <td>{{ act.yearly.parinam_aim }}</td>
+                      <td>{{ act.yearly.bhar_aim }}</td>
+                      <td>{{ act.yearly.budget_aim }}</td>
+                      <td>{{ act.first.parinam_aim }}</td>
+                      <td>{{ act.first.bhar_aim }}</td>
+                      <td>{{ act.first.budget_aim }}</td>
+                      <td>{{ act.second.parinam_aim }}</td>
+                      <td>{{ act.second.bhar_aim }}</td>
+                      <td>{{ act.second.budget_aim }}</td>
+                      <td>{{ act.third.parinam_aim }}</td>
+                      <td>{{ act.third.bhar_aim }}</td>
+                      <td>{{ act.third.budget_aim }}</td>
+                      <td>{{ act.yearly.parinam_progress }}</td>
+                      <td>{{ act.yearly.bhar_progress }}</td>
+                      <td>{{ act.yearly.laagat_progress }}</td>
+                      <td>{{ act.first.parinam_progress }}</td>
+                      <td>{{ act.first.bhar_progress }}</td>
+                      <td>{{ act.first.laagat_progress }}</td>
+                      <td>{{ act.second.parinam_progress }}</td>
+                      <td>{{ act.second.bhar_progress }}</td>
+                      <td>{{ act.second.laagat_progress }}</td>
+                      <td>{{ act.third.parinam_progress }}</td>
+                      <td>{{ act.third.bhar_progress }}</td>
+                      <td>{{ act.third.laagat }}</td>
+                      <td></td>
+
+                  </tr>
+
+              {% endfor %}
+
+
+
+
+
+              </tbody>
+            </table>
+
+  {% endif %}
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+{% endblock %}
