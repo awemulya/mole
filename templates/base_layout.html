@@ -178,7 +178,12 @@
 
 
 
-
+				<p>
+			   	<small>Welcome</small>
+                  {{request.user.profile.name }} - {{request.group}}
+                  
+                 
+                </p>
 					<span class="pull-right" style="position:relative; margin-top: 0px;"><a href="{% url 'users:logout' %}">Logout</a></span>
 				</div>
 			</div>
