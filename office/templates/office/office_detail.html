@@ -101,19 +101,49 @@
 
 {% endblock content %}
 
-{% block extra_scripts %}
-           <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
 
-            <script>
-                function myMap() {
-                    var myCenter = new google.maps.LatLng({{ office.lat }},{{ office.lon }});
-                    var mapCanvas = document.getElementById("map");
-                    var mapOptions = {center: myCenter, zoom: 15};
-                    var map = new google.maps.Map(mapCanvas, mapOptions);
-                    var marker = new google.maps.Marker({position:myCenter});
-                    marker.setMap(map);
-                }
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
+        {% block extra_scripts %}
+
+        <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
+
+    <script>
+
+
+    var locations = [
+      ['', 27.696446, 85.3221903, 4],
+      ['', 27.6692636, 85.3326804, 5],
+      ['', 27.6931977, 85.3242567, 3],
+      ['', 27.6482818, 85.3050494, 2],
+      ['', 27.6867262, 85.3365863, 1]
+    ];
+
+
+      function myMap() {
+        var myCenter = new google.maps.LatLng(27.6966239,85.3239172);
+        var mapCanvas = document.getElementById("map");
+        var mapOptions = {center: myCenter, zoom: 12};
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var marker = new google.maps.Marker({position:myCenter});
+        marker.setMap(map);
+        google.maps.event.addListener(marker,'click',function() {
+          take_action();
+
+
+
+        });
+
+        var marker, i;
+
+          for (i = 0; i < locations.length; i++) {  
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+              map: map
+            });
+      }}
+      function take_action(){
+        alert("Take Action");
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
         {% endblock extra_scripts %}
