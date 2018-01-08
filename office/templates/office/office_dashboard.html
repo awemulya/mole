@@ -111,20 +111,17 @@
 
 
 		{% block extra_scripts %}
-       		 <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
-
-            <script>
-                function myMap() {
-                    var myCenter = new google.maps.LatLng({{ office.lat }},{{ office.lon }});
-                    var mapCanvas = document.getElementById("map");
-                    var mapOptions = {center: myCenter, zoom: 15};
-                    var map = new google.maps.Map(mapCanvas, mapOptions);
-                    var marker = new google.maps.Marker({position:myCenter});
-                    marker.setMap(map);
-                }
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
-
+       		<script>
+			function myMap() {
+				var myCenter = new google.maps.LatLng(27.687022, 85.327193);
+				var mapCanvas = document.getElementById("map");
+				var mapOptions = {center: myCenter, zoom: 15};
+				var map = new google.maps.Map(mapCanvas, mapOptions);
+				var marker = new google.maps.Marker({position:myCenter});
+				marker.setMap(map);
+			}
+		</script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
         {% endblock extra_scripts %}
 
 
