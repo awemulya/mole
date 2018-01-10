@@ -29,7 +29,7 @@
 
                   <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                      <b>इ-मेल</b> <a class="pull-right">{{office.email}}</a>
+                      <b>इ-मेल</b><a class="pull-right">{{office.email}}</a>
                     </li>
                     <li class="list-group-item">
                       <b>फोन</b> <a class="pull-right">{{office.phone}}</a>
@@ -67,33 +67,45 @@
 					<b>कार्यालय :</b> {{office.name}}
 				</p>
 				<p>
-				इन नोन उर्न अ नेक र्होन्कुस अदिपिस्किङ्, उल्तृकेस मिद तोर्तोर एलेमेन्तुम्, अलिकुअ सित एरोस्, मुस पोर्त्तितोर पुल्विनर । कुम मग्न! अक निसी एतिअ पिद ? इन्तेगेर दोलोर पोर्त्तितोर्, औक्तोर्, नेक मग्निस्, रिदिकुलुस दिअ सित्, इन मिद पेनतिबुस्! टिन्किदुन्त ओदिओ वेल लोरेम तृस्तिकुए पेल्लेन्तेस्कुए एलेमेन्तुम ओदिओ । एगेस्तस । उर्न । औगुए उल्तृकेस । मोन्तेस उल्तृकिएस लकुस हक्, नतोकुए अदिपिस्किङ अ, पिद एनिम स्केलेरिस्कुए उत पोर्त्तितोर ।
+				{{office.description}}
 				</p>
-				<p>
-				अलिकुएत नेक एगेस्तस पोर्त्तितोर वेल रिदिकुलुस अलिकुअ सित औक्तोर पोर्त्तितोर अदिपिस्किङ सित ? णोन अदिपिस्किङ पेनतिबुस्, उत एत मोन्तेस्, दुइस पेल्लेन्तेस्कुए अ सगित्तिस प्लतेअ मस्स, एलेमेन्तुम प्लकेरत उत उल्तृकेस पिद अदिपिस्किङ अक दुइस्, अ्एत पोर्त्तितोर सेद पुरुस मग्न नस्केतुर्, अक अ ? पिद कुइस पुरुस मोन्तेस ? औगुए, पेनतिबुस्, प्लकेरत तुर्पिस अलिकुएत एरोस्, दिग्निस्सिम इन्, पेनतिबुस अक अर्कु मस्स दिग्निस्सिम दपिबुस ? अर्कु पेल्लेन्तेस्कुए ।
-				</p>
-				<p>
-				इन नोन उर्न अ नेक र्होन्कुस अदिपिस्किङ्, उल्तृकेस मिद तोर्तोर एलेमेन्तुम्, अलिकुअ सित एरोस्, मुस पोर्त्तितोर पुल्विनर । कुम मग्न! अक निसी एतिअ पिद ? इन्तेगेर दोलोर पोर्त्तितोर्, औक्तोर्, नेक मग्निस्, रिदिकुलुस दिअ सित्, इन मिद पेनतिबुस्! टिन्किदुन्त ओदिओ वेल लोरेम तृस्तिकुए पेल्लेन्तेस्कुए एलेमेन्तुम ओदिओ । एगेस्तस । उर्न । औगुए उल्तृकेस । मोन्तेस उल्तृकिएस लकुस हक्, नतोकुए अदिपिस्किङ अ, पिद एनिम स्केलेरिस्कुए उत पोर्त्तितोर ।
-				</p>
-
-
-
-                <h3 class="box-title" style="text-align: center">बजेटको विवरण </h3><span class="pull-right"><a href="{% url 'office:office-budget-update' office.id %}">सम्पादन गर्नुहोस </a></span>
-                <!-- /.box-header -->
-                <div class="box-body">
-                  <dl class="dl-horizontal">
-                        <dt>आर्थिक वर्ष:</dt> <dd>{{ budget.first.budget_year }}</dd>
-                        <dt>बजेट      :</dt> <dd>{{ budget.first.budget_rs }}</dd>
-                        <dt>नेपाल सरकार :</dt> <dd>{{ budget.first.nepalsarkar }}</dd>
-                        <dt>संस्था :</dt> <dd>{{ budget.first.sastha }}</dd>
-                        <dt>जनसंग्लनता :</dt> <dd>{{budget.first.anasamglanta }}</dd>
-                        <dt>ऋण :</dt> <dd>{{ budget.first.loan }}</dd>
-                        <dt>उपदान :</dt> <dd>{{ budget.first.upadan }}</dd>
-                        <dt>दातृसंस्था :</dt> <dd>{{ budget.first.dritasastha }}</dd>
-                        <dt>अन्तरिक :</dt> <dd>{{ budget.first.antarik }}</dd>
-                        <dt>वैदेशिक :</dt> <dd>{{ budget.first.baidesikh }}</dd>
-                  </dl>
-                </div>
+        <h3 class="box-title" style="text-align: center">बजेटको विवरण </h3>        
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>क्र. म.</th>
+                <th>आर्थिक वर्ष</th>
+                <th>बजेट</th>
+                <th>नेपाल सरकार</th>
+                <th>संस्था</th>
+                <th>जनसंग्लनता</th>
+                <th>ऋण</th>
+                <th>उपदान</th>
+                <th>दातृसंस्था</th>
+                <th>अन्तरिक</th>
+                <th>वैदेशिक</th>
+                <th>सम्पादन गर्नुहोस</th>
+              </tr>
+            </thead>
+            <tbody>  
+              <tr>
+                <td>1</td>
+                <td>{{ budget.first.budget_year }}</td>
+                <td>{{ budget.first.budget_rs }}</td>
+                <td>{{ budget.first.nepalsarkar }}</td>
+                <td>{{ budget.first.sastha }}</td>
+                <td>{{ budget.first.janasamglanta }}</td>
+                <td>{{ budget.first.loan }}</td>
+                <td>{{ budget.first.upadan }}</td>
+                <td>{{ budget.first.dritasastha }}</td>
+                <td>{{ budget.first.antarik }}</td>
+                <td>{{ budget.first.baidesikh }}</td>
+                <td><a href="{% url 'office:office-budget-update' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a></td>
+              </tr>              
+            </tbody>
+          </table>
+        </div>
 			</div>
 
 		</section>
