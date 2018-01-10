@@ -20,13 +20,13 @@
                 <center><h5>{{ object.name }}</h5></center>
               </div>
             </div>
-            <p class="text-muted text-center">{{ office }}</p>
+            <p class="text-muted text-center"></p>
             <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>पोस्ट</b> <a class="pull-right">{{ role.first.group }}</a>
+                  <b>पोस्ट: </b> <a class="pull-right">{{ role.first.group }}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>कार्य</b><a class="pull-right" href="{% url 'office:profile-update' request.user.id %}">परिवर्तन गर्नुहोस्</a>
+                  <b>परिवर्तन: </b><a class="pull-right" href="{% url 'office:profile-update' request.user.id %}">परिवर्तन गर्नुहोस्</a>
                 </li>
               </ul>
           </div>
@@ -37,27 +37,27 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i>फोन नम्बर</strong>
+              <strong><i class="fa fa-book margin-r-5"></i> फोन नम्बर</strong>
 
               <p class="text-muted">
-               {{ object.phone }}
+               {{ object.phoneno }}
               </p>
 
               <hr>
 
-              <strong><i class="fa fa-map-marker margin-r-5"></i>जन्म मिति</strong>
+              <strong><i class="fa fa-map-marker margin-r-5"></i> जन्म मिति</strong>
 
               <p class="text-muted">{{ object.birth_date }}</p>
 
               <hr>
 
-              <strong><i class="fa fa-pencil margin-r-5"></i>तिथि मानाङ्कन</strong>
+              <strong><i class="fa fa-pencil margin-r-5"></i> तिथि मानाङ्कन</strong>
 
               <p class="text-muted">{{ object.assign_date }}</p>
 
               <hr>
 
-              <strong><i class="fa fa-file-text-o margin-r-5"></i>बायो</strong>
+              <strong><i class="fa fa-file-text-o margin-r-5"></i> बायो</strong>
 
               <p>{{ object.bio }}</p>
             </div>

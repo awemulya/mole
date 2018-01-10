@@ -28,6 +28,7 @@ class District(models.Model):
 class Office(models.Model):
 	name = models.CharField(verbose_name="नाम", max_length=255)
 	address = models.CharField(verbose_name="ठेगाना", max_length=255, blank=True)
+	description = models.TextField(verbose_name="विवरण", blank=True, null=True)
 	#district = models.ManyToManyField(District, verbose_name="जिल्ला", related_name="office")
 	email = models.CharField(verbose_name="इमेल", max_length=255, blank=True)
 	phone = models.CharField(verbose_name="फोन", max_length=255, blank=True)
