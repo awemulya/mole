@@ -91,6 +91,7 @@ class KaryaKram(models.Model):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
         return self.lakxya.filter(fiscal_year=fiscal_year, awadhi=1)
+        
     def get_first_pragati(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
