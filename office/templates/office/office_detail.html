@@ -67,33 +67,48 @@
 					<b>कार्यालय :</b> {{office.name}}
 				</p>
 				<p>
-				इन नोन उर्न अ नेक र्होन्कुस अदिपिस्किङ्, उल्तृकेस मिद तोर्तोर एलेमेन्तुम्, अलिकुअ सित एरोस्, मुस पोर्त्तितोर पुल्विनर । कुम मग्न! अक निसी एतिअ पिद ? इन्तेगेर दोलोर पोर्त्तितोर्, औक्तोर्, नेक मग्निस्, रिदिकुलुस दिअ सित्, इन मिद पेनतिबुस्! टिन्किदुन्त ओदिओ वेल लोरेम तृस्तिकुए पेल्लेन्तेस्कुए एलेमेन्तुम ओदिओ । एगेस्तस । उर्न । औगुए उल्तृकेस । मोन्तेस उल्तृकिएस लकुस हक्, नतोकुए अदिपिस्किङ अ, पिद एनिम स्केलेरिस्कुए उत पोर्त्तितोर ।
-				</p>
-				<p>
-				अलिकुएत नेक एगेस्तस पोर्त्तितोर वेल रिदिकुलुस अलिकुअ सित औक्तोर पोर्त्तितोर अदिपिस्किङ सित ? णोन अदिपिस्किङ पेनतिबुस्, उत एत मोन्तेस्, दुइस पेल्लेन्तेस्कुए अ सगित्तिस प्लतेअ मस्स, एलेमेन्तुम प्लकेरत उत उल्तृकेस पिद अदिपिस्किङ अक दुइस्, अ्एत पोर्त्तितोर सेद पुरुस मग्न नस्केतुर्, अक अ ? पिद कुइस पुरुस मोन्तेस ? औगुए, पेनतिबुस्, प्लकेरत तुर्पिस अलिकुएत एरोस्, दिग्निस्सिम इन्, पेनतिबुस अक अर्कु मस्स दिग्निस्सिम दपिबुस ? अर्कु पेल्लेन्तेस्कुए ।
-				</p>
-				<p>
-				इन नोन उर्न अ नेक र्होन्कुस अदिपिस्किङ्, उल्तृकेस मिद तोर्तोर एलेमेन्तुम्, अलिकुअ सित एरोस्, मुस पोर्त्तितोर पुल्विनर । कुम मग्न! अक निसी एतिअ पिद ? इन्तेगेर दोलोर पोर्त्तितोर्, औक्तोर्, नेक मग्निस्, रिदिकुलुस दिअ सित्, इन मिद पेनतिबुस्! टिन्किदुन्त ओदिओ वेल लोरेम तृस्तिकुए पेल्लेन्तेस्कुए एलेमेन्तुम ओदिओ । एगेस्तस । उर्न । औगुए उल्तृकेस । मोन्तेस उल्तृकिएस लकुस हक्, नतोकुए अदिपिस्किङ अ, पिद एनिम स्केलेरिस्कुए उत पोर्त्तितोर ।
+				{{ office.description }}
 				</p>
 
 
 
-                <h3 class="box-title" style="text-align: center">बजेटको विवरण </h3><span class="pull-right"><a href="{% url 'office:office-budget-update' office.id %}">सम्पादन गर्नुहोस </a></span>
+        <h3 class="box-title" style="text-align: center">बजेटको विवरण </h3>
                 <!-- /.box-header -->
-                <div class="box-body">
-                  <dl class="dl-horizontal">
-                        <dt>आर्थिक वर्ष:</dt> <dd>{{ budget.first.budget_year }}</dd>
-                        <dt>बजेट      :</dt> <dd>{{ budget.first.budget_rs }}</dd>
-                        <dt>नेपाल सरकार :</dt> <dd>{{ budget.first.nepalsarkar }}</dd>
-                        <dt>संस्था :</dt> <dd>{{ budget.first.sastha }}</dd>
-                        <dt>जनसंग्लनता :</dt> <dd>{{budget.first.anasamglanta }}</dd>
-                        <dt>ऋण :</dt> <dd>{{ budget.first.loan }}</dd>
-                        <dt>उपदान :</dt> <dd>{{ budget.first.upadan }}</dd>
-                        <dt>दातृसंस्था :</dt> <dd>{{ budget.first.dritasastha }}</dd>
-                        <dt>अन्तरिक :</dt> <dd>{{ budget.first.antarik }}</dd>
-                        <dt>वैदेशिक :</dt> <dd>{{ budget.first.baidesikh }}</dd>
-                  </dl>
-                </div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>आर्थिक वर्ष</th>
+                <th>बजेट</th>      
+                <th>नेपाल सरकार</th>
+                <th>संस्था</th> 
+                <th>जनसंग्लनता</th> 
+                <th>ऋण</th> 
+                <th>उपदान</th>
+                <th>दातृसंस्था</th> 
+                <th>अन्तरिक</th> 
+                <th>वैदेशिक</th>
+                <th>सम्पादन गर्नुहोस</th> 
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr>
+                <td>{{ budget.first.budget_year }}</td>
+                <td>{{ budget.first.budget_rs }}</td>
+                <td>{{ budget.first.nepalsarkar }}</td>
+                <td>{{ budget.first.sastha }}</td>
+                <td>{{budget.first.janasamglanta }}</td>
+                <td>{{ budget.first.loan }}</td>
+                <td>{{ budget.first.upadan }}</td>
+                <td>{{ budget.first.dritasastha }}</td>
+                <td>{{ budget.first.antarik }}</td>
+                <td>{{ budget.first.baidesikh }}</td>
+                <td><a href="{% url 'office:office-budget-update' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 			</div>
 
 		</section>
@@ -101,19 +116,51 @@
 
 {% endblock content %}
 
-{% block extra_scripts %}
-           <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
 
-            <script>
-                function myMap() {
-                    var myCenter = new google.maps.LatLng({{ office.lat }},{{ office.lon }});
-                    var mapCanvas = document.getElementById("map");
-                    var mapOptions = {center: myCenter, zoom: 15};
-                    var map = new google.maps.Map(mapCanvas, mapOptions);
-                    var marker = new google.maps.Marker({position:myCenter});
-                    marker.setMap(map);
-                }
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
+        {% block extra_scripts %}
+
+        <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
+
+    <script>
+
+
+    var locations = [
+      ['', 27.696446, 85.3221903, 4],
+      ['', 27.6692636, 85.3326804, 5],
+      ['', 27.6931977, 85.3242567, 3],
+      ['', 27.6482818, 85.3050494, 2],
+      ['', 27.6867262, 85.3365863, 1]
+    ];
+
+
+      function myMap() {
+        var myCenter = new google.maps.LatLng(27.6966239,85.3239172);
+        var mapCanvas = document.getElementById("map");
+        var mapOptions = {center: myCenter, zoom: 12};
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var marker = new google.maps.Marker({position:myCenter});
+        marker.setMap(map);
+        google.maps.event.addListener(marker,'click',function() {
+          take_action();
+
+
+
+        });
+
+        var marker, i;
+
+          for (i = 0; i < locations.length; i++) {  
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+              map: map
+            });
+      }}
+      function take_action(){
+        alert("Take Action");
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
         {% endblock extra_scripts %}
+
+

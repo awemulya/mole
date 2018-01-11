@@ -30,6 +30,7 @@ class Office(models.Model):
 	address = models.CharField(verbose_name="ठेगाना", max_length=255, blank=True)
 	#district = models.ManyToManyField(District, verbose_name="जिल्ला", related_name="office")
 	email = models.CharField(verbose_name="इमेल", max_length=255, blank=True)
+	description = models.TextField(verbose_name="विवरण", null=True, blank=True)
 	phone = models.CharField(verbose_name="फोन", max_length=255, blank=True)
 	fax = models.CharField(verbose_name="फ्याकस", max_length=255, blank=True)
 	office_time = models.CharField(verbose_name="कार्यालय समय", max_length=255, blank=True)
