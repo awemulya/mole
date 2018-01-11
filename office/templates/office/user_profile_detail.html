@@ -5,12 +5,13 @@
 {% block title %}{{object}}{% endblock title %}
 
 {% block content %}
-<section class="content-header">
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>गृह पृष्ठ</a></li>
-        
-      </ol>
-    </section>
+<section id="app-section">
+      <ol class="breadcrumb no-margin margin-top-lg">
+        <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
+        <li><a href="">वैदेशिक रोजगार विभाग</a></li>
+        <li class="active">विवरण हेर्नुहोस्</li>
+      </ol><br>
+
     <!-- bread crumb  -->
 
     <!-- Main content -->
