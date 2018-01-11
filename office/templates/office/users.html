@@ -29,7 +29,7 @@
 									{% if head.user.id %}
 						            <a href="{% url 'office:profile-detail' head.user.id %}">
 						            {% endif %}
-						            <img class="profile-user-img img-responsive img-circle" src="{% if head.user.profile.photo %}{{ head.user.profile.photo.url }}{% else %}{% static 'dist/img/logo.png' %}{% endif %}" alt="User profile picture" width="50" height="50">
+						            <img class="profile-user-img img-responsive img-circle" src="{% if head.user.profile.photo %}{{ head.user.profile.photo.url }}{% else %}{% static 'dist/img/logo.png' %}{% endif %}" alt=""  width="30" height="30">
 								</td>
 								<td>
 									<h4>{% if head %}{{head.user.profile.name}}
@@ -54,7 +54,7 @@
 									{% if assistant.user.id %}
 						            <a href="{% url 'office:profile-detail' assistant.user.id %}">
 						            {% endif %}
-						            <img class="profile-user-img img-responsive img-circle" src="{% if assistant.user.profile.photo %}{{ assistant.user.profile.photo.url }}{% else %}{% static 'dist/img/logo.png' %}{% endif %}" alt="User profile picture" width="50" height="50">
+						            <img class="profile-user-img img-responsive img-circle" src="{% if assistant.user.profile.photo %}{{ assistant.user.profile.photo.url }}{% else %}{% static 'dist/img/logo.png' %}{% endif %}" alt=""  width="30" height="30">
 								</td>
 								<td>
 									<h4>{% if assistant %}{{assistant.user.profile.name}}

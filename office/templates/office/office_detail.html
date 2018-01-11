@@ -9,7 +9,7 @@
 		<section id="app-section">
 			<ol class="breadcrumb no-margin margin-top-lg">
 			  <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
-			  <li><a href="{% url 'office:office-dashboard' office.id %}">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office.id %}">{{ office.name }}</a></li>
 			  <li class="active">विवरण हेर्नुहोस्</li>
 			</ol><br>
 
