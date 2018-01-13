@@ -145,36 +145,6 @@ class BudgetBaktabyaUpdateView(OfficerMixin, BudgetBaktabyaView, UpdateView):
         return reverse('sachibBaithak:budgetbaktabya-list', args=(self.object.office.id,))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class SachibBaithakListView(OfficerMixin, TemplateView):
     model = SachibBaithak
     template_name = 'sachibBaithak/sachibbaithak_list.html'
@@ -185,9 +155,6 @@ class SachibBaithakListView(OfficerMixin, TemplateView):
         data['mainbaithak'] = SachibBaithakMain.objects.get(pk=self.kwargs.get('pk'))
         data['object_list'] = SachibBaithak.objects.filter(sachibbaithakmain_id=self.kwargs.get('pk'))
         return data
-
-
-
 
 
 class SachibBaithakadminUpdateView(OfficerMixin, SachibBaithakAdminView, UpdateView):

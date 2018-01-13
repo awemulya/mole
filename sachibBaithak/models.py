@@ -14,8 +14,7 @@ class SachibBaithakMain(models.Model):
     dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=10, null=True, blank=True)
 
 class SachibBaithak(models.Model):
-
-    fiscal_year = models.ForeignKey(FiscalYear,verbose_name="वित्तीय वर्ष")
+    fiscal_year = models.ForeignKey(FiscalYear,verbose_name="वित्तीय वर्ष", null=True, blank=True)
     sachibbaithakmain = models.ForeignKey(SachibBaithakMain)
     datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=10, null=True, blank=True)
     dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=10, null=True, blank=True)
