@@ -86,45 +86,46 @@ class KaryakramListView(OfficeView, KaryakramView, OfficerMixin, ListView):
 class LakxyaCreateView(OfficeView, LakxyaView, FormView):
     template_name = 'reports/lakxya_form.html'
 
+    def get_context_data(self, **kwargs):
+        data = super(LakxyaCreateView, self).get_context_data(**kwargs)
+        data['office'] = self.kwargs.get('office')
+        return data
+
 
     def get(self, request, *args, **kwargs):
         awadhi = self.kwargs['awadhi']
         karyakram_id = self.kwargs['karyakram_id']
         karyakram = KaryaKram.objects.get(pk=karyakram_id)
 
-        if awadhi == '1' and not Lakxya.objects.filter(karyakram=karyakram_id, awadhi=4):
+        if awadhi == '1' and not Lakxya.objects.filter(karyakram=karyakram_id, awadhi=0):
             return redirect(reverse('reports:add-lakxya',args=(karyakram.office.id, karyakram_id, 0)))
         if awadhi == '2' and not Pragati.objects.filter(karyakram=karyakram_id, awadhi=1):
             return redirect(reverse('reports:add-pragati',args=(karyakram.office.id, karyakram_id, 1)))
-        if awadhi == '3' and not Pragati.objects.filter(karyakram=karyakram_id, awadhi=2):
-            return redirect(reverse('reports:add-pragati',args=(karyakram.office.id, karyakram_id, 2)))
 
-        laxya, created = Lakxya.objects.get_or_create(karyakram=karyakram, awadhi=awadhi)
+        laxya, created = Lakxya.objects.get_or_create(karyakram=karyakram, fiscal_year_id=1, awadhi=awadhi)
         form = LakxyaForm(instance=laxya)
-        return render(request, 'reports/lakxya_form.html', {'form': form,'awadhi': awadhi, 'karyakram':karyakram, 'office':Office.objects.get(pk=self.kwargs['office'])},)
+        return render(request, 'reports/lakxya_form.html', {'form': form,'awadhi': awadhi, 'karyakram':karyakram},)
 
 
     def form_valid(self, form):
-        converter = NepaliDateConverter()
         lakxya = Lakxya.objects.get(pk=form.data.get('lakxya'))
         lakxya.paridam = form.cleaned_data['paridam']
         lakxya.var = form.cleaned_data['var']
         lakxya.budget = form.cleaned_data['budget']
-        lakxya.dateupdated = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
-        if lakxya.datesubmited is None:
-            lakxya.datesubmited = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
         lakxya.save()
-
-
+        # correct url to redirect after lakxya save and fill pragati
+        
         messages.success(self.request, 'Lakxya Sucessfully Added.')
         if self.request.group.id == 4:
             recipients = User.objects.filter(user_roles__group__name="Office Head", user_roles__office__id=1)
             group = "office_head-"+str(1)
         else:
-            recipients = User.objects.filter(user_roles__group__name="Information Officer", user_roles__office__id=1)
+            recipients = User.objects.filter(user_roles__group__name="Information Officer")
+            # recipients = User.objects.filter(user_roles__group__name="Information Officer", user_roles__office__id=self.request.office.id)
+
             group = "info_officer-"+str(1)
         
-        notify.send(self.request.user, recipient=recipients, verb='Updated new pragati', action_object=lakxya, detail_url = '/comment/add/22/')
+        notify.send(self.request.user, recipient=recipients, verb='Updated new Lakshya', action_object=lakxya, detail_url = '/comment/add/22/')
 
         Group("%s" % group).send({
             'text': json.dumps({
@@ -140,24 +141,28 @@ class LakxyaCreateView(OfficeView, LakxyaView, FormView):
             return redirect(reverse('reports:first-control-list',args=(lakxya.karyakram.office.id, 0,)))
         elif lakxya.awadhi == 2:
             return redirect(reverse('reports:second-control-list',args=(lakxya.karyakram.office.id, 0,)))
-        elif lakxya.awadhi == 3:
-            return redirect(reverse('reports:third-control-list',args=(lakxya.karyakram.office.id, 0,)))
-        elif lakxya.awadhi == 4:
+        elif lakxya.awadhi == 0:
             return redirect(reverse('reports:yearly-control-list',args=(lakxya.karyakram.office.id, 0,)))
         else:
             return redirect(reverse('office:office-dashboard',args=(lakxya.karyakram.office.id,)))
 
 
-def sendrealtimenotif(group, byuser, url, action_object, verb):
-    Group("%s" % group).send({
-        'text': json.dumps({
-            'by': str(byuser),
-            'verb': str(verb),
-            'time':"Just Now",
-            'detail_url':str(url),
-            'action_object':str(action_object),
+        #if lakxya.awadhi == 0:
+        #     return redirect(reverse('reports:add-laksya',args=(lakxya.karyakram.office.id, lakxya.karyakram.id, 1)))
+        # else:
+        #return redirect(reverse('office:office-dashboard',args=(lakxya.karyakram.office.id,)))
+    def sendrealtimenotif(group, byuser, url, action_object, verb):
+        Group("%s" % group).send({
+            'text': json.dumps({
+                'by': str(byuser),
+                'verb': str(verb),
+                'time':"Just Now",
+                'detail_url':str(url),
+                'action_object':str(action_object),
+            })
         })
-    })
+
+
 class PragatiCreateView(OfficeView, PragatiView, UpdateView): 
 
     def get_context_data(self,  **kwargs):
@@ -277,8 +282,11 @@ class FirstControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         data['type']= self.kwargs.get('type')
         return data 
     def get_queryset(self):
-        qs = super(FirstControlList, self).get_queryset().filter(karyakram__isnull=True).prefetch_related(Prefetch('parent__lakxya', queryset=Lakxya.objects.order_by('awadhi')), Prefetch('parent__pragati', queryset=Pragati.objects.order_by('awadhi')))
+
+        qs = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), karyakram__isnull=True) 
+
         return qs
+
 
 class SecondControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
     template_name = 'reports/Second_control.html'

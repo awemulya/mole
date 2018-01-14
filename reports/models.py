@@ -13,6 +13,15 @@ class FiscalYear(models.Model):
     def __unicode__(self):
         return u'%s' % (self.date_range)
 
+class Months(models.Model):
+    month = models.CharField(max_length=25, blank=True)
+
+    def __unicode__(self):
+        return u'%s' % (self.month)
+
+    def get_monthly_progress(self, month):
+        return self.MonthlyProgress.filter(month__id=month)
+
 class OfficeBudget(models.Model):
     budget_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="fiscal_year")
     office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="office")
@@ -38,21 +47,14 @@ class OfficeSetting(models.Model):
     def __unicode__(self):
         return u'%s' % (self.fiscal_year)
 
-class Months(models.Model):
-    month = models.CharField(max_length=25, blank=True)
-
-    def __unicode__(self):
-        return u'%s' % (self.month)
-
-    def get_monthly_progress(self, month):
-        return self.MonthlyProgress.filter(month__id=month)
 
 AWADHI_CHOICES = (
-        (4, 'बार्षिक'),
+        (0, 'बार्षिक'),
         (1, 'प्रथम'),
         (2, 'दितिय'),
         (3, 'तृतीय'),
     )
+
 
 @receiver(post_save, sender=Office)
 def update_office_setting(sender, instance, created, **kwargs):
@@ -69,7 +71,6 @@ class KaryaKram(models.Model):
     code = models.CharField(verbose_name="कोड", max_length=15, null=True, blank=True, help_text="")
     unit = models.CharField(verbose_name="युनिट", max_length=15)
     kriyakalap = models.CharField(verbose_name="कृयाकलाप", max_length=15, null=True, blank=True, help_text="")
-    fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="pragatiyear")
 
     @property
     def is_valid(self):
@@ -81,17 +82,16 @@ class KaryaKram(models.Model):
     def get_yearly_lakxya(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
-        return self.lakxya.filter(awadhi=4)
+        return self.lakxya.filter(awadhi=0)
     def get_yearly_pragati(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
-        return self.pragati.filter(fiscal_year=fiscal_year, awadhi=4)
+        return self.pragati.filter(fiscal_year=fiscal_year, awadhi=0)
 
     def get_first_lakxya(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
         return self.lakxya.filter(fiscal_year=fiscal_year, awadhi=1)
-        
     def get_first_pragati(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
@@ -107,12 +107,13 @@ class KaryaKram(models.Model):
         return self.pragati.filter(fiscal_year=fiscal_year, awadhi=2)
     def get_files_submitted(self):
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
-        return self.pragati.filter(fiscal_year=fiscal_year, awadhi=4)
+        return self.pragati.filter(fiscal_year=fiscal_year, awadhi=0)
 
     def get_monthly_progress(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
         return self.monthlyprogress.filter(fiscal_year=fiscal_year).order_by('-month_id')
+
 
 class MonthlyKaryaKram(models.Model):
     monthly_karyakram = models.ForeignKey('self', verbose_name="मासिक कार्यक्रम", blank=True, null=True, related_name="monthly_parent", help_text="")
@@ -132,6 +133,7 @@ class MonthlyProgress(models.Model):
 
 class Lakxya(models.Model):
     karyakram = models.ForeignKey(KaryaKram, verbose_name=" कार्यक्रम", related_name="lakxya", help_text="")
+    fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="lakxya", null=True, blank=True)
     paridam = models.FloatField(verbose_name="परिमाण", default=0.00)
     var = models.FloatField(verbose_name="भार", default=0.00)
     budget = models.FloatField(verbose_name="बजेट", default=0.00)
@@ -144,6 +146,7 @@ class Lakxya(models.Model):
 
 class Pragati(models.Model):
     karyakram = models.ForeignKey(KaryaKram, verbose_name="कार्यक्रम", related_name="pragati", help_text="")
+    fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="pragati", null=True, blank=True)
     paridam = models.FloatField(verbose_name="परिमाण", default=0.00)
     var = models.FloatField(verbose_name="भार", default=0.00)
     budget = models.FloatField(verbose_name="बजेट", default=0.00)
