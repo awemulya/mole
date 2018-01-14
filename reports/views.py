@@ -275,21 +275,6 @@ class KaryakramControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
             prefetch_related(Prefetch("parent", to_attr='childs'))
         return qs
 
-class YearlyControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
-    template_name = 'reports/Yearly_control.html'
-
-    def get_context_data(self,  **kwargs):
-        data = super(YearlyControlList, self).get_context_data(**kwargs)
-        data['office'] = self.kwargs.get('office')
-        data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
-        data['type']= self.kwargs.get('type')
-        return data 
-
-    def get_queryset(self):
-
-        qs = super(YearlyControlList, self).get_queryset().filter(karyakram__isnull=True).prefetch_related(Prefetch('parent__lakxya', queryset=Lakxya.objects.order_by('awadhi')), Prefetch('parent__pragati', queryset=Pragati.objects.order_by('awadhi')))
-        return qs
-
 
 class FirstControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
     template_name = 'reports/First_control.html'
@@ -335,9 +320,23 @@ class ThirdControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         return data 
 
     def get_queryset(self):       
-        qs =  super(ThirdControlList, self).get_queryset().filter(karyakram__isnull=True).prefetch_related(Prefetch('parent__lakxya', queryset=Lakxya.objects.order_by('awadhi')), Prefetch('parent__pragati', queryset=Pragati.objects.order_by('awadhi')))
+        qs =  KaryaKram.objects.filter(office__id=self.kwargs.get('office'), karyakram__isnull=True)
         return qs
-        
+
+class YearlyControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
+    template_name = 'reports/Yearly_control.html'
+
+    def get_context_data(self,  **kwargs):
+        data = super(YearlyControlList, self).get_context_data(**kwargs)
+        data['office'] = self.kwargs.get('office')
+        data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
+        data['type']= self.kwargs.get('type')
+        return data 
+
+    def get_queryset(self):
+        qs = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), karyakram__isnull=True)
+        return qs
+
 
 class FilesSubmitted(OfficerMixin, TemplateView):
     template_name = "reports/filessubmited.html"
