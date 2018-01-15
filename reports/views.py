@@ -86,10 +86,12 @@ class KaryakramListView(OfficeView, KaryakramView, OfficerMixin, ListView):
 class LakxyaCreateView(OfficeView, LakxyaView, FormView):
     template_name = 'reports/lakxya_form.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self,  **kwargs):
         data = super(LakxyaCreateView, self).get_context_data(**kwargs)
         data['office'] = self.kwargs.get('office')
-        return data
+        data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
+        data['awadhi']= self.kwargs.get('awadhi')
+        return data 
 
 
     def get(self, request, *args, **kwargs):
@@ -164,6 +166,7 @@ class LakxyaCreateView(OfficeView, LakxyaView, FormView):
 
 
 class PragatiCreateView(OfficeView, PragatiView, CreateView):
+    
     def get(self, request, *args,  **kwargs):
         awadhi = self.kwargs['awadhi']
         karyakram_id = self.kwargs['karyakram_id']
@@ -270,9 +273,12 @@ class KaryakramControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         data['awadhi']= self.kwargs.get('awadhi')
         return data 
 
-    def get_queryset(self):  
-        qs =  super(KaryakramControlList, self).get_queryset().filter(karyakram__isnull=True).\
-            prefetch_related(Prefetch("parent", to_attr='childs'))
+    def get_queryset(self):
+        
+        qs =  KaryaKram.objects.filter(office__id=self.kwargs.get("office"), karyakram__isnull=True).\
+            prefetch_related(Prefetch("parent", queryset=KaryaKram.objects.select_related(), to_attr='childs'))
+
+      
         return qs
 
 
@@ -338,13 +344,15 @@ class YearlyControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         return qs
 
 
-class FilesSubmitted(OfficerMixin, TemplateView):
+class FilesSubmitted(OfficeView, OfficerMixin, TemplateView):
+
     template_name = "reports/filessubmited.html"
+
     def get_context_data(self, **kwargs):
         context = super(FilesSubmitted, self).get_context_data(**kwargs)
         context['office'] = self.kwargs.get('office')
         context['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
-        context['karyakrams'] = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), fiscal_year__id=self.request.fiscal_year.id, karyakram__isnull=False)
+        context['karyakrams'] = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), karyakram__isnull=False)
        
         return context
 

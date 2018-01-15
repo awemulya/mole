@@ -39,33 +39,32 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                   <table class="table table-striped">
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>कार्यक्रम</th>
-                      <th>सम्बन्धित फाइलहरू</th>
-                      <th style="width: 40px">आर्थिक  वर्ष</th>
-                    </tr>
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>कार्यक्रम</th>
+                  <th>सम्बन्धित फाइलहरू</th>
+                  <th style="width: 40px">आर्थिक वर्ष</th>
+                </tr>
 
-                     {% for karya in karyakrams %}
-                     {% if karya.get_files_submitted.0.additional_file %}
-                    <tr>
-                      <td>{{forloop.counter}}</td>
-                      <td>{{ karya.name }}</td>
-                      <td>
-
-
-
-                          <a href="{{ karya.get_files_submitted.0.additional_file.url }}">
-                          {{ karya.get_files_submitted.0.additional_file.url }}</a>
-
-                      </td>
-                      <td><span class="badge bg-red"></span>{{ karya.get_files_submitted.0.fiscal_year }}</td>
-                    </tr>
-                    {% endif %}
-                    {% endfor %}
-
-
-                  </table>
+                 {% for karya in karyakrams %}
+                 {% if karya.get_files_submitted.0.additional_file %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{ karya.name }}</td>
+                  <td>
+                    
+                      
+                     
+                      <a href="{{ karya.get_files_submitted.0.additional_file.url }}">
+                      {{ karya.get_files_submitted.0.additional_file.url }}</a>
+                      
+                  </td>
+                  <td><span class="badge bg-red"></span>{{ karya.get_files_submitted.0.fiscal_year }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+               
+              </table>
                 </div>
                 <!-- /.box-body -->
               </div>

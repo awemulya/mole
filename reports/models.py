@@ -25,6 +25,7 @@ class Months(models.Model):
 class OfficeBudget(models.Model):
     budget_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="fiscal_year")
     office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="office")
+    unit = models.CharField(verbose_name="इकाई", max_length=15, blank=True, null=True)
     budget_rs = models.FloatField(verbose_name="बजेट", default=0.00)
     nepalsarkar = models.FloatField(verbose_name="नेपाल सरकार", default=0.00)
     sastha = models.FloatField(verbose_name="संस्था", default=0.00)

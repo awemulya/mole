@@ -19,31 +19,32 @@
 {% endblock extra_css %}
 	
 {% block content %}
- <section id="app-section">
-
+<section id="app-section">
       <ol class="breadcrumb no-margin margin-top-lg">
-        <li><a href="/dashboard/"><i class="fa fa-dashboard"></i>गृह पृष्ठ</a></li>
-        
+        <li><a href="index.php">गृह पृष्ठ</a></li>
         <li><a href="{% url 'office:office-dashboard' office %}">{{ office_obj.name }}</a></li>
-        
+        <li class="active">वार्षिक/प्रथम चौमासिक लक्ष्य</li>
       </ol>
-    
-    <!-- bread crumb  -->
-
-    <!-- Main content -->
-    <section class="content">
-      <!-- Default box -->
       <div class="bg-white padding margin-top-lg">
-        <div class="box-body">
-
-        <div class="pratham-lakchya">
+        <div class="app-page-header">
+          <div class="row">
+            <div class="col-md-5">
+              {% if type == '0' %}
+              <h4>वार्षिक/ प्रथम  चौमासिक लक्ष्य</h4>
+              {% else %}
+              <h4>वार्षिक/ प्रथम  चौमासिक प्रगति</h4>
+              {% endif %}
+            </div> 
+          </div>
+        </div>
+        <div class="table-responsive">
           
         {% if type == '0' %}
 		          <h3>पहिलो चौमासिक लक्ष्य</h3>			                        
 		    {% else %}
 		          <h3>पहिलो चौमासिक प्रगति</h3>
 		    {% endif %}
-          <table id="datatable" class="table table-bordered text-center">
+          <table id="datatable" class="table table-bordered table-hover">
             <thead>
             <tr>
               <th rowspan="2">सि.नं.</th>
@@ -191,11 +192,9 @@
             
           </table>
         </div>
-
-        </div>
-        <!-- /.box-body -->
       </div>
-      <!-- /.box -->
+    </section>
+    <div class="clearfix"></div>
       <div class="modal fade" id="modal-default">
           <div class="modal-dialog" style="z-index: 9999999;">
             <div class="modal-content">
