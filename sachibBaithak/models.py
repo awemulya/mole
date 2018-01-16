@@ -8,6 +8,7 @@ from office.models import Office
 # Create your models here.
 class SachibBaithakMain(models.Model):
     office = models.ForeignKey(Office)
+    fiscal_year = models.ForeignKey(FiscalYear,verbose_name="वित्तीय वर्ष", null=True, blank=True)
     dateofbaithak = models.CharField(verbose_name="बैठक गरिएको मिति ", max_length=10, null=True, blank=True)
     chairmanship = models.CharField(verbose_name="अध्यक्षता ", max_length=10, null=True, blank=True)
     datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=10, null=True, blank=True)
