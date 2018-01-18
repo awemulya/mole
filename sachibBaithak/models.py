@@ -27,9 +27,9 @@ class SachibBaithak(models.Model):
 class BudgetBaktabya(models.Model):
     office = models.ForeignKey(Office)
     budhano = models.CharField(verbose_name="बुदा न", max_length=10, null=True, blank=True)
-    karyakrams = models.TextField(verbose_name="कार्यक्रमहरु ", max_length=10, null=True, blank=True)
-    pragati = models.TextField(verbose_name="प्रगति ", max_length=10, null=True, blank=True)
-    problems = models.TextField(verbose_name="समस्या ", max_length=10, null=True, blank=True)
-    solutions = models.TextField(verbose_name="सावधान ", max_length=10, null=True, blank=True)
+    karyakrams = models.TextField(verbose_name="कार्यक्रमहरु ", null=True, blank=True)
+    pragati = models.TextField(verbose_name="प्रगति ", null=True, blank=True)
+    problems = models.TextField(verbose_name="समस्या ", null=True, blank=True)
+    solutions = models.TextField(verbose_name="सावधान ", null=True, blank=True)
     datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=10, null=True, blank=True)
     dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=10, null=True, blank=True)

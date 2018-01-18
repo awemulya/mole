@@ -39,8 +39,8 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="bg-white padding margin-top-lg">
-				<div class="app-page-header">
+			<div class="bg-white padding margin-top-lg">
+				<!-- <div class="app-page-header">
 					<div class="row">
 						<div class="col-md-2">
 							<select class="form-control input-sm">
@@ -51,7 +51,7 @@
 							  <option>50</option>
 							</select>
 						</div>
-						<div class="col-md-5 col-md-offset-5">
+						<div class="col-md-6 col-md-offset-6">
 							<div class="action-holder">
 								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-code-o"></i> CSV</a>
 								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-excel-o"></i> Excel</a>
@@ -60,7 +60,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
+				<h5>फारम बुझाएको विवरणहरु </h5>
 				<div class="table-responsive">
 					<table class="table table-bordered table-hover">
 						<thead>
@@ -84,11 +85,11 @@
 							<tr>
 								<td>{{office.id}}.</td>
 								<td>{{office}}</td>
-								<td>२०७२-२०७३</td>
-								<td>२०७२-२०७३</td>
-								<td>२०७२-२०७३</td>
-								<td>२०७२-२०७३</td>
-								<td>२०७२-२०७३</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 								<td><a href="{% url 'office:view-data-detail' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a></td>
 							</tr>
 						{% endfor %}
@@ -96,7 +97,7 @@
 						</tbody>
 					</table>
 				</div>
-				<nav aria-label="Page navigation">
+				<!-- <nav aria-label="Page navigation">
 					<ul class="pagination">
 						<li>
 							<a href="#" aria-label="Previous">
@@ -114,8 +115,8 @@
 							</a>
 						</li>
 					</ul>
-				</nav>
-			</div> -->
+				</nav> -->
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<!--Map-->
@@ -133,8 +134,9 @@
 
 
         {% block extra_scripts %}
-
-        <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
+<script src="{% static 'js/leaflet.js' %}"></script>
+		<script src="{% static 'js/map.js' %}"></script>
+        <!-- <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
 
 		<script>
 
@@ -173,7 +175,7 @@
 			function take_action(){
 				alert("Take Action");
 			}
-		</script>
+		</script> -->
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
         {% endblock extra_scripts %}

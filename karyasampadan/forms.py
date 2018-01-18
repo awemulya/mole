@@ -23,5 +23,5 @@ class MonthlyChildKaryasampadanForm(forms.ModelForm):
 
     class Meta:
         model = SampadanKaryakram
-        exclude = ('main_suchak', 'office', )
+        exclude = ('main_suchak', 'office',)
     
