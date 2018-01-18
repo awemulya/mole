@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from reports.models import Office, FiscalYear, Months
+from reports.models import Office, FiscalYear, Months, KaryaKram
 
 
 from django.db import models

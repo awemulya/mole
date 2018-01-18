@@ -33,4 +33,5 @@ class OfficeBudgetForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ('user', 'email_confirmed', )
+        exclude = ('user', 'email_confirmed',)
+

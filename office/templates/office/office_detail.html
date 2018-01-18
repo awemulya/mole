@@ -9,7 +9,7 @@
 		<section id="app-section">
 			<ol class="breadcrumb no-margin margin-top-lg">
 			  <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
-			  <li><a href="{% url 'office:office-dashboard' office.id %}">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office.id %}">{{ office.name }}</a></li>
 			  <li class="active">विवरण हेर्नुहोस्</li>
 			</ol><br>
 
@@ -67,42 +67,49 @@
 					<b>कार्यालय :</b> {{office.name}}
 				</p>
 				<p>
-				{{office.description}}
+				{{ office.description }}
 				</p>
-        <h3 class="box-title" style="text-align: center">बजेटको विवरण </h3>        
+
+
+
+        <h3 class="box-title" style="text-align: center">बजेटको विवरण </h3>
+                <!-- /.box-header -->
         <div class="table-responsive">
           <table class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th>क्र. म.</th>
                 <th>आर्थिक वर्ष</th>
-                <th>बजेट</th>
+                <th>बजेट</th>   
+                <th>युनिट</th>
                 <th>नेपाल सरकार</th>
-                <th>संस्था</th>
-                <th>जनसंग्लनता</th>
-                <th>ऋण</th>
+                <th>संस्था</th> 
+                <th>जनसंग्लनता</th> 
+                <th>ऋण</th> 
                 <th>उपदान</th>
-                <th>दातृसंस्था</th>
-                <th>अन्तरिक</th>
+                <th>दातृसंस्था</th> 
+                <th>अन्तरिक</th> 
                 <th>वैदेशिक</th>
-                <th>सम्पादन गर्नुहोस</th>
+                <th>सम्पादन गर्नुहोस</th> 
               </tr>
             </thead>
-            <tbody>  
+            <tbody>
+              
               <tr>
-                <td>1</td>
                 <td>{{ budget.first.budget_year }}</td>
                 <td>{{ budget.first.budget_rs }}</td>
+                <td>{{ budget.first.unit}}</td>
                 <td>{{ budget.first.nepalsarkar }}</td>
                 <td>{{ budget.first.sastha }}</td>
-                <td>{{ budget.first.janasamglanta }}</td>
+                <td>{{budget.first.janasamglanta }}</td>
                 <td>{{ budget.first.loan }}</td>
                 <td>{{ budget.first.upadan }}</td>
                 <td>{{ budget.first.dritasastha }}</td>
                 <td>{{ budget.first.antarik }}</td>
                 <td>{{ budget.first.baidesikh }}</td>
                 <td><a href="{% url 'office:office-budget-update' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a></td>
-              </tr>              
+
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -158,4 +165,7 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
+
         {% endblock extra_scripts %}
+
+

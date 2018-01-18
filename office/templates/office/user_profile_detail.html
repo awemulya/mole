@@ -6,6 +6,30 @@
 
 {% block content %}
 
+<section id="app-section">
+      <ol class="breadcrumb no-margin margin-top-lg">
+        <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
+        <li><a href="">वैदेशिक रोजगार विभाग</a></li>
+        <li class="active">विवरण हेर्नुहोस्</li>
+      </ol><br>
+
+    <!-- bread crumb  -->
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="row">
+        <div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+             <img class="profile-user-img img-responsive img-circle" src="{% if object.photo %}{{ object.photo.url }}{% else %}{% static 'dist/img/logo.png' %}{% endif %}" alt="User profile picture">
+              <h3 class="profile-username text-center">{{ object.name }}</h3>
+
+              <p class="text-muted text-center">{{ office }}</p>
+
 <!--Main Content Area Starts-->
 
     <section id="app-section">

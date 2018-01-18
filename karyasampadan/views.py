@@ -58,7 +58,7 @@ class MonthlyChildKaryakramCreateView(OfficeView, MonthlyKaryasampadanView, Crea
     template_name = "karyasampadan/karyakram_form.html"
     def form_valid(self, form):
         super(MonthlyChildKaryakramCreateView, self).form_valid(form)
-        form.instance.monthly_karyakram = SampadanKaryakram.objects.get(pk=self.kwargs.get('karyakram_id'),)
+        form.instance.main_suchak = SampadanKaryakram.objects.get(pk=self.kwargs.get('karyakram_id'),)
         self.object = form.save()
         return redirect(reverse('karyasampadan:monthly-control-list', args=(self.object.office.id,)))
 

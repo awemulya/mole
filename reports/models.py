@@ -16,6 +16,7 @@ class FiscalYear(models.Model):
 class OfficeBudget(models.Model):
     budget_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="fiscal_year")
     office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="office")
+    unit = models.CharField(verbose_name="युनिट", max_length=15, blank=True, null=True)
     budget_rs = models.FloatField(verbose_name="बजेट", default=0.00)
     nepalsarkar = models.FloatField(verbose_name="नेपाल सरकार", default=0.00)
     sastha = models.FloatField(verbose_name="संस्था", default=0.00)
@@ -69,7 +70,7 @@ class KaryaKram(models.Model):
     code = models.CharField(verbose_name="कोड", max_length=15, null=True, blank=True, help_text="")
     unit = models.CharField(verbose_name="युनिट", max_length=15)
     kriyakalap = models.CharField(verbose_name="कृयाकलाप", max_length=15, null=True, blank=True, help_text="")
-    fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="pragatiyear")
+    fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", blank=True, null=True, related_name="pragatiyear")
 
     @property
     def is_valid(self):
@@ -91,6 +92,7 @@ class KaryaKram(models.Model):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
         return self.lakxya.filter(fiscal_year=fiscal_year, awadhi=1)
+        
     def get_first_pragati(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
@@ -106,7 +108,7 @@ class KaryaKram(models.Model):
         return self.pragati.filter(fiscal_year=fiscal_year, awadhi=2)
     def get_files_submitted(self):
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
-        return self.pragati.filter(fiscal_year=fiscal_year, awadhi=4)
+        return self.pragati.filter(awadhi=4)
 
     def get_monthly_progress(self):
         #assign ofice fiscal year on office create

@@ -91,6 +91,7 @@ class OfficeDetailView(LoginRequiredMixin, OfficeView, DetailView):
         return context
 
 class OfficeViewDataDetail(LoginRequiredMixin, OfficeView, DetailView):
+    
     template_name = 'office/view_data.html'
 
 
