@@ -29,7 +29,9 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User,Group
 from userrole.models import UserRole
-from reports.models import OfficeBudget, FiscalYear, KaryaKram
+from reports.models import OfficeBudget, FiscalYear, KaryaKram, Pragati, MonthlyProgress
+from sachibBaithak.models import SachibBaithak, BudgetBaktabya
+from karyasampadan.models import SampadanKaryakram
 from users.models import Profile
 
 from django.views.generic.detail import DetailView
@@ -91,8 +93,15 @@ class OfficeDetailView(LoginRequiredMixin, OfficeView, DetailView):
         return context
 
 class OfficeViewDataDetail(LoginRequiredMixin, OfficeView, DetailView):
-    
     template_name = 'office/view_data.html'
+    def get_context_data(self, **kwargs):
+        context = super(OfficeViewDataDetail, self).get_context_data(**kwargs)
+        context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati")
+        context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
+        context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
+        context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")
+        context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
+        return context
 
 
 
@@ -221,6 +230,12 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['submission_count'] = 0
         context['offices_count'] = Office.objects.all().count()
         context['users_count'] = User.objects.all().count()
+        context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati ORDER BY datesubmited DESC")[:1]
+        context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
+        context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
+        context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")
+        context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
+     
         # context['office1'] = KaryaKram.objects.filter(office_id=1).order_by('-id').first()
         # context['office2'] = KaryaKram.objects.filter(office_id=2).order_by('-id').first()
         # context['office3'] = KaryaKram.objects.filter(office_id=3).order_by('-id').first()

@@ -81,12 +81,15 @@
 						</thead>
 						<tbody>
 						{% for office in offices %}
-
 							<tr>
 								<td>{{office.id}}.</td>
 								<td>{{office}}</td>
-								<td></td>
-								<td></td>
+								{% for pragati in pragati %}
+								<td>{{ pragati.datesubmited }}</td>
+								{% endfor%}
+								{% for monthlyprogress in monthlyprogress%}
+								<td>{{ monthlyprogress.datesubmited }}</td>
+								{% endfor %}
 								<td></td>
 								<td></td>
 								<td></td>
