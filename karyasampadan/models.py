@@ -18,5 +18,5 @@ class SampadanMonthlyProgress(models.Model):
     pragati = models.TextField(verbose_name="महिनाको प्रगती")
     pragati_till_date = models.TextField(verbose_name="हाल सम्मको प्रगती")
     comments = models.TextField(verbose_name="कैफियत")
-    datesubmited = models.CharField(max_length=10, null=True, blank=True)
-    dateupdated = models.CharField(max_length=10, null=True, blank=True)
+    datesubmited = models.CharField(max_length=255, null=True, blank=True)
+    dateupdated = models.CharField(max_length=255, null=True, blank=True)

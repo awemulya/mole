@@ -16,7 +16,7 @@ class FiscalYear(models.Model):
 class OfficeBudget(models.Model):
     budget_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="fiscal_year")
     office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="office")
-    unit = models.CharField(verbose_name="युनिट", max_length=15, blank=True, null=True)
+    unit = models.CharField(verbose_name="युनिट", max_length=255, blank=True, null=True)
     budget_rs = models.FloatField(verbose_name="बजेट", default=0.00)
     nepalsarkar = models.FloatField(verbose_name="नेपाल सरकार", default=0.00)
     sastha = models.FloatField(verbose_name="संस्था", default=0.00)
@@ -67,9 +67,9 @@ class KaryaKram(models.Model):
     karyakram = models.ForeignKey('self', verbose_name="कार्यक्रम", blank=True, null=True, related_name="parent", help_text="")
     name = models.CharField(max_length=255, verbose_name="कार्यक्रम",)
     office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="karyakram")
-    code = models.CharField(verbose_name="कोड", max_length=15, null=True, blank=True, help_text="")
-    unit = models.CharField(verbose_name="युनिट", max_length=15)
-    kriyakalap = models.CharField(verbose_name="कृयाकलाप", max_length=15, null=True, blank=True, help_text="")
+    code = models.CharField(verbose_name="कोड", max_length=255, null=True, blank=True, help_text="")
+    unit = models.CharField(verbose_name="युनिट", max_length=255, blank=True, null=True)
+    kriyakalap = models.CharField(verbose_name="कृयाकलाप", max_length=255, null=True, blank=True, help_text="")
     fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", blank=True, null=True, related_name="pragatiyear")
 
     @property
@@ -128,8 +128,8 @@ class MonthlyProgress(models.Model):
     pragati = models.TextField(verbose_name="महिनाको प्रगती")
     pragati_till_date = models.TextField(verbose_name="हाल सम्मको प्रगती")
     comments = models.TextField(verbose_name="कैफियत")
-    datesubmited = models.CharField(max_length=10, null=True, blank=True)
-    dateupdated = models.CharField(max_length=10, null=True, blank=True)
+    datesubmited = models.CharField(max_length=255, null=True, blank=True)
+    dateupdated = models.CharField(max_length=255, null=True, blank=True)
 
 class Lakxya(models.Model):
     karyakram = models.ForeignKey(KaryaKram, verbose_name=" कार्यक्रम", related_name="lakxya", help_text="")
@@ -137,8 +137,8 @@ class Lakxya(models.Model):
     var = models.FloatField(verbose_name="भार", default=0.00)
     budget = models.FloatField(verbose_name="बजेट", default=0.00)
     awadhi = models.IntegerField(verbose_name="अवधि", choices=AWADHI_CHOICES, default=0)
-    datesubmited = models.CharField(max_length=10, null=True, blank=True)
-    dateupdated = models.CharField(max_length=10, null=True, blank=True)
+    datesubmited = models.CharField(max_length=255, null=True, blank=True)
+    dateupdated = models.CharField(max_length=255, null=True, blank=True)
 
     def __unicode__(self):
         return u'%s'%(self.paridam)
@@ -161,8 +161,8 @@ class Pragati(models.Model):
     awadhi = models.IntegerField(verbose_name="अवधि", choices=AWADHI_CHOICES, default=1)
     additional_file = models.FileField(verbose_name="फाइल अपलोड", null=True, blank=True)
     file_name = models.FileField(verbose_name="फाइल name", null=True, blank=True)
-    datesubmited = models.CharField(max_length=10, null=True, blank=True)
-    dateupdated = models.CharField(max_length=10, null=True, blank=True)
+    datesubmited = models.CharField(max_length=255, null=True, blank=True)
+    dateupdated = models.CharField(max_length=255, null=True, blank=True)
 
 
 class PragatiHistory(models.Model):
