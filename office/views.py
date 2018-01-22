@@ -227,7 +227,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context = super(DashboardView, self).get_context_data(**kwargs)
         context['offices'] = Office.objects.all()
       
-        context['submission_count'] = 0
+        context['submission_count'] = Pragati.objects.all().count()
         context['offices_count'] = Office.objects.all().count()
         context['users_count'] = User.objects.all().count()
         context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati ORDER BY datesubmited DESC")[:1]
