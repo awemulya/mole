@@ -82,7 +82,7 @@ class KaryaKram(models.Model):
     def get_yearly_lakxya(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
-        return self.lakxya.filter(awadhi=4)
+        return self.lakxya.filter(fiscal_year=fiscal_year, awadhi=4)
     def get_yearly_pragati(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
@@ -102,28 +102,40 @@ class KaryaKram(models.Model):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
         return self.lakxya.filter(fiscal_year=fiscal_year, awadhi=2)
+
     def get_second_pragati(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
         return self.pragati.filter(fiscal_year=fiscal_year, awadhi=2)
+
+    def get_third_lakxya(self):
+        #assign ofice fiscal year on office create
+        fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
+        return self.lakxya.filter(fiscal_year=fiscal_year, awadhi=3)
+        
+    def get_third_pragati(self):
+        #assign ofice fiscal year on office create
+        fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
+        return self.pragati.filter(fiscal_year=fiscal_year, awadhi=3)
+
     def get_files_submitted(self):
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
         return self.pragati.filter(awadhi=4)
 
-    def get_monthly_progress(self):
-        #assign ofice fiscal year on office create
-        fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
-        return self.monthlyprogress.filter(fiscal_year=fiscal_year).order_by('-month_id')
-
+    
 class MonthlyKaryaKram(models.Model):
     monthly_karyakram = models.ForeignKey('self', verbose_name="मासिक कार्यक्रम", blank=True, null=True, related_name="monthly_parent", help_text="")
     name = models.CharField(max_length=255, verbose_name="मासिक कार्यक्रम",)
     office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="monthly_karyakram")
     fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="monthly_year")
-        
+    def get_monthly_progress(self):
+        #assign ofice fiscal year on office create
+        fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
+        return self.monthlyprogress.filter(fiscal_year=fiscal_year).order_by('-month_id')
+
 class MonthlyProgress(models.Model):
     karyakram = models.ForeignKey(MonthlyKaryaKram, verbose_name=" कार्यक्रम", related_name="monthlyprogress", help_text="")
-    fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष")
+    fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="monthlyprogress", null=True, blank=True)
     month=models.ForeignKey(Months, related_name="months")
     pragati = models.TextField(verbose_name="महिनाको प्रगती")
     pragati_till_date = models.TextField(verbose_name="हाल सम्मको प्रगती")

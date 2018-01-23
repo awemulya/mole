@@ -386,13 +386,13 @@ class MonthlyProgressDetail(OfficeView, OfficerMixin, KaryakramView, TemplateVie
         data = super(MonthlyProgressDetail, self).get_context_data(**kwargs)
         data['office'] = self.kwargs.get('office')
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
-        karyakram = KaryaKram.objects.get(pk=self.kwargs.get('karyakram_id'))
+        monthly_karyakram = MonthlyKaryaKram.objects.get(pk=self.kwargs.get('karyakram_id'))
         # if  karyakram.get_monthly_progress().first():
         #     a = karyakram.get_monthly_progress().first().month_id
         # else:
         #     a = 0
-        data['history'] = karyakram.get_monthly_progress()
-        data['karyakram'] = karyakram
+        data['history'] = monthly_karyakram.get_monthly_progress()
+        data['monthly_karyakram'] = monthly_karyakram
         karyakram_id = self.kwargs.get('karyakram_id')
         data['months'] = Months.objects.raw('SELECT * FROM reports_months LEFT JOIN reports_monthlyprogress ON reports_months.id = reports_monthlyprogress.month_id AND reports_monthlyprogress.karyakram_id = %s', [karyakram_id])
         return data     
