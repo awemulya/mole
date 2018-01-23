@@ -93,7 +93,7 @@ class LakxyaCreateView(OfficeView, LakxyaView, FormView):
         karyakram = KaryaKram.objects.get(pk=karyakram_id)
 
         if awadhi == '1' and not Lakxya.objects.filter(karyakram=karyakram_id, awadhi=4):
-            return redirect(reverse('reports:add-lakxya',args=(karyakram.office.id, karyakram_id, 0)))
+            return redirect(reverse('reports:add-lakxya',args=(karyakram.office.id, karyakram_id, 4)))
         if awadhi == '2' and not Pragati.objects.filter(karyakram=karyakram_id, awadhi=1):
             return redirect(reverse('reports:add-pragati',args=(karyakram.office.id, karyakram_id, 1)))
         if awadhi == '3' and not Pragati.objects.filter(karyakram=karyakram_id, awadhi=2):
@@ -176,8 +176,8 @@ class PragatiCreateView(OfficeView, PragatiView, UpdateView):
             return redirect(reverse('reports:add-lakxya',args=(karyakram.office.id, karyakram_id, 2)))
         if awadhi == '3' and not Lakxya.objects.filter(karyakram=karyakram_id, awadhi=3):
             return redirect(reverse('reports:add-lakxya',args=(karyakram.office.id, karyakram_id, 3)))
-        if awadhi == '0' and not Pragati.objects.filter(karyakram=karyakram_id, awadhi=3):
-            return redirect(reverse('reports:add-pragati',args=(karyakram.office.id, karyakram_id, 3)))
+        if awadhi == '4' and not Pragati.objects.filter(karyakram=karyakram_id, awadhi=4):
+            return redirect(reverse('reports:add-pragati',args=(karyakram.office.id, karyakram_id, 4)))
         else:
             return super(PragatiCreateView, self).dispatch(request, *args, **kwargs)
 
