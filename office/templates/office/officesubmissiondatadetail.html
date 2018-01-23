@@ -13,9 +13,8 @@
 			  <li class="active">वैदेसिक रोजगार विभाग</li>
 			</ol>
 			<div class="bg-white padding margin-top-lg">
-			<div class="app-page-header">
+				<div class="app-page-header">
 					<div class="row">
-
 						<div class="col-md-5">
 							<h4>{{ office }}</h4>
 						</div>
@@ -27,8 +26,8 @@
 							  <option>40</option>
 							  <option>50</option>
 							</select>
-						</div> -->
-						<div class="col-md-8">
+						</div>
+						<div class="col-md-5">
 							<div class="action-holder">
 								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-code-o"></i> CSV</a>
 								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-excel-o"></i> Excel</a>
@@ -38,7 +37,6 @@
 						</div> -->
 					</div>
 				</div>
-				
 				<div class="table-responsive">
 					<table class="table table-bordered table-hover">
 						<thead>
@@ -53,17 +51,12 @@
 						</thead>
 						<tbody>
 							<tr>
-							
-								{% for pragati in pragati %}
-								<td>{{ forloop.counter }}</td>
 								<td>{{ pragati.datesubmited }}</td>
-								{% endfor%}
-								{% for monthlyprogress in monthlyprogress%}
-								<td>{{ monthlyprogress.datesubmited }}</td>
-								{% endfor %}
-								</td>
 								<td></td>
-							
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</tbody>
 					</table>

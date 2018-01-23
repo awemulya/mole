@@ -9,16 +9,16 @@ from office.models import Office
 class SachibBaithakMain(models.Model):
     office = models.ForeignKey(Office)
     fiscal_year = models.ForeignKey(FiscalYear,verbose_name="वित्तीय वर्ष", null=True, blank=True)
-    dateofbaithak = models.CharField(verbose_name="बैठक गरिएको मिति ", max_length=10, null=True, blank=True)
-    chairmanship = models.CharField(verbose_name="अध्यक्षता ", max_length=10, null=True, blank=True)
-    datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=10, null=True, blank=True)
-    dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=10, null=True, blank=True)
+    dateofbaithak = models.CharField(verbose_name="बैठक गरिएको मिति ", max_length=255, null=True, blank=True)
+    chairmanship = models.CharField(verbose_name="अध्यक्षता ", max_length=255, null=True, blank=True)
+    datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=255, null=True, blank=True)
+    dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=255, null=True, blank=True)
 
 class SachibBaithak(models.Model):
     fiscal_year = models.ForeignKey(FiscalYear,verbose_name="वित्तीय वर्ष", null=True, blank=True)
     sachibbaithakmain = models.ForeignKey(SachibBaithakMain)
-    datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=10, null=True, blank=True)
-    dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=10, null=True, blank=True)
+    datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=255, null=True, blank=True)
+    dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=255, null=True, blank=True)
     nirnayaharu = models.TextField(verbose_name="निर्णयहरु ")
     jimmewar_nikaya = models.CharField(verbose_name="जिम्मेवार निकाय ", max_length=100)
     karyanayan_awastha = models.TextField(verbose_name="कर्यनयन अवस्था ")
@@ -26,10 +26,10 @@ class SachibBaithak(models.Model):
 
 class BudgetBaktabya(models.Model):
     office = models.ForeignKey(Office)
-    budhano = models.CharField(verbose_name="बुदा न", max_length=10, null=True, blank=True)
+    budhano = models.CharField(verbose_name="बुदा न", max_length=255, null=True, blank=True)
     karyakrams = models.TextField(verbose_name="कार्यक्रमहरु ", null=True, blank=True)
     pragati = models.TextField(verbose_name="प्रगति ", null=True, blank=True)
     problems = models.TextField(verbose_name="समस्या ", null=True, blank=True)
     solutions = models.TextField(verbose_name="सावधान ", null=True, blank=True)
-    datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=10, null=True, blank=True)
-    dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=10, null=True, blank=True)
+    datesubmited = models.CharField(verbose_name="पेश गरिएको समय ", max_length=255, null=True, blank=True)
+    dateupdated = models.CharField(verbose_name="सच्याइएको समय ", max_length=255, null=True, blank=True)

@@ -19,15 +19,15 @@
 						<p>
 						कुल प्रयोगकर्ता
 						</p>
-						<span>100</span>
+						<span>{{users_count}}</span>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="widget-count margin-top-lg">
 						<p>
-						कुल संगठन
+						कुल निकाय 
 						</p>
-						<span>23</span>
+						<span>{{offices_count}}</span>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -35,7 +35,7 @@
 						<p>
 						कुल पेश्की
 						</p>
-						<span>200</span>
+						<span>{{submission_count}}</span>
 					</div>
 				</div>
 			</div>
@@ -84,12 +84,15 @@
 						</thead>
 						<tbody>
 						{% for office in offices %}
-
 							<tr>
 								<td>{{office.id}}.</td>
 								<td>{{office}}</td>
-								<td></td>
-								<td></td>
+								{% for pragati in pragati %}
+								<td>{{ pragati.datesubmited }}</td>
+								{% endfor%}
+								{% for monthlyprogress in monthlyprogress%}
+								<td>{{ monthlyprogress.datesubmited }}</td>
+								{% endfor %}
 								<td></td>
 								<td></td>
 								<td></td>
