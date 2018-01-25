@@ -34,7 +34,7 @@ class ChildKaryakramForm(forms.ModelForm):
 
     class Meta:
         model = KaryaKram
-        exclude = ('kriyakalap',)
+        exclude = ('kriyakalap', 'fiscal_year',)
         widgets = {'office': forms.HiddenInput(), 'karyakram': forms.HiddenInput()}
 
 

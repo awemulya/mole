@@ -29,8 +29,8 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User,Group
 from userrole.models import UserRole
-from reports.models import OfficeBudget, FiscalYear, KaryaKram, Pragati, MonthlyProgress
-from sachibBaithak.models import SachibBaithak, BudgetBaktabya
+from reports.models import OfficeBudget, FiscalYear, KaryaKram, Pragati, MonthlyProgress, MonthlyKaryaKram
+from sachibBaithak.models import SachibBaithak, BudgetBaktabya, SachibBaithakMain
 from karyasampadan.models import SampadanKaryakram
 from users.models import Profile
 
@@ -96,12 +96,13 @@ class OfficeViewDataDetail(LoginRequiredMixin, OfficeView, DetailView):
     template_name = 'office/view_data.html'
     def get_context_data(self, **kwargs):
         context = super(OfficeViewDataDetail, self).get_context_data(**kwargs)
-        context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati")
-        context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
-        context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
-        context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")
-        context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
+        context['pragati'] = Pragati.objects.filter(office__id=self.kwargs.get('pk'))
+        context['monthlyprogress'] = MonthlyKaryaKram.objects.filter(office__id=self.kwargs.get('pk'))
+        context['sachibbaithak'] = SachibBaithakMain.objects.filter(office__id=self.kwargs.get('pk'))
+        context['sampadansuchak'] = SampadanKaryakram.objects.filter(office__id=self.kwargs.get('pk'))
+        context['budgetbaktabya'] = BudgetBaktabya.objects.filter(office__id=self.kwargs.get('pk'))
         return context
+
 
 
 
@@ -230,7 +231,10 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['submission_count'] = Pragati.objects.all().count()
         context['offices_count'] = Office.objects.all().count()
         context['users_count'] = User.objects.all().count()
+        
         context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati ORDER BY datesubmited DESC")[:1]
+        # context['pragati'] = Pragati.objects.raw("SELECT * FROM office LEFT JOIN (SELECT * FROM karyakram LEFT JOIN (SELECT * FROM pragati GROUP BY karyakram_id ORDER BY date_created DESC LIMIT 0,1) AS pragati ON karyakra.id = pragati.karyakram_id GROUP BY office.id ORDER BY date_created DESC LIMIT 0,1) AS karyakram ON office.id=karyakram.office_id")
+        # context['pragati'] = Pragati.objects.filter(office__id=self.kwargs.get('pk'))       
         # context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
         # context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
         # context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")

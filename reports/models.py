@@ -83,6 +83,7 @@ class KaryaKram(models.Model):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
         return self.lakxya.filter(fiscal_year=fiscal_year, awadhi=4)
+        
     def get_yearly_pragati(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
@@ -157,6 +158,7 @@ class Lakxya(models.Model):
 
 class Pragati(models.Model):
     karyakram = models.ForeignKey(KaryaKram, verbose_name="कार्यक्रम", related_name="pragati", help_text="")
+    office = models.ForeignKey(Office, verbose_name="कार्यालय", null=True, blank=True, related_name="pragati")
     paridam = models.FloatField(verbose_name="परिमाण", default=0.00)
     var = models.FloatField(verbose_name="भार", default=0.00)
     budget = models.FloatField(verbose_name="बजेट", default=0.00)
@@ -175,6 +177,7 @@ class Pragati(models.Model):
     file_name = models.FileField(verbose_name="फाइल name", null=True, blank=True)
     datesubmited = models.CharField(max_length=255, null=True, blank=True)
     dateupdated = models.CharField(max_length=255, null=True, blank=True)
+
 
 
 class PragatiHistory(models.Model):

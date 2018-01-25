@@ -176,8 +176,8 @@ class PragatiCreateView(OfficeView, PragatiView, UpdateView):
             return redirect(reverse('reports:add-lakxya',args=(karyakram.office.id, karyakram_id, 2)))
         if awadhi == '3' and not Lakxya.objects.filter(karyakram=karyakram_id, awadhi=3):
             return redirect(reverse('reports:add-lakxya',args=(karyakram.office.id, karyakram_id, 3)))
-        if awadhi == '4' and not Pragati.objects.filter(karyakram=karyakram_id, awadhi=4):
-            return redirect(reverse('reports:add-pragati',args=(karyakram.office.id, karyakram_id, 4)))
+        if awadhi == '0' and not Pragati.objects.filter(karyakram=karyakram_id, awadhi=3):
+            return redirect(reverse('reports:add-pragati',args=(karyakram.office.id, karyakram_id, 3)))
         else:
             return super(PragatiCreateView, self).dispatch(request, *args, **kwargs)
 
