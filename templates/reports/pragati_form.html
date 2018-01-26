@@ -11,23 +11,8 @@
 
   
           <ol class="breadcrumb no-margin margin-top-lg">
-            <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
-            <li><a href="{% url 'office:office-dashboard' office.id %}">वैदेशिक रोजगार विभाग</a></li>
-            {% if awadhi == "0" %}
-            <li class=""><a href="{% url 'reports:yearly-control-list' office.id 1  %}">वार्षिक चौमासिक प्रगति</a></li>
-            <li class="active">प्रगति फारम</li>
-            {% elif awadhi == "1" %}
-            <li class=""><a href="{% url 'reports:first-control-list' office.id 1 %}">प्रथम चौमासिक प्रगति</a></li>
-            <li class="active">प्रगति फारम</li>
-            {% elif awadhi == "2" %}
-            <li class=""><a href="{% url 'reports:second-control-list' office.id 1 %}">दोस्रो चौमासिक प्रगति</a></li>
-            <li class="active">प्रगति फारम</li>
-            {% elif awadhi == "3" %}  
-            <li class=""><a href="{% url 'reports:third-control-list' office.id 1  %}">तेस्रो चौमासिक प्रगति </a></li>
-            <li class="active">प्रगति फारम</li>
-            {% else %}
-                    
-            {% endif %}            
+            
+                  
           </ol>
       
         <section class="content">
@@ -44,7 +29,7 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                   
- <form class = "" action="" method="post" enctype="multipart/form-data">
+            <form class = "" action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             {% for field in form %}
