@@ -231,9 +231,10 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['submission_count'] = Pragati.objects.all().count()
         context['offices_count'] = Office.objects.all().count()
         context['users_count'] = User.objects.all().count()
-        
+        Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM reports_karyakram LEFT JOIN (SELECT * FROM reports_pragati GROUP BY karyakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS reports_pragati ON reports_karyakram.id = reports_pragati.karyakram_id GROUP BY reports_karyakram.office_id ORDER BY reports_pragati.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
+
         # context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati ORDER BY datesubmited DESC")[:1]
-        context['pragati'] = Office.objects.raw("SELECT * FROM Office LEFT JOIN (SELECT * FROM karyakram LEFT JOIN (SELECT * FROM pragati GROUP BY karyakram_id ORDER BY date_created DESC LIMIT 0,1) AS pragati ON karyakra.id = pragati.karyakram_id GROUP BY office.id ORDER BY date_created DESC LIMIT 0,1) AS karyakram ON office.id=karyakram.office_id")
+        # context['pragati'] = Office.objects.raw("SELECT * FROM Office LEFT JOIN (SELECT * FROM karyakram LEFT JOIN (SELECT * FROM pragati GROUP BY karyakram_id ORDER BY date_created DESC LIMIT 0,1) AS pragati ON karyakra.id = pragati.karyakram_id GROUP BY office.id ORDER BY date_created DESC LIMIT 0,1) AS karyakram ON office.id=karyakram.office_id")
         # context['pragati'] = Pragati.objects.filter(office__id=self.kwargs.get('pk'))       
         # context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
         # context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")

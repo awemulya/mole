@@ -41,6 +41,7 @@ class SachibBaithakMainListView(OfficeView, OfficerMixin, ListView):
     def get_context_data(self, **kwargs):
         data = super(SachibBaithakMainListView, self).get_context_data(**kwargs)
         data['office'] = Office.objects.get(pk=self.kwargs.get('office'))
+        data['object_list'] = SachibBaithakMain.objects.filter(office_id=self.kwargs.get('office'))
         return data
 
 class SachibBaithakMainCreateView(OfficeView, OfficerMixin, SachibBaithakMainView, CreateView):
