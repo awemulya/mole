@@ -10,9 +10,24 @@
     <section id="app-section">
 
   
-          <ol class="breadcrumb no-margin margin-top-lg">
-            
-                  
+         <ol class="breadcrumb no-margin margin-top-lg">
+            <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i>गृह पृष्ठ</a></li>
+            <li><a href="">वैदेशिक रोजगार विभाग</a></li>
+            {% if awadhi == "0" %}
+            <li class=""><a href="">वार्षिक चौमासिक प्रगति</a></li>
+            <li class="active">प्रगति फारम</li>
+            {% elif awadhi == "1" %}
+            <li class=""><a href="">प्रथम चौमासिक प्रगति</a></li>
+            <li class="active">प्रगति फारम</li>
+            {% elif awadhi == "2" %}
+            <li class=""><a href="">दोस्रो चौमासिक प्रगति</a></li>
+            <li class="active">प्रगति फारम</li>
+            {% elif awadhi == "3" %}  
+            <li class=""><a href="">तेस्रो चौमासिक प्रगति </a></li>
+            <li class="active">प्रगति फारम</li>
+            {% else %}
+                    
+            {% endif %}            
           </ol>
       
         <section class="content">

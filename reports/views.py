@@ -93,7 +93,9 @@ class LakxyaCreateView(OfficeView, LakxyaView, FormView):
     def get_context_data(self, **kwargs):
         data = super(LakxyaCreateView, self).get_context_data(**kwargs)
         data['office'] = self.kwargs.get('office')
-        return data
+        data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
+        data['type']= self.kwargs.get('type')
+        return data 
 
 
     def get(self, request, *args, **kwargs):
@@ -410,11 +412,11 @@ class MonthlyProgressCreateView(OfficeView, MonthlyProgressView, UpdateView):
 
 
     def get_success_url(self):
-        converter = NepaliDateConverter()
-        self.object.dateupdated = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
-        if self.object.datesubmited is None:
-            self.object.datesubmited = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
-        self.object.save()
+        # converter = NepaliDateConverter()
+        # self.object.dateupdated = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
+        # if self.object.datesubmited is None:
+            # self.object.datesubmited = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
+        # self.object.save()
         return reverse('reports:monthly-all-progress-list',args=(self.object.karyakram.office.id, self.object.karyakram.id))
 
 class MonthlyProgressDetail(OfficeView, OfficerMixin, KaryakramView, TemplateView):

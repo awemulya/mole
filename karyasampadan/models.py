@@ -19,7 +19,7 @@ class SampadanKaryakram(models.Model):
         #      return self.sampadan_monthlyprogress.filter(fiscal_year=fiscal_year).order_by('-month_id')
         #        
 class SampadanMonthlyProgress(models.Model):
-    sampadan_karyakram = models.ForeignKey(SampadanKaryakram, verbose_name=" कार्यक्रम", related_name="sampadan_monthlyprogress", help_text="")
+    sampadankaryakram = models.ForeignKey(SampadanKaryakram, verbose_name=" कार्यक्रम", related_name="sampadan_monthlyprogress", help_text="")
     fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष")
     month=models.ForeignKey(Months)
     pragati = models.TextField(verbose_name="महिनाको प्रगती")

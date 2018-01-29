@@ -129,6 +129,7 @@ class MonthlyKaryaKram(models.Model):
     name = models.CharField(max_length=255, verbose_name="मासिक कार्यक्रम",)
     office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="monthly_karyakram")
     fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="monthly_year")
+    
     def get_monthly_progress(self):
         #assign ofice fiscal year on office create
         fiscal_year=OfficeSetting.objects.get(office=self.office, is_active=True).fiscal_year
@@ -141,8 +142,8 @@ class MonthlyProgress(models.Model):
     pragati = models.TextField(verbose_name="महिनाको प्रगती")
     pragati_till_date = models.TextField(verbose_name="हाल सम्मको प्रगती")
     comments = models.TextField(verbose_name="कैफियत")
-    datesubmited = models.CharField(max_length=255, null=True, blank=True)
-    dateupdated = models.CharField(max_length=255, null=True, blank=True)
+    datesubmited = models.DateTimeField(max_length=255, null=True, blank=True, auto_now_add=True)
+    dateupdated = models.DateTimeField(max_length=255, null=True, blank=True, auto_now=True)
 
 class Lakxya(models.Model):
     karyakram = models.ForeignKey(KaryaKram, verbose_name=" कार्यक्रम", related_name="lakxya", help_text="")
@@ -151,8 +152,8 @@ class Lakxya(models.Model):
     var = models.FloatField(verbose_name="भार", default=0.00)
     budget = models.FloatField(verbose_name="बजेट", default=0.00)
     awadhi = models.IntegerField(verbose_name="अवधि", choices=AWADHI_CHOICES, default=0)
-    datesubmited = models.CharField(max_length=255, null=True, blank=True)
-    dateupdated = models.CharField(max_length=255, null=True, blank=True)
+    datesubmited = models.DateTimeField(max_length=255, null=True, blank=True, auto_now_add=True)
+    dateupdated = models.DateTimeField(max_length=255, null=True, blank=True, auto_now=True)
 
     def __unicode__(self):
         return u'%s'%(self.paridam)
@@ -177,8 +178,8 @@ class Pragati(models.Model):
     awadhi = models.IntegerField(verbose_name="अवधि", choices=AWADHI_CHOICES, default=1)
     additional_file = models.FileField(verbose_name="फाइल अपलोड", null=True, blank=True)
     file_name = models.FileField(verbose_name="फाइल name", null=True, blank=True)
-    datesubmited = models.CharField(max_length=255, null=True, blank=True)
-    dateupdated = models.CharField(max_length=255, null=True, blank=True)
+    datesubmited = models.DateTimeField(max_length=255, null=True, blank=True, auto_now_add=True)
+    dateupdated = models.DateTimeField(max_length=255, null=True, blank=True, auto_now=True)
 
 
 

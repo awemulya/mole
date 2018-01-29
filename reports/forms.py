@@ -42,13 +42,13 @@ class ChildKaryakramForm(forms.ModelForm):
 class LakxyaForm(forms.ModelForm):
     class Meta:
         model = Lakxya
-        exclude = ('karyakram', 'awadhi', 'datesubmited', 'dateupdated',)
+        exclude = ('karyakram', 'awadhi', 'office',)
 
 
 class PragatiForm(forms.ModelForm):
     class Meta:
         model = Pragati
-        exclude = ('karyakram', 'awadhi', 'datesubmited', 'dateupdated',)
+        exclude = ('karyakram', 'awadhi','office',)
 
 
 class OfficeSettingsForm(forms.ModelForm):
@@ -61,7 +61,7 @@ class MonthlyProgressForm(forms.ModelForm):
 
     class Meta:
         model = MonthlyProgress
-        exclude = ('id','karyakram', 'month', 'fiscal_year', 'datesubmited', 'dateupdated', 'pragati_till_date')
+        exclude = ('id','karyakram', 'month', 'fiscal_year', 'pragati_till_date')
 
 
 class MonthlyKaryakramForm(forms.ModelForm):

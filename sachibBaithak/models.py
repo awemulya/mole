@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from reports.models import FiscalYear
+from reports.models import FiscalYear, KaryaKram
 from office.models import Office
 
 # Create your models here.
@@ -25,9 +25,9 @@ class SachibBaithak(models.Model):
     samaya_sima = models.CharField(verbose_name="समय सिमा ", max_length=100)
 
 class BudgetBaktabya(models.Model):
-    office = models.ForeignKey(Office)
+    karyakram = models.ForeignKey(KaryaKram, verbose_name="कार्यक्रम", related_name="budgetbaktabya", null=True, blank=True, help_text="")
+    office = models.ForeignKey(Office, null=True, blank=True)
     budhano = models.CharField(verbose_name="बुदा न", max_length=255, null=True, blank=True)
-    karyakrams = models.TextField(verbose_name="कार्यक्रमहरु ", null=True, blank=True)
     pragati = models.TextField(verbose_name="प्रगति ", null=True, blank=True)
     problems = models.TextField(verbose_name="समस्या ", null=True, blank=True)
     solutions = models.TextField(verbose_name="सावधान ", null=True, blank=True)
