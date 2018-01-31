@@ -232,16 +232,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['offices_count'] = Office.objects.all().count()
         context['users_count'] = User.objects.all().count()
 
-        context['pragati'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM reports_karyakram LEFT JOIN (SELECT * FROM reports_pragati GROUP BY karyakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS reports_pragati ON reports_karyakram.id = reports_pragati.karyakram_id GROUP BY reports_karyakram.office_id ORDER BY reports_pragati.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-
-        context['monthlyprogress'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM reports_monthlykaryakram LEFT JOIN (SELECT * FROM reports_monthlyprogress GROUP BY karyakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS reports_monthlyprogress ON reports_monthlykaryakram.id = reports_monthlyprogress.karyakram_id GROUP BY reports_monthlykaryakram.office_id ORDER BY reports_monthlyprogress.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-
-        context['sachibbaithak'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM sachibBaithak_sachibbaithakmain LEFT JOIN (SELECT * FROM sachibBaithak_sachibbaithak GROUP BY sachibbaithakmain_id ORDER BY datesubmited DESC LIMIT 0,1) AS sachibBaithak_sachibbaithak ON sachibBaithak_sachibbaithakmain.id = sachibBaithak_sachibbaithak.sachibbaithakmain_id GROUP BY sachibBaithak_sachibbaithakmain.office_id ORDER BY sachibBaithak_sachibbaithak.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-
-        context['karyasampadan'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM karyasampadan_sampadankaryakram LEFT JOIN (SELECT * FROM karyasampadan_sampadanmonthlyprogress GROUP BY sampadankaryakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS karyasampadan_sampadanmonthlyprogress ON karyasampadan_sampadankaryakram.id = karyasampadan_sampadanmonthlyprogress.sampadankaryakram_id GROUP BY karyasampadan_sampadankaryakram.office_id ORDER BY karyasampadan_sampadanmonthlyprogress.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-
-        context['budgetbaktabya'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM sachibBaithak_karyakram LEFT JOIN (SELECT * FROM sachibBaithak_pragati GROUP BY karyakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS sachibBaithak_pragati ON sachibBaithak_karyakram.id = sachibBaithak_budgetbaktabya.karyakram_id GROUP BY sachibBaithak_karyakram.office_id ORDER BY sachibBaithak_budgetbaktabya.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-
+        
 
 
         # context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati ORDER BY datesubmited DESC")[:1]
