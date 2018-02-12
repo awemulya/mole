@@ -125,9 +125,9 @@ class KaryaKram(models.Model):
 
     
 class MonthlyKaryaKram(models.Model):
-    monthly_karyakram = models.ForeignKey('self', verbose_name="मासिक कार्यक्रम", blank=True, null=True, related_name="monthly_parent", help_text="")
+    monthlykaryakram = models.ForeignKey('self', verbose_name="मासिक कार्यक्रम", blank=True, null=True, related_name="monthly_parent", help_text="")
     name = models.CharField(max_length=255, verbose_name="मासिक कार्यक्रम",)
-    office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="monthly_karyakram")
+    office = models.ForeignKey(Office, verbose_name="कार्यालय", related_name="monthlykaryakram")
     fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="monthly_year")
     
     def get_monthly_progress(self):

@@ -371,7 +371,7 @@ class MonthlyControlList(OfficeView, OfficerMixin, MonthlyKaryakramView, ListVie
 
     def get_queryset(self):
         
-        qs =  super(MonthlyControlList, self).get_queryset().filter(monthly_karyakram__isnull=True).prefetch_related(Prefetch('monthly_parent__monthlyprogress', queryset=MonthlyProgress.objects.order_by('-month__id')))
+        qs =  super(MonthlyControlList, self).get_queryset().filter(monthlykaryakram__isnull=True).prefetch_related(Prefetch('monthly_parent__monthlyprogress', queryset=MonthlyProgress.objects.order_by('-month__id')))
         return qs
         
 class MonthlyKaryakramCreateView(OfficeView, MonthlyKaryakramView, CreateView):
