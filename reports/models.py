@@ -139,7 +139,7 @@ class MonthlyProgress(models.Model):
     karyakram = models.ForeignKey(MonthlyKaryaKram, verbose_name=" कार्यक्रम", related_name="monthlyprogress", help_text="")
     fiscal_year = models.ForeignKey(FiscalYear, verbose_name="वित्तीय वर्ष", related_name="monthlyprogress", null=True, blank=True)
     month=models.ForeignKey(Months, related_name="months")
-    pragati = models.TextField(verbose_name="महिनाको प्रगती")
+    pragati = models.TextField(verbose_name="महिनाको प्रगती", blank=True, null=True)
     pragati_till_date = models.TextField(verbose_name="हाल सम्मको प्रगती")
     comments = models.TextField(verbose_name="कैफियत")
     datesubmited = models.DateTimeField(max_length=255, null=True, blank=True, auto_now_add=True)
