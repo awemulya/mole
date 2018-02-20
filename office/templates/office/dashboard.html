@@ -85,17 +85,24 @@
 						<tbody>
 						{% for office in offices %}
 							<tr>
-								<td>{{office.id}}.</td>
+								<td>{{office.id}}</td>
 								<td>{{office}}</td>
 								{% for pragati in pragati %}
 								<td>{{ pragati.datesubmited }}</td>
-								{% endfor%}
-								{% for monthlyprogress in monthlyprogress%}
+								{% endfor %}
+								{% for monthlyprogress in monthlyprogress %}
 								<td>{{ monthlyprogress.datesubmited }}</td>
 								{% endfor %}
-								<td></td>
-								<td></td>
-								<td></td>
+								{% for sachib in sachib %}
+								<td>{{ sachib.datesubmited }}</td>
+								{% endfor %}
+								{% for karyasampadak in karyasampadak %}
+								<td>{{ karyasampadak.datesubmited }}</td>
+								{% endfor %}
+								{% for bugbaktabya in bugbaktabya %}
+								<td>{{ bugbaktabya.datesubmited }}</td>
+								{% endfor %}
+								
 								<td><a href="{% url 'office:view-data-detail' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a></td>
 							</tr>
 						{% endfor %}

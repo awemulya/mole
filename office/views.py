@@ -231,12 +231,12 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['offices_count'] = Office.objects.all().count()
         context['users_count'] = User.objects.all().count()
         context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati ORDER BY datesubmited DESC")[:1]
-        context['monthlyprogress'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM reports_monthlykaryakram LEFT JOIN (SELECT * FROM reports_monthlyprogress GROUP BY karyakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS reports_monthlyprogress ON reports_monthlykaryakram.id = reports_monthlyprogress.karyakram_id GROUP BY reports_monthlykaryakram.office_id ORDER BY reports_monthlyprogress.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
+        # context['monthlyprogress'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM reports_monthlykaryakram LEFT JOIN (SELECT * FROM reports_monthlyprogress GROUP BY karyakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS reports_monthlyprogress ON reports_monthlykaryakram.id = reports_monthlyprogress.karyakram_id GROUP BY reports_monthlykaryakram.office_id ORDER BY reports_monthlyprogress.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
 
-        # context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
-        # context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
-        # context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")
-        # context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
+        context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
+        context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
+        context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")
+        context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
      
         # context['office1'] = KaryaKram.objects.filter(office_id=1).order_by('-id').first()
         # context['office2'] = KaryaKram.objects.filter(office_id=2).order_by('-id').first()
