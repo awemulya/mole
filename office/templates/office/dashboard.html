@@ -1,7 +1,7 @@
 {% extends "base_layout.html" %}
 {% load filters %}
 {% load static %}
-
+{% load dashboard_tags %}
 {% block title %}MOLE{% endblock title %}
 
 {% block extra_styles %}{% endblock extra_styles %}
@@ -83,28 +83,54 @@
 							</tr>
 						</thead>
 						<tbody>
+						<!-- {% for item in item_list %}
+						    {{ forloop.counter }} {# starting index 1 #}
+						    {{ forloop.counter0 }} {# starting index 0 #}
+
+						    {# do your stuff #}
+						{% endfor %} -->
 						{% for office in offices %}
+
 							<tr>
 								<td>{{office.id}}</td>
-								<td>{{office}}</td>
-								{% for pragati in pragati %}
-								<td>{{ pragati.datesubmited }}</td>
-								{% endfor %}
-								{% for monthlyprogress in monthlyprogress %}
-								<td>{{ monthlyprogress.datesubmited }}</td>
-								{% endfor %}
-								{% for sachib in sachib %}
-								<td>{{ sachib.datesubmited }}</td>
-								{% endfor %}
-								{% for karyasampadak in karyasampadak %}
-								<td>{{ karyasampadak.datesubmited }}</td>
-								{% endfor %}
-								{% for bugbaktabya in bugbaktabya %}
-								<td>{{ bugbaktabya.datesubmited }}</td>
-								{% endfor %}
+								<td>{{office.name}}</td>
+								<td>
+									{% with pragati|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ pragati.num.id }}
+									{% endwith %}
+								</td>
+								<td>
+									{% with monthlyprogress|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ monthlyprogress.num.id }}
+									{% endwith %}
+								</td>
+								<td>
+									
+									{% with sachibbaithak|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ sachibbaithak.num.id }}
+									{% endwith %}
+								</td>
+								<td>
+									
+									{% with karyasampadan|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ karyasampadan.num.id }}
+									{% endwith %}
+								</td>
+								<td>
+									
+									{% with karyasampadan|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ karyasampadan.num.id }}
+									{% endwith %}
+								</td>
+								<td>
 								
-								<td><a href="{% url 'office:view-data-detail' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a></td>
-							</tr>
+								</td>
+							</tr> 													
 						{% endfor %}
 
 						</tbody>

@@ -26,3 +26,6 @@ def user_context(context):
     if user.is_anonymous():
         return None
     return user
+@register.filter
+def lookup(d, key):
+    return d[key]
