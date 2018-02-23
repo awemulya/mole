@@ -23,15 +23,16 @@
 		<!--Main Content Area Starts-->
 		<section id="app-section">
 			<ol class="breadcrumb no-margin margin-top-lg">
-			  <li><a href="index.php">गृह पृष्ठ</a></li>
-			  <li><a href="page-office.php">मसचिब बैठक प्रगती</a></li>
+			  <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office.id %}">{{ office.name }}</a></li>
+			  <li class="active">सचिब बैठक प्रगती</li>
 
 			</ol>
 			<div class="bg-white padding margin-top-lg">
 				<div class="app-page-header">
 					<div class="row">
 						<div class="col-md-10">
-							<h4>सचिब बैठक</h4>
+							<h4>सचिब बैठक प्रगती</h4>
 						</div>
 
 

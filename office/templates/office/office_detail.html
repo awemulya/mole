@@ -29,22 +29,22 @@
 
                   <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                      <b>इ-मेल</b><a class="pull-right">{{office.email}}</a>
+                      <b>इ-मेल:</b><a class="pull-right">{{office.email}}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>फोन</b> <a class="pull-right">{{office.phone}}</a>
+                      <b>फोन:</b> <a class="pull-right">{{office.phone}}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>फ्याक्स</b> <a class="pull-right">{{office.fax}}</a>
+                      <b>फ्याक्स:</b> <a class="pull-right">{{office.fax}}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>कार्यालय समय</b> <a class="pull-right">{{office.office_time}}</a>
+                      <b>कार्यालय समय:</b> <a class="pull-right">{{office.office_time}}</a>
                     </li>
                   <li class="list-group-item">
-                      <b>सेटिङ परिवर्तन</b> <a href="{% url 'reports:office-settings' office.id office.settings.id %}" %} class="pull-right">परिवर्तन गर्नुहोस्</a>
+                      <b>सेटिङ परिवर्तन:</b> <a href="{% url 'reports:office-settings' office.id office.settings.id %}" %} class="pull-right">परिवर्तन गर्नुहोस्</a>
                     </li>
                     <li class="list-group-item">
-                      <b>विवरण परिवर्तन</b> <a href="{% url 'office:office-update' office.id %}" %} class="pull-right">परिवर्तन गर्नुहोस्</a>
+                      <b>विवरण परिवर्तन:</b> <a href="{% url 'office:office-update' office.id %}" %} class="pull-right">परिवर्तन गर्नुहोस्</a>
                     </li>
                   </ul>
 
@@ -55,7 +55,7 @@
               </div>
                 <div class="col-md-8">
                     <div class="map-office">
-                        <div id="map" style="width:100%;height:400px"></div>
+                        <div id="map" style="width:100%;height:510px"></div>
                     </div>
                 </div>
 

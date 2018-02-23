@@ -49,7 +49,9 @@ class MonthlyKaryakramView(object):
 
 
 class OfficeSettings(OfficeView, OfficerMixin, OfficeSettingView, UpdateView):
+    
     def get_success_url(self):
+
         return reverse('office:office-detail', args=(self.kwargs.get('office'),))
 
 
