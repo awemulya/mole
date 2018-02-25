@@ -96,11 +96,11 @@ class OfficeViewDataDetail(LoginRequiredMixin, OfficeView, DetailView):
     template_name = 'office/view_data.html'
     def get_context_data(self, **kwargs):
         context = super(OfficeViewDataDetail, self).get_context_data(**kwargs)
-        context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati")
-        context['monthlyprogress'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM reports_monthlykaryakram LEFT JOIN (SELECT * FROM reports_monthlyprogress GROUP BY karyakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS reports_monthlyprogress ON reports_monthlykaryakram.id = reports_monthlyprogress.karyakram_id GROUP BY reports_monthlykaryakram.office_id ORDER BY reports_monthlyprogress.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-        context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
-        context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")
-        context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
+        # context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati")
+        # context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
+        # context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
+        # context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")
+        # context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
         return context
 
 
