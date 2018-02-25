@@ -54,7 +54,7 @@ class ProfileUpdateView(LoginRequiredMixin, OfficerMixin, ProfileUpdateView, Upd
     template_name = 'office/user_profile.html'
 
     def get_object(self):
-        profile = Profile.objects.get(user__id=self.kwargs.get('pk')) 
+        profile = Profile.objects.get(user__id=self.kwargs.get('pk'))
         return profile
 
     def get_success_url(self):
@@ -72,7 +72,7 @@ class ProfileDetailView(LoginRequiredMixin, OfficerMixin, DetailView):
         return context
 
     def get_object(self):
-        profile = Profile.objects.get(user__id=self.kwargs.get('pk')) 
+        profile = Profile.objects.get(user__id=self.kwargs.get('pk'))
         return profile
 
 class OfficeUserView(LoginRequiredMixin, OfficerMixin, TemplateView):
@@ -116,7 +116,7 @@ class OfficeCreateView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, Crea
         os = OfficeSetting(office=self.object, fiscal_year=FiscalYear(pk=1))
         os.save()
 
-    
+
     def get_success_url(self):
         return reverse_lazy('office:office-list')
 
@@ -124,7 +124,7 @@ class OfficeUpdateView(LoginRequiredMixin, OfficerMixin, OfficeView, UpdateView)
     template_name = 'office/office-update.html'
     form_class = OfficeEditForm
     def get_success_url(self):
-            return reverse('office:office-dashboard',args=(self.object.id,))  
+            return reverse('office:office-dashboard',args=(self.object.id,))
 
 
 class OfficeDeleteView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, DeleteView):
@@ -133,9 +133,9 @@ class OfficeDeleteView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, Dele
 
 
 
-class Monthly(LoginRequiredMixin, OfficerMixin, ListView): 
+class Monthly(LoginRequiredMixin, OfficerMixin, ListView):
     template_name = 'reports/monthly.html'
-        
+
 
 
 
@@ -155,7 +155,7 @@ class OfficeAddOfficeHeadView(LoginRequiredMixin, AdminAssistantMixin, OfficeVie
             user.set_unusable_password()
             user.save()
 
-           
+
             office_head = Group.objects.get(name="Office Head")
             role, created = UserRole.objects.get_or_create(user=user, group=office_head, office = Office.objects.get(id=request.POST.get('office')))
 
@@ -217,7 +217,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = "office/dashboard.html"
 
     def dispatch(self, request, *args, **kwargs):
-        
+
         if request.office:
 
             return redirect('office:office-dashboard', pk=request.office.id)
@@ -226,26 +226,26 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
         context['offices'] = Office.objects.all()
-      
+
         context['submission_count'] = Pragati.objects.all().count()
         context['offices_count'] = Office.objects.all().count()
         context['users_count'] = User.objects.all().count()
         # context['pragati'] = Pragati.objects.raw("SELECT * FROM reports_pragati ORDER BY datesubmited DESC")[:1]
         context['pragati'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT *, Max(reports_pragati.mainid) AS mainid FROM reports_karyakram LEFT JOIN (SELECT *, Max(id) as mainid FROM reports_pragati GROUP BY karyakram_id) AS reports_pragati ON reports_karyakram.id = reports_pragati.karyakram_id GROUP BY office_id) AS karyakram ON office_office.id=karyakram.office_id")
 
-        
-        context['monthlyprogress'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM reports_monthlykaryakram LEFT JOIN (SELECT * FROM reports_monthlyprogress GROUP BY karyakram_id ORDER BY id DESC LIMIT 0,1) AS reports_monthlyprogress ON reports_monthlykaryakram.id = reports_monthlyprogress.karyakram_id GROUP BY reports_monthlykaryakram.office_id ORDER BY reports_monthlyprogress.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-        
-        context['sachibbaithak'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM sachibBaithak_sachibbaithakmain LEFT JOIN (SELECT * FROM sachibBaithak_sachibbaithak GROUP BY sachibbaithakmain_id ORDER BY id DESC LIMIT 0,1) AS sachibBaithak_sachibbaithak ON sachibBaithak_sachibbaithakmain.id = sachibBaithak_sachibbaithak.sachibbaithakmain_id GROUP BY sachibBaithak_sachibbaithakmain.office_id ORDER BY sachibBaithak_sachibbaithak.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-        
-        context['karyasampadan'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM karyasampadan_sampadankaryakram LEFT JOIN (SELECT * FROM karyasampadan_sampadanmonthlyprogress GROUP BY sampadankaryakram_id ORDER BY id DESC LIMIT 0,1) AS karyasampadan_sampadanmonthlyprogress ON karyasampadan_sampadankaryakram.id = karyasampadan_sampadanmonthlyprogress.sampadankaryakram_id GROUP BY karyasampadan_sampadankaryakram.office_id ORDER BY karyasampadan_sampadanmonthlyprogress.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
-        # context['budgetbaktabya'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT * FROM sachibBaithak_karyakram LEFT JOIN (SELECT * FROM sachibBaithak_pragati GROUP BY karyakram_id ORDER BY datesubmited DESC LIMIT 0,1) AS sachibBaithak_pragati ON sachibBaithak_karyakram.id = sachibBaithak_budgetbaktabya.karyakram_id GROUP BY sachibBaithak_karyakram.office_id ORDER BY sachibBaithak_budgetbaktabya.datesubmited DESC LIMIT 0,1) AS karyakram ON office_office.id=karyakram.office_id")
+
+        context['monthlyprogress'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT *, Max(reports_monthlyprogress.mainid) AS mainid FROM reports_monthlykaryakram LEFT JOIN (SELECT *, Max(id) as mainid FROM reports_monthlyprogress GROUP BY karyakram_id) AS reports_monthlyprogress ON reports_monthlykaryakram.id = reports_monthlyprogress.karyakram_id GROUP BY office_id) AS karyakram ON office_office.id=karyakram.office_id")
+
+        context['sachibbaithak'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT *, Max(SachibBaithak_sachibbaithak.mainid) AS mainid FROM SachibBaithak_sachibbaithakmain LEFT JOIN (SELECT *, Max(id) as mainid FROM SachibBaithak_sachibbaithak GROUP BY sachibbaithakmain_id) AS SachibBaithak_sachibbaithak ON SachibBaithak_sachibbaithakmain.id = SachibBaithak_sachibbaithak.sachibbaithakmain_id GROUP BY office_id) AS karyakram ON office_office.id=karyakram.office_id")
+
+        context['karyasampadan'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT *, Max(karyasampadan_sampadanmonthlyprogress.mainid) AS mainid FROM karyasampadan_sampadankaryakram LEFT JOIN (SELECT *, Max(id) as mainid FROM karyasampadan_sampadanmonthlyprogress GROUP BY sampadankaryakram_id) AS karyasampadan_sampadanmonthlyprogress ON karyasampadan_sampadankaryakram.id = karyasampadan_sampadanmonthlyprogress.sampadankaryakram_id GROUP BY office_id) AS karyakram ON office_office.id=karyakram.office_id")
+        context['budgetbaktabya'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT *, Max(id) as budget_id FROM sachibbaithak_budgetbaktabya GROUP BY office_id) AS budgetdetail ON office_office.id=budgetdetail.office_id")
 
         # context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")
         # context['sachib'] = SachibBaithak.objects.raw("SELECT * FROM sachibBaithak_sachibbaithak")
         # context['karyasampadak'] = SampadanKaryakram.objects.raw("SELECT * FROM karyasampadan_sampadankaryakram")
-        context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
-     
+        # context['bugbaktabya'] = BudgetBaktabya.objects.raw("SELECT * FROM sachibBaithak_budgetbaktabya")
+
         # context['office1'] = KaryaKram.objects.filter(office_id=1).order_by('-id').first()
         # context['office2'] = KaryaKram.objects.filter(office_id=2).order_by('-id').first()
         # context['office3'] = KaryaKram.objects.filter(office_id=3).order_by('-id').first()
@@ -298,10 +298,10 @@ class DistrictDashboard(LoginRequiredMixin, TemplateView):
 
         context['district'] = district
         context['offices'] = Office.objects.filter(district=district)
-       
+
         context['activePage'] = district.id
         return context
-        
+
 
 class OfficeBudgetUpdateView(LoginRequiredMixin, OfficerMixin, BudgetView, UpdateView):
     template_name = "office/office_budget_form.html"
@@ -312,7 +312,7 @@ class OfficeBudgetUpdateView(LoginRequiredMixin, OfficerMixin, BudgetView, Updat
         if self.request.office:
             office_id = self.request.office.id
         else:
-            office_id = self.kwargs.get('pk')   
+            office_id = self.kwargs.get('pk')
         office = Office.objects.get(pk=office_id)
         budgetyear = FiscalYear.objects.get(pk=office.settings.fiscal_year.pk)
         budget, created = OfficeBudget.objects.get_or_create(office=office, budget_year=budgetyear)

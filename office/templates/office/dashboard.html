@@ -25,7 +25,7 @@
 				<div class="col-md-4">
 					<div class="widget-count margin-top-lg">
 						<p>
-						कुल निकाय 
+						कुल निकाय
 						</p>
 						<span>{{offices_count}}</span>
 					</div>
@@ -107,30 +107,30 @@
 									{% endwith %}
 								</td>
 								<td>
-									
+
 									{% with sachibbaithak|lookup:forloop.counter0 as data %}
 									{{ data.datesubmited }}
 									{{ sachibbaithak.num.id }}
 									{% endwith %}
 								</td>
 								<td>
-									
+
 									{% with karyasampadan|lookup:forloop.counter0 as data %}
 									{{ data.datesubmited }}
 									{{ karyasampadan.num.id }}
 									{% endwith %}
 								</td>
 								<td>
-									
-									{% with karyasampadan|lookup:forloop.counter0 as data %}
+
+									{% with budgetbaktabya|lookup:forloop.counter0 as data %}
 									{{ data.datesubmited }}
-									{{ karyasampadan.num.id }}
+									{{ budgetbaktabya.num.id }}
 									{% endwith %}
 								</td>
 								<td>
-								
+
 								</td>
-							</tr> 													
+							</tr>
 						{% endfor %}
 
 						</tbody>
@@ -163,7 +163,7 @@
 						<div id="map" style="width:100%;height:500px"></div>
 					</div>
 				</div>
-				
+
 			</div>
 		</section>
 		<div class="clearfix"></div>
@@ -205,7 +205,7 @@
 
 				var marker, i;
 
-			    for (i = 0; i < locations.length; i++) {  
+			    for (i = 0; i < locations.length; i++) {
 			      marker = new google.maps.Marker({
 			        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
 			        map: map
@@ -218,5 +218,3 @@
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
         {% endblock extra_scripts %}
-
-
