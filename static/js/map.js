@@ -32,7 +32,6 @@ var baseLayers = {
 
         //console.log(data.features.length);
      
-      
         map = L.map("map",{layers:osm}).setView([27, 85], 6);;
         
         
@@ -45,10 +44,13 @@ var baseLayers = {
           iconAnchor: [16, 37],
           popupAnchor: [0, -37]
         });
-        L.marker([27.6692636, 85.3326804],{icon:icon}).bindPopup("बैदेशिक रोजगार बिभाग ").addTo(map);
-        // L.marker([27.696446, 85.3221903],{icon:icon}).bindPopup("Baidesik Rojgar bibhag").addTo(map);
-        // L.marker([27.6931977, 85.3242567],{icon:icon}).bindPopup("Baidesik Rojgar bibhag").addTo(map);
-        // L.marker([27.6482818, 85.3050494],{icon:icon}).bindPopup("Baidesik Rojgar bibhag").addTo(map);
-        // L.marker([27.6867262, 85.3365863],{icon:icon}).bindPopup("Baidesik Rojgar bibhag").addTo(map);
+        L.marker([27.6692636, 85.0326804],{icon:icon}).bindPopup("बैदेशिक रोजगार बिभाग ").addTo(map);
+        L.marker([27.696446, 85.1221903],{icon:icon}).bindPopup("श्रम विभाग").addTo(map);
+        L.marker([27.6931977, 85.2242567],{icon:icon}).bindPopup("वैदेशिक रोजगार प्रवर्द्धन वोर्ड").addTo(map);
+        L.marker([27.6482818, 85.4050494],{icon:icon}).bindPopup("व्यवसायिक तथा सीप विकास तालिम केन्द्र").addTo(map);
+        L.marker([27.6867262, 85.6365863],{icon:icon}).bindPopup("व्यवसायजन्य सुरक्षा तथा स्वास्थ्य सम्बन्धी आयोजना").addTo(map);
+        L.marker([27.6931977, 85.7242567],{icon:icon}).bindPopup("ई. पि. एस. कोरिया शाखा").addTo(map);
+        L.marker([27.6482818, 85.9050494],{icon:icon}).bindPopup("सामाजिक सुरक्षा कोष").addTo(map);
+        L.marker([27.6867262, 85.5365863],{icon:icon}).bindPopup("वैदेशिक रोजगार न्यायधिकरण").addTo(map);
 
 

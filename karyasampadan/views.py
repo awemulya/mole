@@ -77,7 +77,7 @@ class MonthlyProgressList(OfficeView, OfficerMixin, TemplateView):
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
         data['karyakram'] = SampadanKaryakram.objects.get(pk=self.kwargs.get('karyakram_id'))
         karyakram_id = self.kwargs.get('karyakram_id')
-        data['months'] = Months.objects.raw('SELECT * FROM reports_months LEFT JOIN karyasampadan_sampadanmonthlyprogress ON reports_months.id = karyasampadan_sampadanmonthlyprogress.month_id AND karyasampadan_sampadanmonthlyprogress.sampadan_karyakram_id = %s', [karyakram_id])
+        data['months'] = Months.objects.raw('SELECT * FROM reports_months LEFT JOIN karyasampadan_sampadanmonthlyprogress ON reports_months.id = karyasampadan_sampadanmonthlyprogress.month_id AND karyasampadan_sampadanmonthlyprogress.sampadankaryakram_id = %s', [karyakram_id])
         return data
 
 class MonthlyProgressCreateView(OfficeView, MonthlyProgressView, UpdateView): 
@@ -95,7 +95,7 @@ class MonthlyProgressCreateView(OfficeView, MonthlyProgressView, UpdateView):
         if self.object.datesubmited is None:
             self.object.datesubmited = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
         self.object.save()
-        return reverse('karyasampadan:monthly-all-progress-list',args=(self.object.sampadan_karyakram.office.id, self.object.sampadan_karyakram.id))
+        return reverse('karyasampadan:monthly-all-progress-list',args=(self.object.sampadankaryakram.office.id, self.object.sampadankaryakram.id))
 
 class MonthlyProgressDetail(OfficeView, OfficerMixin, TemplateView):
     template_name = 'karyasampadan/monthly_progress_detail.html'
