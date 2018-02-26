@@ -239,6 +239,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['sachibbaithak'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT *, Max(SachibBaithak_sachibbaithak.mainid) AS mainid FROM SachibBaithak_sachibbaithakmain LEFT JOIN (SELECT *, Max(id) as mainid FROM SachibBaithak_sachibbaithak GROUP BY sachibbaithakmain_id) AS SachibBaithak_sachibbaithak ON SachibBaithak_sachibbaithakmain.id = SachibBaithak_sachibbaithak.sachibbaithakmain_id GROUP BY office_id) AS karyakram ON office_office.id=karyakram.office_id")
 
         context['karyasampadan'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT *, Max(karyasampadan_sampadanmonthlyprogress.mainid) AS mainid FROM karyasampadan_sampadankaryakram LEFT JOIN (SELECT *, Max(id) as mainid FROM karyasampadan_sampadanmonthlyprogress GROUP BY sampadankaryakram_id) AS karyasampadan_sampadanmonthlyprogress ON karyasampadan_sampadankaryakram.id = karyasampadan_sampadanmonthlyprogress.sampadankaryakram_id GROUP BY office_id) AS karyakram ON office_office.id=karyakram.office_id")
+        
         context['budgetbaktabya'] = Office.objects.raw("SELECT * FROM office_office LEFT JOIN (SELECT *, Max(id) as budget_id FROM sachibbaithak_budgetbaktabya GROUP BY office_id) AS budgetdetail ON office_office.id=budgetdetail.office_id")
 
         # context['monthlyprogress'] = MonthlyProgress.objects.raw("SELECT * FROM reports_monthlyprogress")

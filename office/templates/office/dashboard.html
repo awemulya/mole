@@ -79,7 +79,7 @@
 								<th>सचिव वैठक प्रगति</th>
 								<th>कार्य सम्पादन सूचक</th>
 								<th>वजेट वक्तव्य</th>
-								<th>पुरा हेर्नुहोस</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -127,9 +127,7 @@
 									{{ budgetbaktabya.num.id }}
 									{% endwith %}
 								</td>
-								<td>
-										<a href="{% url 'office:view-data-detail' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
-								</td>
+							
 							</tr>
 						{% endfor %}
 
