@@ -17,12 +17,12 @@
 
 }</style>
 {% endblock extra_css %}
-	
+  
 {% block content %}
  <section id="app-section">
 
       <ol class="breadcrumb no-margin margin-top-lg">
-        <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i>गृह पृष्ठ</a></li>
+        <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
         <li><a href="{% url 'office:office-dashboard' office %}">{{ office_obj.name }}</a></li>
         {% if type == '0' %}
         <li class="active">पहिलो चौमासिक लक्ष्य</li>                            
@@ -42,10 +42,10 @@
         <div class="pratham-lakchya">
           
         {% if type == '0' %}
-		          <h3>पहिलो चौमासिक लक्ष्य</h3>			                        
-		    {% else %}
-		          <h3>पहिलो चौमासिक प्रगति</h3>
-		    {% endif %}
+              <h3>पहिलो चौमासिक लक्ष्य</h3>                             
+        {% else %}
+              <h3>पहिलो चौमासिक प्रगति</h3>
+        {% endif %}
           <table id="datatable" class="table table-bordered text-center">
             <thead>
             <tr>

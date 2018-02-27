@@ -1,7 +1,7 @@
 {% extends "base_layout.html" %}
 {% load filters %}
 {% load static %}
-
+{% load dashboard_tags %}
 {% block title %}MOLE{% endblock title %}
 
 {% block extra_styles %}{% endblock extra_styles %}
@@ -25,7 +25,7 @@
 				<div class="col-md-4">
 					<div class="widget-count margin-top-lg">
 						<p>
-						कुल निकाय 
+						कुल निकाय
 						</p>
 						<span>{{offices_count}}</span>
 					</div>
@@ -79,23 +79,56 @@
 								<th>सचिव वैठक प्रगति</th>
 								<th>कार्य सम्पादन सूचक</th>
 								<th>वजेट वक्तव्य</th>
-								<th>पुरा हेर्नुहोस</th>
+								
 							</tr>
 						</thead>
 						<tbody>
+						<!-- {% for item in item_list %}
+						    {{ forloop.counter }} {# starting index 1 #}
+						    {{ forloop.counter0 }} {# starting index 0 #}
+
+						    {# do your stuff #}
+						{% endfor %} -->
 						{% for office in offices %}
+
 							<tr>
-							
-								<td>{{office.id}}.</td>
+
+								<td>{{office.id}}</td>
 								<td>{{office.name}}</td>
-								{% for pragati in pragati%}
-								<td></td>
-								{% endfor %}
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td><a href="{% url 'office:view-data-detail' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a></td>
+								<td>
+									{% with pragati|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ pragati.num.id }}
+									{% endwith %}
+								</td>
+								<td>
+									{% with monthlyprogress|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ monthlyprogress.num.id }}
+									{% endwith %}
+								</td>
+								<td>
+
+									{% with sachibbaithak|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ sachibbaithak.num.id }}
+									{% endwith %}
+								</td>
+								<td>
+
+									{% with karyasampadan|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ karyasampadan.num.id }}
+									{% endwith %}
+								</td>
+								<td>
+
+									{% with budgetbaktabya|lookup:forloop.counter0 as data %}
+									{{ data.datesubmited }}
+									{{ budgetbaktabya.num.id }}
+									{% endwith %}
+								</td>
+							
 							</tr>
 						{% endfor %}
 
@@ -129,7 +162,7 @@
 						<div id="map" style="width:100%;height:500px"></div>
 					</div>
 				</div>
-				
+
 			</div>
 		</section>
 		<div class="clearfix"></div>
@@ -171,7 +204,7 @@
 
 				var marker, i;
 
-			    for (i = 0; i < locations.length; i++) {  
+			    for (i = 0; i < locations.length; i++) {
 			      marker = new google.maps.Marker({
 			        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
 			        map: map
@@ -184,5 +217,3 @@
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
         {% endblock extra_scripts %}
-
-

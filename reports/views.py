@@ -49,9 +49,10 @@ class MonthlyKaryakramView(object):
 
 
 class OfficeSettings(OfficeView, OfficerMixin, OfficeSettingView, UpdateView):
-    def get_success_url(self):
-        return reverse('office:office-detail', args=(self.kwargs.get('office'),))
 
+    def get_success_url(self):
+
+        return reverse('office:office-detail', args=(self.kwargs.get('office'),))
 
 
 class KaryakramCreateView(OfficeView, KaryakramView, CreateView):
@@ -61,10 +62,6 @@ class KaryakramCreateView(OfficeView, KaryakramView, CreateView):
 
 class ChildKaryakramCreateView(OfficeView, KaryakramView, CreateView):
     form_class = ChildKaryakramForm
-    def get_context_data(self, **kwargs):
-        data = super(ChildKaryakramCreateView, self).get_context_data(**kwargs)
-        data['office'] = self.kwargs.get('office')
-        return data
 
     def form_valid(self, form):
         super(ChildKaryakramCreateView, self).form_valid(form)
@@ -95,7 +92,7 @@ class LakxyaCreateView(OfficeView, LakxyaView, FormView):
         data['office'] = self.kwargs.get('office')
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
         data['type']= self.kwargs.get('type')
-        return data 
+        return data
 
 
     def get(self, request, *args, **kwargs):
@@ -122,7 +119,7 @@ class LakxyaCreateView(OfficeView, LakxyaView, FormView):
         lakxya.budget = form.cleaned_data['budget']
         lakxya.save()
         # correct url to redirect after lakxya save and fill pragati
-        
+
         messages.success(self.request, 'Lakxya Sucessfully Added.')
         if self.request.group.id == 4:
             recipients = User.objects.filter(user_roles__group__name="Office Head", user_roles__office__id=1)
@@ -132,7 +129,7 @@ class LakxyaCreateView(OfficeView, LakxyaView, FormView):
             # recipients = User.objects.filter(user_roles__group__name="Information Officer", user_roles__office__id=self.request.office.id)
 
             group = "info_officer-"+str(1)
-        
+
         notify.send(self.request.user, recipient=recipients, verb='Updated new Lakshya', action_object=lakxya, detail_url = '/comment/add/22/')
 
         Group("%s" % group).send({
@@ -173,6 +170,7 @@ class LakxyaCreateView(OfficeView, LakxyaView, FormView):
         })
 
 class PragatiCreateView(OfficeView, PragatiView, CreateView):
+
     def get(self, request, *args,  **kwargs):
         awadhi = self.kwargs['awadhi']
         karyakram_id = self.kwargs['karyakram_id']
@@ -193,15 +191,16 @@ class PragatiCreateView(OfficeView, PragatiView, CreateView):
 
 
     def form_valid(self, form):
+
         pragati = Pragati.objects.get(pk=form.data.get('pragati'))
         pragati.paridam = form.cleaned_data['paridam']
         pragati.var = form.cleaned_data['var']
         pragati.budget = form.cleaned_data['budget']
-        
+
         pragati.abp_paridam = form.cleaned_data['abp_paridam']
         pragati.abp_var = form.cleaned_data['abp_var']
         pragati.abp_budget = form.cleaned_data['abp_budget']
-        
+
         pragati.pas_paridam = form.cleaned_data['pas_paridam']
         pragati.pas_var = form.cleaned_data['pas_var']
         pragati.pas_budget = form.cleaned_data['pas_budget']
@@ -215,6 +214,9 @@ class PragatiCreateView(OfficeView, PragatiView, CreateView):
         # correct url to redirect after lakxya save and fill pragati
 
         messages.success(self.request, 'Lakxya Sucessfully Added.')
+
+
+
         if self.request.group.id == 4:
             recipients = User.objects.filter(user_roles__group__name="Office Head", user_roles__office__id=1)
             group = "office_head-"+str(1)
@@ -223,7 +225,7 @@ class PragatiCreateView(OfficeView, PragatiView, CreateView):
             # recipients = User.objects.filter(user_roles__group__name="Information Officer", user_roles__office__id=self.request.office.id)
 
             group = "info_officer-"+str(1)
-        
+
         notify.send(self.request.user, recipient=recipients, verb='Updated new pragati', action_object=pragati, detail_url = '/comment/add/22/')
 
         Group("%s" % group).send({
@@ -247,6 +249,7 @@ class PragatiCreateView(OfficeView, PragatiView, CreateView):
         else:
             return redirect(reverse('office:office-dashboard',args=(pragati.karyakram.office.id,)))
 
+    
         def sendrealtimenotif(group, byuser, url, action_object, verb):
             Group("%s" % group).send({
                 'text': json.dumps({
@@ -257,8 +260,6 @@ class PragatiCreateView(OfficeView, PragatiView, CreateView):
                     'action_object':str(action_object),
                 })
             })
-
-
 
 class ReportView(OfficeView, OfficerMixin, KaryakramView, ListView):
     template_name = 'reports/reports.html'
@@ -283,13 +284,27 @@ class KaryakramControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         data['office'] = self.kwargs.get('office')
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
         data['awadhi']= self.kwargs.get('awadhi')
-        return data 
+        return data
 
-    def get_queryset(self):  
+    def get_queryset(self):
         qs =  super(KaryakramControlList, self).get_queryset().filter(karyakram__isnull=True).\
             prefetch_related(Prefetch("parent", to_attr='childs'))
         return qs
 
+class YearlyControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
+    template_name = 'reports/Yearly_control.html'
+
+    def get_context_data(self,  **kwargs):
+        data = super(YearlyControlList, self).get_context_data(**kwargs)
+        data['office'] = self.kwargs.get('office')
+        data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
+        data['type']= self.kwargs.get('type')
+        return data
+
+    def get_queryset(self):
+
+        qs = super(YearlyControlList, self).get_queryset().filter(karyakram__isnull=True).prefetch_related(Prefetch('parent__lakxya', queryset=Lakxya.objects.order_by('awadhi')), Prefetch('parent__pragati', queryset=Pragati.objects.order_by('awadhi')))
+        return qs
 
 
 class FirstControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
@@ -300,12 +315,10 @@ class FirstControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         data['office'] = self.kwargs.get('office')
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
         data['type']= self.kwargs.get('type')
-        return data 
-        
+        return data
     def get_queryset(self):
-        qs = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), karyakram__isnull=True) 
+        qs = super(FirstControlList, self).get_queryset().filter(karyakram__isnull=True).prefetch_related(Prefetch('parent__lakxya', queryset=Lakxya.objects.order_by('awadhi')), Prefetch('parent__pragati', queryset=Pragati.objects.order_by('awadhi')))
         return qs
-
 
 class SecondControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
     template_name = 'reports/Second_control.html'
@@ -315,10 +328,10 @@ class SecondControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         data['office'] = self.kwargs.get('office')
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
         data['type']= self.kwargs.get('type')
-        return data 
+        return data
 
     def get_queryset(self):
-        qs = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), karyakram__isnull=True)
+        qs =  super(SecondControlList, self).get_queryset().filter(karyakram__isnull=True).prefetch_related(Prefetch('parent__lakxya', queryset=Lakxya.objects.order_by('awadhi')), Prefetch('parent__pragati', queryset=Pragati.objects.order_by('awadhi')))
         return qs
 
 class ThirdControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
@@ -329,25 +342,12 @@ class ThirdControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         data['office'] = self.kwargs.get('office')
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
         data['type']= self.kwargs.get('type')
-        return data 
+        return data
 
     def get_queryset(self):
-        qs = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), karyakram__isnull=True)
+        qs =  super(ThirdControlList, self).get_queryset().filter(karyakram__isnull=True).prefetch_related(Prefetch('parent__lakxya', queryset=Lakxya.objects.order_by('awadhi')), Prefetch('parent__pragati', queryset=Pragati.objects.order_by('awadhi')))
         return qs
-        
-class YearlyControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
-    template_name = 'reports/Yearly_control.html'
 
-    def get_context_data(self,  **kwargs):
-        data = super(YearlyControlList, self).get_context_data(**kwargs)
-        data['office'] = self.kwargs.get('office')
-        data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
-        data['type']= self.kwargs.get('type')
-        return data 
-
-    def get_queryset(self):
-        qs = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), karyakram__isnull=True)
-        return qs
 
 class FilesSubmitted(OfficerMixin, TemplateView):
     template_name = "reports/filessubmited.html"
@@ -356,7 +356,7 @@ class FilesSubmitted(OfficerMixin, TemplateView):
         context['office'] = self.kwargs.get('office')
         context['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
         context['karyakrams'] = KaryaKram.objects.filter(office__id=self.kwargs.get('office'), fiscal_year__id=self.request.fiscal_year.id, karyakram__isnull=False)
-       
+
         return context
 
 
@@ -367,13 +367,13 @@ class MonthlyControlList(OfficeView, OfficerMixin, MonthlyKaryakramView, ListVie
         data = super(MonthlyControlList, self).get_context_data(**kwargs)
         data['office'] = self.kwargs.get('office')
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
-        return data 
+        return data
 
     def get_queryset(self):
-        
-        qs =  super(MonthlyControlList, self).get_queryset().filter(monthlykaryakram__isnull=True).prefetch_related(Prefetch('monthly_parent__monthlyprogress', queryset=MonthlyProgress.objects.order_by('-month__id')))
+
+        qs =  super(MonthlyControlList, self).get_queryset().filter(monthly_karyakram__isnull=True).prefetch_related(Prefetch('monthly_parent__monthlyprogress', queryset=MonthlyProgress.objects.order_by('-month__id')))
         return qs
-        
+
 class MonthlyKaryakramCreateView(OfficeView, MonthlyKaryakramView, CreateView):
     template_name = "reports/karyakram_form.html"
     def get_success_url(self):
@@ -403,7 +403,7 @@ class MonthlyProgressList(OfficeView, OfficerMixin, KaryakramView, TemplateView)
         data['months'] = Months.objects.raw('SELECT * FROM reports_months LEFT JOIN reports_monthlyprogress ON reports_months.id = reports_monthlyprogress.month_id AND reports_monthlyprogress.karyakram_id = %s', [karyakram_id])
         return data
 
-class MonthlyProgressCreateView(OfficeView, MonthlyProgressView, UpdateView):        
+class MonthlyProgressCreateView(OfficeView, MonthlyProgressView, UpdateView):
     def get_object(self):
         month_id = self.kwargs['month_id']
         karyakram_id = self.kwargs['karyakram_id']
@@ -412,11 +412,11 @@ class MonthlyProgressCreateView(OfficeView, MonthlyProgressView, UpdateView):
 
 
     def get_success_url(self):
-        # converter = NepaliDateConverter()
-        # self.object.dateupdated = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
-        # if self.object.datesubmited is None:
-            # self.object.datesubmited = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
-        # self.object.save()
+        converter = NepaliDateConverter()
+        self.object.dateupdated = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
+        if self.object.datesubmited is None:
+            self.object.datesubmited = converter.ad2bs((datetime.date.today().year, datetime.date.today().month, datetime.date.today().day))
+        self.object.save()
         return reverse('reports:monthly-all-progress-list',args=(self.object.karyakram.office.id, self.object.karyakram.id))
 
 class MonthlyProgressDetail(OfficeView, OfficerMixin, KaryakramView, TemplateView):
@@ -435,4 +435,4 @@ class MonthlyProgressDetail(OfficeView, OfficerMixin, KaryakramView, TemplateVie
         data['monthly_karyakram'] = monthly_karyakram
         karyakram_id = self.kwargs.get('karyakram_id')
         data['months'] = Months.objects.raw('SELECT * FROM reports_months LEFT JOIN reports_monthlyprogress ON reports_months.id = reports_monthlyprogress.month_id AND reports_monthlyprogress.karyakram_id = %s', [karyakram_id])
-        return data     
+        return data

@@ -9,8 +9,8 @@
     <section id="app-section">
         <section class="content-header">
               <ol class="breadcrumb">
-                <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i>गृह पृष्ठ</a></li>
-                <li><a href="{% url 'office:office-dashboard' office.id %}">वैदेशिक रोजगार विभाग</a></li>
+                <li><a href="{% url 'dashboard' %}"></i>गृह पृष्ठ</a></li>
+                <li><a href="{% url 'office:office-dashboard' office.id %}">{{ office.name }}</a></li>
                 <li class="active">बजेट बक्तब्य</li>
               </ol>
         </section>

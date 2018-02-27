@@ -10,26 +10,7 @@
     <section id="app-section">
 
   
-         <ol class="breadcrumb no-margin margin-top-lg">
-            <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i>गृह पृष्ठ</a></li>
-            <li><a href="">वैदेशिक रोजगार विभाग</a></li>
-            {% if awadhi == "0" %}
-            <li class=""><a href="">वार्षिक चौमासिक प्रगति</a></li>
-            <li class="active">प्रगति फारम</li>
-            {% elif awadhi == "1" %}
-            <li class=""><a href="">प्रथम चौमासिक प्रगति</a></li>
-            <li class="active">प्रगति फारम</li>
-            {% elif awadhi == "2" %}
-            <li class=""><a href="">दोस्रो चौमासिक प्रगति</a></li>
-            <li class="active">प्रगति फारम</li>
-            {% elif awadhi == "3" %}  
-            <li class=""><a href="">तेस्रो चौमासिक प्रगति </a></li>
-            <li class="active">प्रगति फारम</li>
-            {% else %}
-                    
-            {% endif %}            
-          </ol>
-      
+
         <section class="content">
 
 
@@ -48,20 +29,7 @@
             {% csrf_token %}
 
             {% for field in form %}
-                {% if forloop.counter == 1 %}
-                    <legend>प्रगति</legend>
-                {% elif forloop.counter == 4 %}
-                    <legend>आर्थिक भौतिक प्रगति</legend>
-                {% elif forloop.counter == 7 %}
-                    <legend>पतिबेदन अवधि सम्म एस आ.व.धी. को प्रगति </legend>
-                {% elif forloop.counter == 10 %}
-                    <legend>कुल मध्ये हाल सम्म को परगति</legend>
-                {% elif forloop.counter == 13 %}
-                    <legend>कौफियत</legend>
-                {% endif %}
-
-                {% if form.instance.awadhi != 0 and forloop.counter == 15 %}
-        {% else %}
+     
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <span class="text-danger small">{{ field.errors }}</span>
@@ -69,7 +37,7 @@
                 <label class="col-md-3 control-label">{{ field.label_tag }}</label>
                 <div class="col-md-5">{{ field }}</div>
             </div>
-        {% endif %}
+      
               {% endfor %}
 
 

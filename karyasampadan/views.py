@@ -23,8 +23,6 @@ from channels import Group
 import json
 from reports.models import Months
 
-
-
 class MonthlyProgressView(object):
     model = SampadanMonthlyProgress
     form_class = MonthlyProgressForm
@@ -41,10 +39,10 @@ class MonthlyControlList(OfficeView, OfficerMixin, MonthlyKaryasampadanView, Lis
         data = super(MonthlyControlList, self).get_context_data(**kwargs)
         data['office'] = self.kwargs.get('office')
         data['office_obj'] = Office.objects.get(pk=self.kwargs.get('office'))
-        return data 
+        return data
 
     def get_queryset(self):
-        
+
         qs =  super(MonthlyControlList, self).get_queryset().filter(main_suchak__isnull=True).prefetch_related(Prefetch('karyasampadan_parent__sampadan_monthlyprogress', queryset=SampadanMonthlyProgress.objects.order_by('-month__id')))
         return qs
 
@@ -65,9 +63,6 @@ class MonthlyChildKaryakramCreateView(OfficeView, MonthlyKaryasampadanView, Crea
     def get_success_url(self):
         return reverse('karyasampadan:monthly-control-list', args=(self.object.office.id,))
 
-
-
-
 class MonthlyProgressList(OfficeView, OfficerMixin, TemplateView):
     template_name = 'karyasampadan/monthly_all_progress_list.html'
 
@@ -80,12 +75,12 @@ class MonthlyProgressList(OfficeView, OfficerMixin, TemplateView):
         data['months'] = Months.objects.raw('SELECT * FROM reports_months LEFT JOIN karyasampadan_sampadanmonthlyprogress ON reports_months.id = karyasampadan_sampadanmonthlyprogress.month_id AND karyasampadan_sampadanmonthlyprogress.sampadankaryakram_id = %s', [karyakram_id])
         return data
 
-class MonthlyProgressCreateView(OfficeView, MonthlyProgressView, UpdateView): 
-    template_name = 'karyasampadan/monthlyprogress_form.html'       
+class MonthlyProgressCreateView(OfficeView, MonthlyProgressView, UpdateView):
+    template_name = 'karyasampadan/monthlyprogress_form.html'
     def get_object(self):
         month_id = self.kwargs['month_id']
         karyakram_id = self.kwargs['karyakram_id']
-        monthly_pragati, created = SampadanMonthlyProgress.objects.get_or_create(sampadan_karyakram_id=karyakram_id, fiscal_year_id=1, month_id=month_id)
+        monthly_pragati, created = SampadanMonthlyProgress.objects.get_or_create(sampadankaryakram_id=karyakram_id, fiscal_year_id=1, month_id=month_id)
         return monthly_pragati
 
 

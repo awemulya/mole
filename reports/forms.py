@@ -48,7 +48,8 @@ class LakxyaForm(forms.ModelForm):
 class PragatiForm(forms.ModelForm):
     class Meta:
         model = Pragati
-        exclude = ('karyakram', 'awadhi','office',)
+        exclude = ('karyakram', 'awadhi', 'file_name', 'datesubmited', 'dateupdated',)
+
 
 
 class OfficeSettingsForm(forms.ModelForm):

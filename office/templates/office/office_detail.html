@@ -8,7 +8,7 @@
 <!--Main Content Area Starts-->
 		<section id="app-section">
       <ol class="breadcrumb no-margin margin-top-lg">
-        <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i>गृह पृष्ठ</a></li>
+        <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
         <li><a href="{% url 'office:office-dashboard' office.id %}">{{ office.name }}</a></li>
         <li class="active">विवरण हेर्नुहोस</li>
       </ol><br>
@@ -26,37 +26,35 @@
                     {% endif %}
 
                   <h5 class="profile-username text-center">{{office.name}}</h5>
-
                   <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-<<<<<<< HEAD
-                      <b>इ-मेल</b><a class="pull-right">{{office.email}}</a>
-=======
-                      <b>इ-मेल :</b> <a class="pull-right">{{office.email}}</a>
->>>>>>> LAKSHYAPRAGATI
+                      <b>इ-मेल:</b><a class="pull-right">{{office.email}}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>फोन :</b> <a class="pull-right">{{office.phone}}</a>
+                      <b>फोन:</b> <a class="pull-right">{{office.phone}}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>फ्याक्स :</b> <a class="pull-right">{{office.fax}}</a>
+                      <b>फ्याक्स:</b> <a class="pull-right">{{office.fax}}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>कार्यालय समय :</b> <a class="pull-right">{{office.office_time}}</a>
-                    </li>
-                  <li class="list-group-item">
-                      <b>सेटिङ परिवर्तन :</b> <a href="{% url 'reports:office-settings' office.id office.settings.id %}" %} class="pull-right">परिवर्तन गर्नुहोस्</a>
+                      <b>कार्यालय समय:</b> <a class="pull-right">{{office.office_time}}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>विवरण परिवर्तन :</b> <a href="{% url 'office:office-update' office.id %}" %} class="pull-right">परिवर्तन गर्नुहोस्</a>
+                      <b>सेटिङ परिवर्तन:</b> <a href="{% url 'reports:office-settings' office.id office.settings.id %}" %} class="pull-right">परिवर्तन गर्नुहोस्</a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>विवरण परिवर्तन:</b> <a href="{% url 'office:office-update' office.id %}" %} class="pull-right">परिवर्तन गर्नुहोस्</a>
+
                     </li>
                   </ul>
 
 
                 <!-- /.box-body -->
                  </div>
-                </div>
-             
+               
+
+              </div>
+
                 <div class="col-md-8">
                     <div class="map-office">
                         <div id="map" style="width:100%;height:510px"></div>
@@ -126,9 +124,13 @@
 
 
         {% block extra_scripts %}
-<script src="{% static 'js/leaflet.js' %}"></script>
-    <script src="{% static 'js/map.js' %}"></script>
-        <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
+
+        <script src="{% static 'js/leaflet.js' %}"></script>
+        <script src="{% static 'js/map.js' %}"></script>
+
+
+        <!-- <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
+ -->
 
     <!-- <script>
 
