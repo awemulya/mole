@@ -42,7 +42,7 @@ class ChildKaryakramForm(forms.ModelForm):
 class LakxyaForm(forms.ModelForm):
     class Meta:
         model = Lakxya
-        exclude = ('karyakram', 'awadhi', 'office',)
+        exclude = ('karyakram', 'awadhi', 'office', 'datesubmited', 'dateupdated')
 
 
 class PragatiForm(forms.ModelForm):

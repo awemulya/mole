@@ -48,7 +48,10 @@ class MonthlyKaryakramView(object):
     form_class = MonthlyKaryakramForm
 
 
-class OfficeSettings(OfficeView, OfficerMixin, OfficeSettingView, UpdateView):
+class OfficeSettings(OfficeSettingView,  OfficeView,  OfficerMixin, UpdateView):
+
+    def get_queryset(self):
+        return OfficeSetting.objects.filter(pk=self.kwargs.get('pk'))
 
     def get_success_url(self):
 

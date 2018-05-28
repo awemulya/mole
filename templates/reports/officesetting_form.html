@@ -8,7 +8,7 @@
     <section id="app-section">
              <ol class="breadcrumb no-margin margin-top-lg">
 			  <li><a href="{% url 'dashboard' %}">गृह पृष्ठ</a></li>
-			  <li><a href="{% url 'office:office-dashboard' office %}">{{office.name}}</a></li>
+			  <li><a href="{% url 'office:office-dashboard' form.instance.office.id %}">{{office.name}}</a></li>
 			  <li class="active">परिवर्तन गर्नुहोस्</li>
 			</ol>
 

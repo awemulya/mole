@@ -221,7 +221,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def dispatch(self, request, *args, **kwargs):
 
         if request.office:
-
             return redirect('office:office-dashboard', pk=request.office.id)
         return super(DashboardView, self).dispatch(request, *args, **kwargs)
 

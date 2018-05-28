@@ -86,6 +86,7 @@ class OfficeView(LoginRequiredMixin):
             if hasattr(form.Meta, 'office_filters'):
                 for field in form.Meta.office_filters:
                     form.fields[field].queryset = form.fields[field].queryset.filter(office__id=self.kwargs.get('office'))
+
         return form
 
 
