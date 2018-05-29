@@ -10,15 +10,17 @@ class KaryakramForm(forms.ModelForm):
         super(KaryakramForm, self).__init__(*args, **kwargs)
         # there's a `fields` property now
         self.fields['office'].required = False
+        self.fields['fiscal_year'].required = False
         self.fields['office'].label = ""
+        self.fields['fiscal_year'].label = ""
 
 
 
     class Meta:
         model = KaryaKram
-        exclude = ('karyakram', 'code', 'unit', 'kriyakalap', )
+        exclude = ('karyakram', 'code', 'unit', 'kriyakalap')
 
-        widgets = {'office': forms.HiddenInput()}
+        widgets = {'office': forms.HiddenInput(), 'fiscal_year': forms.HiddenInput()}
 
 
 class ChildKaryakramForm(forms.ModelForm):
@@ -28,21 +30,37 @@ class ChildKaryakramForm(forms.ModelForm):
         super(ChildKaryakramForm, self).__init__(*args, **kwargs)
         # there's a `fields` property now
         self.fields['office'].required = False
+        self.fields['karyakram'].required = False
+        self.fields['fiscal_year'].required = False
         self.fields['office'].label = ""
         self.fields['karyakram'].label = ""
+        self.fields['fiscal_year'].label = ""
 
 
     class Meta:
         model = KaryaKram
-        exclude = ('kriyakalap', 'fiscal_year',)
-        widgets = {'office': forms.HiddenInput(), 'karyakram': forms.HiddenInput()}
+        exclude = ('kriyakalap', )
+        widgets = {'office': forms.HiddenInput(),
+                   'karyakram': forms.HiddenInput(),
+                   'fiscal_year': forms.HiddenInput()}
 
 
 
 class LakxyaForm(forms.ModelForm):
+
+    def  __init__(self, *args, **kwargs):
+        # first call parent's constructor
+        super(LakxyaForm, self).__init__(*args, **kwargs)
+        # there's a `fields` property now
+        self.fields['fiscal_year'].required = False
+        self.fields['fiscal_year'].label = ""
+
     class Meta:
         model = Lakxya
         exclude = ('karyakram', 'awadhi', 'office', 'datesubmited', 'dateupdated')
+        widgets = {
+                   'karyakram': forms.HiddenInput(),
+                   'fiscal_year': forms.HiddenInput()}
 
 
 class PragatiForm(forms.ModelForm):

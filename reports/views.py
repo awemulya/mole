@@ -21,6 +21,8 @@ from django.contrib.auth.models import User
 from notifications.signals import notify
 from channels import Group
 import json
+
+
 class KaryakramView(object):
     model = KaryaKram
     form_class = KaryakramForm
@@ -69,6 +71,7 @@ class ChildKaryakramCreateView(OfficeView, KaryakramView, CreateView):
     def form_valid(self, form):
         super(ChildKaryakramCreateView, self).form_valid(form)
         form.instance.karyakram = KaryaKram.objects.get(pk=self.kwargs.get('karyakram'),)
+        form.instance.fiscal_year = self.request.fiscal_year
         self.object = form.save()
         return redirect(reverse('reports:add-lakxya', args=(self.object.office.id, self.object.id, 0)))
 

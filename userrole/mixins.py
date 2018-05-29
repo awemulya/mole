@@ -66,6 +66,9 @@ class OfficeView(LoginRequiredMixin):
             form.instance.office = self.request.office
         else:
             form.instance.office = Office.objects.get(pk=self.kwargs.get('office'))
+        if hasattr(form.instance, 'fiscal_year'):
+            form.instance.fiscal_year = self.request.fiscal_year
+
         return super(OfficeView, self).form_valid(form)
 
     def get_queryset(self):
