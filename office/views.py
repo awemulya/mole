@@ -153,13 +153,15 @@ class OfficeAddOfficeHeadView(LoginRequiredMixin, AdminAssistantMixin, OfficeVie
         office = request.POST.get('office')
         if form.is_valid:
             user = form.save(commit=False)
-            user.is_active = False
-            user.set_unusable_password()
+            user.is_active = True
+            user.set_password("123456")
             user.save()
 
 
             office_head = Group.objects.get(name="Office Head")
-            role, created = UserRole.objects.get_or_create(user=user, group=office_head, office = Office.objects.get(id=request.POST.get('office')))
+            role, created = UserRole.objects.get_or_create(
+                user=user, group=office_head, fiscal_year=request.fiscal_year,
+                office = Office.objects.get(id=request.POST.get('office')))
 
             #email sending part
             current_site = get_current_site(request)
@@ -185,11 +187,13 @@ class OfficeAddInfoofficerView(LoginRequiredMixin, OfficeHeadMixin, OfficeView, 
         if form.is_valid:
             user = form.save(commit=False)
             user.is_active = False
-            user.set_unusable_password()
+            user.set_password("123456")
             user.save()
 
             information_officer = Group.objects.get(name="Information Officer")
-            role, created = UserRole.objects.get_or_create(user=user, group=information_officer, office = Office.objects.get(id=request.POST.get('office')))
+            role, created = UserRole.objects.get_or_create(
+                user=user, group=information_officer, fiscal_year=request.fiscal_year,
+                office = Office.objects.get(id=request.POST.get('office')))
 
 
             #email sending part
