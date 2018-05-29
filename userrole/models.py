@@ -74,7 +74,7 @@ class UserRole(models.Model):
 
     @staticmethod
     def get_office_user(group, office_id):
-        if UserRole.objects.filter(office__id=office_id, ended_at=None, group__name=group, user__is_active=True).exists():
+        if UserRole.objects.filter(office__id=office_id, ended_at=None, group__name=group).exists():
             return UserRole.objects.filter(office__id=office_id, ended_at=None, group__name=group).first()
         return False
 
