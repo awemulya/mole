@@ -33,12 +33,16 @@ from reports.models import OfficeBudget, FiscalYear, KaryaKram, Pragati, Monthly
 from sachibBaithak.models import SachibBaithak, BudgetBaktabya, SachibBaithakMain
 from karyasampadan.models import SampadanKaryakram
 from users.models import Profile
-
 from django.views.generic.detail import DetailView
+from reports.models import Pragati
+from reports.views import PragatiView
+
+
 class OfficeView(object):
     model = Office
     success_url = reverse_lazy('office:office-list')
     form_class = OfficeForm
+
 
 class BudgetView(object):
     model = OfficeBudget
@@ -218,6 +222,7 @@ class DeactivateUserView(LoginRequiredMixin, OfficeHeadMixin, OfficeView, View):
         office = Office.objects.filter(pk=userid)
         return redirect('office:office-users', pk=office.id)
 
+
 class DashboardView(LoginRequiredMixin, TemplateView):
 
     template_name = "office/dashboard.html"
@@ -266,6 +271,18 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         return context
 
 
+class OfficePragati(LoginRequiredMixin, PragatiView, DetailView):
+
+    def get_context_data(self, **kwargs):
+
+        context = super(OfficePragati, self).get_context_data(**kwargs)
+        office_id = self.kwargs.get('pk')
+        fiscal_year = FiscalYear.objects.get(settings__office=office_id)
+        context['office'] = Office.objects.get(pk=office_id)
+        context['pragati'] = Pragati.objects.filter(karyakram__karyakram__office=office_id, fiscal_year=fiscal_year)
+
+        return context
+
 
 class OfficeDashboard(LoginRequiredMixin, TemplateView):
 
@@ -283,6 +300,8 @@ class OfficeDashboard(LoginRequiredMixin, TemplateView):
         context['activePageOff'] = office.id
         #context['activePage'] = office.district.first().id
         return context
+
+
 
 class OfficeKaryakramList(LoginRequiredMixin, TemplateView):
 

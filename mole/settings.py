@@ -115,15 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("localhost", 6379)],
-        },
-        "ROUTING": "reports.routing.channel_routing",
-    },
-}
+    # CHANNEL_LAYERS = {
+    #     "default": {
+    #         "BACKEND": "asgi_redis.RedisChannelLayer",
+    #         "CONFIG": {
+    #             "hosts": [("localhost", 6379)],
+    #         },
+    #         "ROUTING": "reports.routing.channel_routing",
+    #     },
+    # }
 
 
 # Internationalization
@@ -163,6 +163,8 @@ LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'
 
 INTERNAL_IPS = '127.0.0.1'
+
+CURRENT_FISCAL_YEAR = 3
 
 try:
     from local_settings import *
