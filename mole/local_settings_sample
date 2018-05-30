@@ -1,0 +1,15 @@
+import settings
+
+INSTALLED_APPS = list(settings.INSTALLED_APPS)
+MIDDLEWARE_CLASSES = list(settings.MIDDLEWARE_CLASSES)
+
+INSTALLED_APPS += ['debug_toolbar']
+
+MIDDLEWARE_CLASSES += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
+
+
+DEBUG = True
+
+
+INTERNAL_IPS = '127.0.0.1'
+TIME_ZONE = 'Asia/Kathmandu'
