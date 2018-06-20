@@ -43,9 +43,10 @@ INSTALLED_APPS = [
     'reports.apps.ReportsConfig',
     'comments.apps.CommentsConfig',
     'notifications.apps.Config',
-    'sachibBaithak.apps.SachibbaithakConfig',
-    'karyasampadan.apps.KaryasampadanConfig',
+    # 'sachibBaithak.apps.SachibbaithakConfig',
+    # 'karyasampadan.apps.KaryasampadanConfig',
     'channels',
+    'forms',
     #'debug_toolbar',
 
 

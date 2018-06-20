@@ -30,8 +30,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User,Group
 from userrole.models import UserRole
 from reports.models import OfficeBudget, FiscalYear, KaryaKram, Pragati, MonthlyProgress, MonthlyKaryaKram
-from sachibBaithak.models import SachibBaithak, BudgetBaktabya, SachibBaithakMain
-from karyasampadan.models import SampadanKaryakram
+# from sachibBaithak.models import SachibBaithak, BudgetBaktabya, SachibBaithakMain
+# from karyasampadan.models import SampadanKaryakram
 from users.models import Profile
 from django.views.generic.detail import DetailView
 from reports.models import Pragati
