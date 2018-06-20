@@ -6,6 +6,9 @@
 *.pot
 *.pyc
 *.sqlite3
+.idea/*
+db.sqlite3
+
 
 __pycache__/
 local_settings.py
