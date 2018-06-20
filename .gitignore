@@ -2,12 +2,14 @@
 # Created by https://www.gitignore.io/api/django
 
 ### Django ###
+db.sqlite3
 *.log
 *.pot
 *.pyc
 *.sqlite3
 .idea/*
-db.sqlite3
+
+
 
 
 __pycache__/
