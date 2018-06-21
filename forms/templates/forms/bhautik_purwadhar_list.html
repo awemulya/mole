@@ -69,28 +69,24 @@
                 <table class="table table-bordered">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Pad Name</th>
-                    <th scope="col">Shreni</th>
-                    <th scope="col">Swikriti</th>
-                    <th scope="col">Pad purti</th>
-                    <th scope="col">Rikta</th>
-                    <th scope="col">Lok Sewa Mag</th>
-                    <th scope="col">Raman Banki</th>
-                    <th scope="col">Fazil</th>
+                    <th scope="col">Bibaran</th>
+                    <th scope="col">Parimand</th>
+                    <th scope="col">Chalu Halat</th>
+                    <th scope="col">Bigreko</th>
+                    <th scope="col">Marmat Garna Sakine</th>
                     <th scope="col">Kaifiyat</th>
+                    <th scope="col">Office</th>
                   </tr>
                     {% for obj in object_list %}
                       <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                          <td><a href="{% url 'forms:darbandi_update' obj.pk %}">{{ obj.pad_naam }}</a></td>
-                        <td>{{ obj.shreni }}</td>
-                        <td>{{ obj.darbandi_sankhya }}</td>
-                        <td>{{ obj.padpurti_sankhya }}</td>
-                        <td>{{ obj.rikta_sankhya }}</td>
-                        <td>{{ obj.mag_gareko_sankhya }}</td>
-                        <td>{{ obj.ramana_huna_banki }}</td>
-                        <td>{{ obj.phajil_sankhya }}</td>
+                          <td><a href="{% url 'forms:bhautik_update' obj.pk %}">{{ obj.bibaran }}</a></td>
+                        <td>{{ obj.parimand }}</td>
+                        <td>{{ obj.chalu_halat }}</td>
+                        <td>{{ obj.bigreko }}</td>
+                        <td>{{ obj.marmat }}</td>
                         <td>{{ obj.kaifiyat }}</td>
+                        <td>{{ obj.office }}</td>
                       </tr>
                     {% endfor %}
                 </table>

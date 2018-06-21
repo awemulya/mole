@@ -69,28 +69,14 @@
                 <table class="table table-bordered">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Pad Name</th>
-                    <th scope="col">Shreni</th>
-                    <th scope="col">Swikriti</th>
-                    <th scope="col">Pad purti</th>
-                    <th scope="col">Rikta</th>
-                    <th scope="col">Lok Sewa Mag</th>
-                    <th scope="col">Raman Banki</th>
-                    <th scope="col">Fazil</th>
-                    <th scope="col">Kaifiyat</th>
+                    <th scope="col">Rajaswa Sirshak</th>
+                    <th scope="col">Rakam</th>
                   </tr>
                     {% for obj in object_list %}
                       <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                          <td><a href="{% url 'forms:darbandi_update' obj.pk %}">{{ obj.pad_naam }}</a></td>
-                        <td>{{ obj.shreni }}</td>
-                        <td>{{ obj.darbandi_sankhya }}</td>
-                        <td>{{ obj.padpurti_sankhya }}</td>
-                        <td>{{ obj.rikta_sankhya }}</td>
-                        <td>{{ obj.mag_gareko_sankhya }}</td>
-                        <td>{{ obj.ramana_huna_banki }}</td>
-                        <td>{{ obj.phajil_sankhya }}</td>
-                        <td>{{ obj.kaifiyat }}</td>
+                          <td><a href="{% url 'forms:rajaswa_update' obj.pk %}">{{ obj.rajaswo_sirshak }}</a></td>
+                        <td>{{ obj.rakam }}</td>
                       </tr>
                     {% endfor %}
                 </table>
@@ -136,10 +122,10 @@
     <script src="{% static 'js/map.js' %}"></script>
     <!-- <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
 
-		<script>
+        <script>
 
 
-		var locations = [
+        var locations = [
       ['', 27.696446, 85.3221903, 4],
       ['', 27.6692636, 85.3326804, 5],
       ['', 27.6931977, 85.3242567, 3],
@@ -148,32 +134,32 @@
     ];
 
 
-			function myMap() {
-				var myCenter = new google.maps.LatLng(27.6966239,85.3239172);
-				var mapCanvas = document.getElementById("map");
-				var mapOptions = {center: myCenter, zoom: 12};
-				var map = new google.maps.Map(mapCanvas, mapOptions);
-				var marker = new google.maps.Marker({position:myCenter});
-				marker.setMap(map);
-				google.maps.event.addListener(marker,'click',function() {
-					take_action();
+            function myMap() {
+                var myCenter = new google.maps.LatLng(27.6966239,85.3239172);
+                var mapCanvas = document.getElementById("map");
+                var mapOptions = {center: myCenter, zoom: 12};
+                var map = new google.maps.Map(mapCanvas, mapOptions);
+                var marker = new google.maps.Marker({position:myCenter});
+                marker.setMap(map);
+                google.maps.event.addListener(marker,'click',function() {
+                    take_action();
 
 
 
-				});
+                });
 
-				var marker, i;
+                var marker, i;
 
-			    for (i = 0; i < locations.length; i++) {
-			      marker = new google.maps.Marker({
-			        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-			        map: map
-			      });
-			}}
-			function take_action(){
-				alert("Take Action");
-			}
-		</script> -->
+                for (i = 0; i < locations.length; i++) {
+                  marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map
+                  });
+            }}
+            function take_action(){
+                alert("Take Action");
+            }
+        </script> -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
 {% endblock extra_scripts %}
