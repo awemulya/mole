@@ -69,14 +69,22 @@
                 <table class="table table-bordered">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Rajaswa Sirshak</th>
-                    <th scope="col">Rakam</th>
+                    <th scope="col">beruju_prakar</th>
+                    <th scope="col">beruju_rakam</th>
+                    <th scope="col">phachheut_rakam</th>
+                    <th scope="col">phachheut_banki_rakam</th>
+                    <th scope="col">samparichhyan_rakam</th>
+                    <th scope="col">Kaifiyat</th>
                   </tr>
                     {% for obj in object_list %}
                       <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                          <td><a href="{% url 'forms:rajaswa_update' obj.pk %}">{{ obj.rajaswo_sirshak }}</a></td>
-                        <td>{{ obj.rakam }}</td>
+                          <td><a href="{% url 'forms:beruju_update' obj.pk %}">{{ obj.beruju_prakar }}</a></td>
+                        <td>{{ obj.beruju_rakam }}</td>
+                        <td>{{ obj.phachheut_rakam }}</td>
+                        <td>{{ obj.phachheut_banki_rakam }}</td>
+                        <td>{{ obj.samparichhyan_rakam }}</td>
+                        <td>{{ obj.kaifiyat }}</td>
                       </tr>
                     {% endfor %}
                 </table>

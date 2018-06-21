@@ -3,7 +3,8 @@ from django.conf.urls import url
 from forms.views import DarbandiVivaranCreateView, DarbandiVivaranListView,\
  DarbandiVivaranUpdateView, BhautikPurwadharCreateView, BhautikPurwadharListView,\
   BhautikPurwadharUpdateView, RajaswaVivaranCreateView, RajaswaVivaranListView,\
-   RajaswaVivaranUpdateView
+   RajaswaVivaranUpdateView, BerujuVivaranCreateView, BerujuVivaranListView,\
+   BerujuVivaranUpdateView
 from . import views
 
 urlpatterns = [
@@ -17,4 +18,7 @@ urlpatterns = [
     url(r'^rajaswa-vivaran-create/$', RajaswaVivaranCreateView.as_view(), name='rajaswa_create'),
     url(r'^rajaswa-vivaran-list/$', RajaswaVivaranListView.as_view(), name='rajaswa_list'),
     url(r'^rajaswa-vivaran-update/(?P<pk>\d+)/$', RajaswaVivaranUpdateView.as_view(), name='rajaswa_update'),
+    url(r'^beruju-vivaran-create/$', BerujuVivaranCreateView.as_view(), name='beruju_create'),
+    url(r'^beruju-vivaran-list/$', BerujuVivaranListView.as_view(), name='beruju_list'),
+    url(r'^beruju-vivaran-update/(?P<pk>\d+)/$', BerujuVivaranUpdateView.as_view(), name='beruju_update'),
 ]

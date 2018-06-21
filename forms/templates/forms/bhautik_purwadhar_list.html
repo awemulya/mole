@@ -2,7 +2,7 @@
 {% load filters %}
 {% load static %}
 {% load dashboard_tags %}
-{% block title %}MOLE{% endblock title %}
+{% block title %}REPORT{% endblock title %}
 
 {% block extra_styles %}{% endblock extra_styles %}
 
@@ -69,24 +69,22 @@
                 <table class="table table-bordered">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Bibaran</th>
-                    <th scope="col">Parimand</th>
-                    <th scope="col">Chalu Halat</th>
-                    <th scope="col">Bigreko</th>
-                    <th scope="col">Marmat Garna Sakine</th>
+                    <th scope="col">Beruju Prakar</th>
+                    <th scope="col">Beruju Rakam</th>
+                    <th scope="col">Phachheut Rakam</th>
+                    <th scope="col">Phachheut Banki Rakam</th>
+                    <th scope="col">Samparichhyan Rakam</th>
                     <th scope="col">Kaifiyat</th>
-                    <th scope="col">Office</th>
                   </tr>
                     {% for obj in object_list %}
                       <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                          <td><a href="{% url 'forms:bhautik_update' obj.pk %}">{{ obj.bibaran }}</a></td>
-                        <td>{{ obj.parimand }}</td>
-                        <td>{{ obj.chalu_halat }}</td>
-                        <td>{{ obj.bigreko }}</td>
-                        <td>{{ obj.marmat }}</td>
+                          <td><a href="{% url 'forms:bhautik_update' obj.pk %}">{{ obj.beruju_prakar }}</a></td>
+                        <td>{{ obj.beruju_rakam }}</td>
+                        <td>{{ obj.phachheut_rakam }}</td>
+                        <td>{{ obj.phachheut_banki_rakam }}</td>
+                        <td>{{ obj.samparichhyan_rakam }}</td>
                         <td>{{ obj.kaifiyat }}</td>
-                        <td>{{ obj.office }}</td>
                       </tr>
                     {% endfor %}
                 </table>

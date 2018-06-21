@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
-from forms.models import DarbandiVivaran, BhautikPurwadhar, RajaswaVivaran
+from forms.models import DarbandiVivaran, BhautikPurwadhar, RajaswaVivaran, BerujuVivaran
 
 
 def index(request):
@@ -86,3 +86,28 @@ class RajaswaVivaranUpdateView(UpdateView):
     fields = '__all__'
     template_name = "forms/rajaswa_vivaran_create.html"
     success_url = reverse_lazy("forms:rajaswa_list")
+
+
+class BerujuVivaranCreateView(CreateView):
+    model = BerujuVivaran
+    template_name = "forms/beruju_vivaran_create.html"
+    success_url = reverse_lazy("forms:beruju_create")
+    fields = '__all__'
+
+
+class BerujuVivaranListView(ListView):
+    model = BerujuVivaran
+    paginate_by = 10
+    template_name = "forms/beruju_vivaran_list.html"
+
+
+class BerujuVivaranDetailView(DetailView):
+    model = BerujuVivaran
+    template_name = "forms/beruju_vivaran_detail.html"
+
+
+class BerujuVivaranUpdateView(UpdateView):
+    model = BerujuVivaran
+    fields = '__all__'
+    template_name = "forms/beruju_vivaran_create.html"
+    success_url = reverse_lazy("forms:beruju_list")
