@@ -1,0 +1,66 @@
+{% extends "base_layout.html" %}
+{% load filters %}
+{% load static %}
+{% load dashboard_tags %}
+{% block title %}REPORT{% endblock title %}
+
+{% block extra_styles %}{% endblock extra_styles %}
+
+
+{% block content %}
+
+
+    <!--Main Content Area Starts-->
+    <section id="app-section">
+        <!--Statistics-->
+            <div class="row">
+                    <div class="col-md-12 ">                    
+                       <center> <h5><strong>नापी कार्यालय</strong></h5>
+                        <h5><strong>बुर्तिबाङ |</strong></h5>
+                        <h5><u>आ. व. ०७३/७४ को वार्सिक विवरण तथा अध्यवधिक स्थिति</u></h5></center>
+                        ><h5 dir="rtl">email:napiofficeburtibang57@gmail.com</h5>
+                        <h5 dir="rtl">फ्याक्स न. ०६८४१०१</h5><center><h5>फोन न. ०६८४१०१६७</h5></center>
+                        <h5>प्रशासनिक विवरण</h5>                        
+                    </div>
+                    <div>
+                        <h5>१.१ श्रेणी:
+                        <select>
+                                <option value="क श्रेणी">क श्रेणी</option>
+                                <option value="ख श्रेणी">ख श्रेणी</option>
+                                <option value="ग श्रेणी">ग श्रेणी</option>
+                                <option value="घ श्रेणी">घ श्रेणी</option>
+                                <option value="ङ श्रेणी">ङ श्रेणी</option>
+                                </select></h5>
+                    </div>
+                    <div>
+                        <form action="/your-name/" method="post">
+                        <label for="your_name"><h5>१.२ प्रमुख नाम:</h5> </label>
+                        <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+                        <input type="submit" value="OK">
+                        </form>
+                    </div>
+                    <div>
+                        <a href="{% url 'forms:darbandi_list' %}">१.३ दरबन्दी विवरण</a>
+                    </div>
+                    <div>
+                        <a href="{% url 'forms:bhautik_list' %}">१.४ भौतिक पुर्वाधर सम्बन्धि विवरण</a>
+                    </div>
+                    <div>
+                        <a href="{% url 'forms:rajaswa_list' %}">२.२ राजश्व विवरण</a>
+                    </div>
+                    <div>
+                        <a href="{% url 'forms:beruju_list' %}">२.३ बेरुजु सम्बन्धि विवरण</a>
+                    </div>
+                </div>
+            </div>
+    <!--Main Content Area Ends-->
+
+{% endblock content %}
+
+
+{% block extra_scripts %}
+    <script src="{% static 'js/leaflet.js' %}"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
+
+{% endblock extra_scripts %}

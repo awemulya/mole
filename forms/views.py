@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
-from forms.models import DarbandiVivaran, BhautikPurwadhar, RajaswaVivaran, BerujuVivaran
+from forms.models import DarbandiVivaran, BhautikPurwadhar, RajaswaVivaran,\
+ BerujuVivaran
 
 
-def index(request):
-    return HttpResponse("Hello, world.")
+
+class FormDashboardView(TemplateView):
+    template_name = "forms/form_dashboard.html"
+
 
 
 class DarbandiVivaranCreateView(CreateView):

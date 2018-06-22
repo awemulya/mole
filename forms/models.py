@@ -66,3 +66,4 @@ class BerujuVivaran(models.Model):
 
     def __str__(self):
         return self.beruju_prakar
+
