@@ -14,30 +14,6 @@
     <section id="app-section">
         <!--Statistics-->
         <div class="bg-white padding margin-top-lg">
-            <!-- <div class="app-page-header">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h4>बुझाईएको फारमको विवरण </h4>
-                    </div>
-                    <!-- <div class="col-md-2">
-                        <select class="form-control input-sm">
-                          <option>10</option>
-                          <option>20</option>
-                          <option>30</option>
-                          <option>40</option>
-                          <option>50</option>
-                        </select>
-
-                    <div class="col-md-6 col-md-offset-6">
-                        <div class="action-holder">
-                            <a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-code-o"></i> CSV</a>
-                            <a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-excel-o"></i> Excel</a>
-                            <a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-pdf-o"></i> PDF</a>
-                            <a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-print"></i> Print</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <h5>फारम बुझाएको विवरणहरु </h5>
             <div class="row">
                 <div class="col-md-12">
@@ -47,25 +23,6 @@
                 </form>
                 </div>
             </div>
-            <!-- <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav> -->
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -86,46 +43,6 @@
 {% block extra_scripts %}
     <script src="{% static 'js/leaflet.js' %}"></script>
     <script src="{% static 'js/map.js' %}"></script>
-    <!-- <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
-
-		<script>
-
-
-		var locations = [
-      ['', 27.696446, 85.3221903, 4],
-      ['', 27.6692636, 85.3326804, 5],
-      ['', 27.6931977, 85.3242567, 3],
-      ['', 27.6482818, 85.3050494, 2],
-      ['', 27.6867262, 85.3365863, 1]
-    ];
-
-
-			function myMap() {
-				var myCenter = new google.maps.LatLng(27.6966239,85.3239172);
-				var mapCanvas = document.getElementById("map");
-				var mapOptions = {center: myCenter, zoom: 12};
-				var map = new google.maps.Map(mapCanvas, mapOptions);
-				var marker = new google.maps.Marker({position:myCenter});
-				marker.setMap(map);
-				google.maps.event.addListener(marker,'click',function() {
-					take_action();
-
-
-
-				});
-
-				var marker, i;
-
-			    for (i = 0; i < locations.length; i++) {
-			      marker = new google.maps.Marker({
-			        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-			        map: map
-			      });
-			}}
-			function take_action(){
-				alert("Take Action");
-			}
-		</script> -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
 {% endblock extra_scripts %}

@@ -16,12 +16,20 @@
         <div class="bg-white padding margin-top-lg">
             <h5>फारम बुझाएको विवरणहरु </h5>
             <div class="row">
-                <div class="col-md-12">
-                <form method="post">{% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Save"/>
-                </form>
-                </div>
+                <table class="table table-bordered">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">शिर्सक</th>
+                    <th scope="col">रकम</th>
+                  </tr>
+                    {% for obj in object_list %}
+                      <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                          <td><a href="{% url 'forms:aawashek_bajet_update' obj.pk %}">{{ obj.sirshak }}</a></td>
+                        <td>{{ obj.rakam }}</td>
+                      </tr>
+                    {% endfor %}
+                </table>
             </div>
         </div>
         <div class="row">

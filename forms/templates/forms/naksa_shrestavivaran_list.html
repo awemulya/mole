@@ -16,12 +16,22 @@
         <div class="bg-white padding margin-top-lg">
             <h5>फारम बुझाएको विवरणहरु </h5>
             <div class="row">
-                <div class="col-md-12">
-                <form method="post">{% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Save"/>
-                </form>
-                </div>
+                <table class="table table-bordered">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">विवरण</th>
+                    <th scope="col">पारीमन</th>
+                    <th scope="col">कैफियत</th>
+                  </tr>
+                    {% for obj in object_list %}
+                      <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                          <td><a href="{% url 'forms:naksa_shrestavivaran_update' obj.pk %}">{{ obj.vivaran }}</a></td>
+                        <td>{{ obj.parimand }}</td>
+                        <td>{{ obj.kaifiyat }}</td>
+                      </tr>
+                    {% endfor %}
+                </table>
             </div>
         </div>
         <div class="row">

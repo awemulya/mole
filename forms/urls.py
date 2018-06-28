@@ -4,7 +4,10 @@ from forms.views import DarbandiVivaranCreateView, DarbandiVivaranListView,\
  DarbandiVivaranUpdateView, BhautikPurwadharCreateView, BhautikPurwadharListView,\
   BhautikPurwadharUpdateView, RajaswaVivaranCreateView, RajaswaVivaranListView,\
    RajaswaVivaranUpdateView, BerujuVivaranCreateView, BerujuVivaranListView,\
-      BerujuVivaranUpdateView, FormDashboardView
+      BerujuVivaranUpdateView, FormDashboardView, AawashekBajetCreateView,\
+      AawashekBajetListView, AawashekBajetUpdateView, PrastawitKaryakramCreateView,\
+      PrastawitKaryakramListView, PrastawitKaryakramUpdateView, NaksaShrestaVivaranCreateView,\
+      NaksaShrestaVivaranListView, NaksaShrestaVivaranUpdateView
 
 from . import views
 
@@ -22,4 +25,13 @@ urlpatterns = [
     url(r'^beruju-vivaran-create/$', BerujuVivaranCreateView.as_view(), name='beruju_create'),
     url(r'^beruju-vivaran-list/$', BerujuVivaranListView.as_view(), name='beruju_list'),
     url(r'^beruju-vivaran-update/(?P<pk>\d+)/$', BerujuVivaranUpdateView.as_view(), name='beruju_update'),
+    url(r'^aawashek-bajet-create/$', AawashekBajetCreateView.as_view(), name='aawashek_bajet_create'),
+    url(r'^aawashek-bajet-list/$', AawashekBajetListView.as_view(), name='aawashek_bajet_list'),
+    url(r'^aawashek-bajet-update/(?P<pk>\d+)/$', AawashekBajetUpdateView.as_view(), name='aawashek_bajet_update'),
+    url(r'^prastawit-karyakram-create/$', PrastawitKaryakramCreateView.as_view(), name='prastawit_karyakram_create'),
+    url(r'^prastawit-karyakram-list/$', PrastawitKaryakramListView.as_view(), name='prastawit_karyakram_list'),
+    url(r'^prastawit-karyakram-update/(?P<pk>\d+)/$', PrastawitKaryakramUpdateView.as_view(), name='prastawit_karyakram_update'),
+    url(r'^naksa-shrestavivaran-create/$', NaksaShrestaVivaranCreateView.as_view(), name='naksa_shrestavivaran_create'),
+    url(r'^naksa-shrestavivaran-list/$', NaksaShrestaVivaranListView.as_view(), name='naksa_shrestavivaran_list'),
+    url(r'^naksa-shrestavivaran-update/(?P<pk>\d+)/$', NaksaShrestaVivaranUpdateView.as_view(), name='naksa_shrestavivaran_update'),
 ]

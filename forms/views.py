@@ -7,13 +7,12 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
 from forms.models import DarbandiVivaran, BhautikPurwadhar, RajaswaVivaran,\
- BerujuVivaran
+ BerujuVivaran, AawashekBajet, PrastawitKaryakram, NaksaShrestaVivaran
 
 
 
 class FormDashboardView(TemplateView):
     template_name = "forms/form_dashboard.html"
-
 
 
 class DarbandiVivaranCreateView(CreateView):
@@ -29,9 +28,9 @@ class DarbandiVivaranListView(ListView):
     template_name = "forms/darbarndi_vivaran_list.html"
 
 
-class DarbandiVivaranDetailView(DetailView):
-    model = DarbandiVivaran
-    template_name = "forms/darbarndi_vivaran_detail.html"
+# class DarbandiVivaranDetailView(DetailView):
+#     model = DarbandiVivaran
+#     template_name = "forms/darbarndi_vivaran_detail.html"
 
 
 class DarbandiVivaranUpdateView(UpdateView):
@@ -52,11 +51,6 @@ class BhautikPurwadharListView(ListView):
     model = BhautikPurwadhar
     paginate_by = 10
     template_name = "forms/bhautik_purwadhar_list.html"
-
-
-class BhautikPurwadharDetailView(DetailView):
-    model = BhautikPurwadhar
-    template_name = "forms/bhautik_purwadhar_detail.html"
 
 
 class BhautikPurwadharUpdateView(UpdateView):
@@ -80,11 +74,6 @@ class RajaswaVivaranListView(ListView):
     template_name = "forms/rajaswa_vivaran_list.html"
 
 
-class RajaswaVivaranDetailView(DetailView):
-    model = RajaswaVivaran
-    template_name = "forms/rajaswa_vivaran_detail.html"
-
-
 class RajaswaVivaranUpdateView(UpdateView):
     model = RajaswaVivaran
     fields = '__all__'
@@ -105,9 +94,24 @@ class BerujuVivaranListView(ListView):
     template_name = "forms/beruju_vivaran_list.html"
 
 
-class BerujuVivaranDetailView(DetailView):
+class BerujuVivaranUpdateView(UpdateView):
     model = BerujuVivaran
-    template_name = "forms/beruju_vivaran_detail.html"
+    fields = '__all__'
+    template_name = "forms/beruju_vivaran_create.html"
+    success_url = reverse_lazy("forms:beruju_list")
+
+
+class BerujuVivaranCreateView(CreateView):
+    model = BerujuVivaran
+    template_name = "forms/beruju_vivaran_create.html"
+    success_url = reverse_lazy("forms:beruju_create")
+    fields = '__all__'
+
+
+class BerujuVivaranListView(ListView):
+    model = BerujuVivaran
+    paginate_by = 10
+    template_name = "forms/beruju_vivaran_list.html"
 
 
 class BerujuVivaranUpdateView(UpdateView):
@@ -115,3 +119,63 @@ class BerujuVivaranUpdateView(UpdateView):
     fields = '__all__'
     template_name = "forms/beruju_vivaran_create.html"
     success_url = reverse_lazy("forms:beruju_list")
+
+
+class AawashekBajetCreateView(CreateView):
+    model = AawashekBajet
+    template_name = "forms/aawashek_bajet_create.html"
+    success_url = reverse_lazy("forms:aawashek_bajet_create")
+    fields = '__all__'
+
+
+class AawashekBajetListView(ListView):
+    model = AawashekBajet
+    paginate_by = 10
+    template_name = "forms/aawashek_bajet_list.html"
+
+
+class AawashekBajetUpdateView(UpdateView):
+    model = AawashekBajet
+    fields = '__all__'
+    template_name = "forms/aawashek_bajet_create.html"
+    success_url = reverse_lazy("forms:aawashek_bajet_list")
+
+
+class PrastawitKaryakramCreateView(CreateView):
+    model = PrastawitKaryakram
+    template_name = "forms/prastawit_karyakram_create.html"
+    success_url = reverse_lazy("forms:prastawit_karyakram_create")
+    fields = '__all__'
+
+
+class PrastawitKaryakramListView(ListView):
+    model = PrastawitKaryakram
+    paginate_by = 10
+    template_name = "forms/prastawit_karyakram_list.html"
+
+
+class PrastawitKaryakramUpdateView(UpdateView):
+    model = PrastawitKaryakram
+    fields = '__all__'
+    template_name = "forms/prastawit_karyakram_create.html"
+    success_url = reverse_lazy("forms:prastawit_karyakram_list")
+
+
+class NaksaShrestaVivaranCreateView(CreateView):
+    model = NaksaShrestaVivaran
+    template_name = "forms/naksa_shrestavivaran_create.html"
+    success_url = reverse_lazy("forms:naksa_shrestavivaran_create")
+    fields = '__all__'
+
+
+class NaksaShrestaVivaranListView(ListView):
+    model = NaksaShrestaVivaran
+    paginate_by = 10
+    template_name = "forms/naksa_shrestavivaran_list.html"
+
+
+class NaksaShrestaVivaranUpdateView(UpdateView):
+    model = NaksaShrestaVivaran
+    fields = '__all__'
+    template_name = "forms/naksa_shrestavivaran_create.html"
+    success_url = reverse_lazy("forms:naksa_shrestavivaran_list")
